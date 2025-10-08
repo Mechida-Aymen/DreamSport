@@ -1,0 +1,117 @@
+<div class="content court-bg">
+  <div class="container">
+    <div class="coach-court-list profile-court-list">
+      <ul class="nav">
+        <li><a class="active" [routerLink]="routes.admin_profile_edit">Profile</a></li>
+        <li><a [routerLink]="routes.admin_setting_password">Change Password</a></li>
+      </ul>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="profile-detail-blk">
+          <ul>
+            <li class="active"><a [routerLink]="routes.coachProfile">Profile Details</a></li>
+          </ul>
+        </div>
+        <div class="profile-detail-group">
+          <div class="card">
+            <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-lg-4 col-md-6">
+                  <div class="input-space">
+                    <label class="form-label">Firstname</label>
+                    <input type="text" class="form-control" formControlName="prenom" 
+                           [readonly]="!isEditing" placeholder="Enter Firstname">
+                    <div *ngIf="profileForm.get('prenom')?.invalid && profileForm.get('prenom')?.touched" 
+                         class="text-danger">
+                      Firstname is required
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Lastname -->
+                <div class="col-lg-4 col-md-6">
+                  <div class="input-space">
+                    <label class="form-label">Lastname</label>
+                    <input type="text" class="form-control" formControlName="nom" 
+                           [readonly]="!isEditing" placeholder="Enter Lastname">
+                    <div *ngIf="profileForm.get('nom')?.invalid && profileForm.get('nom')?.touched" 
+                         class="text-danger">
+                      Lastname is required
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Username -->
+                <div class="col-lg-4 col-md-6">
+                  <div class="input-space">
+                    <label class="form-label">Username</label>
+                    <input type="text" class="form-control" formControlName="login" 
+                           [readonly]="!isEditing" placeholder="Enter Username">
+                    <div *ngIf="profileForm.get('login')?.invalid && profileForm.get('login')?.touched" 
+                         class="text-danger">
+                      Username is required
+                    </div>
+                    <div *ngIf="backendErrors['Login']" class="text-danger">
+                      {{ backendErrors['Login'] }}
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Email -->
+                <div class="col-lg-4 col-md-6">
+                  <div class="input-space">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" formControlName="email" 
+                           [readonly]="!isEditing" placeholder="Enter Email">
+                    <div *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched" 
+                         class="text-danger">
+                      Valid email is required
+                    </div>
+                    <div *ngIf="backendErrors['Email']" class="text-danger">
+                      {{ backendErrors['Email'] }}
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Phone Number -->
+                <div class="col-lg-4 col-md-6">
+                  <div class="input-space">
+                    <label class="form-label">Phone Number</label>
+                    <input type="tel" class="form-control" formControlName="phoneNumber" 
+                           [readonly]="!isEditing" placeholder="Enter Phone Number">
+                    <div *ngIf="profileForm.get('phoneNumber')?.invalid && profileForm.get('phoneNumber')?.touched" 
+                         class="text-danger">
+                      Phone number is required
+                    </div>
+                    <div *ngIf="backendErrors['PhoneNumber']" class="text-danger">
+                      {{ backendErrors['PhoneNumber'] }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="save-changes text-end">
+                <button type="button" class="btn btn-primary reset-profile" 
+                        (click)="onReset()" [disabled]="isLoading">
+                  Reset
+                </button>
+                <button *ngIf="!isEditing" type="button" class="btn btn-secondary" 
+                        (click)="toggleEdit()" [disabled]="isLoading">
+                  Edit Profile
+                </button>
+                <button *ngIf="isEditing" type="submit" class="btn btn-secondary save-profile" 
+                        [disabled]="isLoading || profileForm.invalid">
+                  <span *ngIf="!isLoading">Save Changes</span>
+                  <span *ngIf="isLoading">Saving...</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,28 @@
+using Xunit;
+
+namespace YourProject.Tests
+{
+    public class JwtServiceTests
+    {
+        [Fact]
+        public void GenerateAccessToken_ShouldReturnTokenString()
+        {
+            // Arrange
+            var jwtService = new JwtService();
+
+            int userId = 1;
+            string role = "User";
+            int adminId = 101;
+            string nom = "Doe";
+            string prenom = "John";
+            string imageUrl = "http://example.com/image.jpg";
+
+            // Act
+            string token = jwtService.GenerateAccessToken(userId, role, adminId, nom, prenom, imageUrl);
+
+            // Assert
+            Assert.False(string.IsNullOrWhiteSpace(token)); // Just make sure it's not empty
+            Assert.IsType<string>(token);
+        }
+    }
+}

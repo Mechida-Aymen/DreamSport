@@ -1,0 +1,96 @@
+.form-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.image-upload-wrapper {
+  max-width: 150px;
+}
+
+.image-preview-container {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+  
+  .preview-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .upload-label {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.card {
+  border-radius: 0.5rem;
+  
+  .card-header {
+    border-radius: 0.5rem 0.5rem 0 0 !important;
+    padding: 1rem 1.25rem;
+  }
+  
+  .card-body {
+    padding: 1.5rem;
+  }
+}
+
+.input-group-text {
+  min-width: 40px;
+  justify-content: center;
+}
+
+.form-label {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #495057;
+}
+
+.btn {
+  min-width: 120px;
+  transition: all 0.3s ease;
+  
+  i {
+    font-size: 1rem;
+  }
+}
+
+.invalid-feedback {
+  font-size: 0.85rem;
+}
+
+.text-danger {
+  font-size: 0.85rem;
+}
+
+.mat-datepicker-toggle {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  background-color: #f8f9fa;
+  border: 1px solid #ced4da;
+  border-left: none;
+  border-radius: 0 0.25rem 0.25rem 0;
+  
+  &:hover {
+    background-color: #e9ecef;
+  }
+}

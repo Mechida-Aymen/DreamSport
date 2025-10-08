@@ -1,0 +1,15 @@
+<!-- Breadcrumb -->
+@if (breadcrum) {
+  <div class="breadcrumb breadcrumb-list mb-0">
+    <span class="primary-right-round"></span>
+    <div class="container">
+      <h1 class="text-white">{{end | titlecase}}</h1>
+      <ul>
+        <li><a [routerLink]="routes.home">Home</a></li>
+        <li>{{end | titlecase}}</li>
+      </ul>
+    </div>
+  </div>
+}
+<!-- /Breadcrumb -->
+<router-outlet> </router-outlet>

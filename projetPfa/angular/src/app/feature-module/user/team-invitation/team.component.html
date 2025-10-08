@@ -1,0 +1,121 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="sortby-section court-sortby-section">
+      <div class="sorting-info">
+        <div class="row d-flex align-items-center">
+          <div class="col-xl-6 col-lg-6 col-sm-12 col-12">
+            <div class="coach-court-list">
+              <ul class="nav">
+                <li><a [routerLink]="routes.userInvitation">User Invitations</a></li>
+                <li><a class="active" [routerLink]="routes.teamInvitation">Team Invitations</a></li>
+                <li><a [routerLink]="routes.sendInvitation">Send Invitation</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="court-tab-content">
+      <div class="card card-tableset">
+        <div class="card-body">
+          <div class="coache-head-blk">
+            <div class="row align-items-center">
+              <div class="col-md-5">
+                <div class="court-table-head">
+                  <h4>Team Invitations</h4>
+                  <p>List of all your team invitations</p>
+                </div>
+              </div>
+              <div class="col-md-7">
+                <div class="table-search-top Invitation-search-top">
+                  <div id="tablefilter">
+                    <div class="dataTables_filter">
+                      <label>
+                        <input [(ngModel)]="searchDataValue" 
+                               (ngModelChange)="searchData(searchDataValue)"
+                               class="form-control" 
+                               placeholder="Search by team name..." />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="table-responsive table-datatble">
+            <div class="card dashboard-card upcoming-card">
+              <div class="notification-coach">
+                <ng-container *ngFor="let invitation of displayedData">
+                  <div class="notify-box">
+                    <div class="avatar flex-shrink-0">
+                      <img [src]="invitation.invitation.avatar || 'https://pub-ae615910610b409dbb3d91c073aa47e6.r2.dev/avatar-02.jpg'" 
+                           [alt]="invitation.invitation.name"
+                           class="avatar-img team-avatar">
+                    </div>
+                    <div class="notify-detail flex-grow-1">
+                      <h5 class="team-name">
+                        {{ invitation.invitation.name }}
+                      </h5>
+                      <p class="team-description" *ngIf="invitation.invitation.description">
+                        {{ invitation.invitation.description }}
+                      </p>
+                      <div class="notify-btn-group">
+                        <button (click)="acceptInvitation(invitation.id)" 
+                                class="btn btn-primary"
+                                [disabled]="processingInvitation === invitation.id">
+                          <i class="fas fa-check"></i> 
+                          <span *ngIf="processingInvitation !== invitation.id">Accept</span>
+                          <span *ngIf="processingInvitation === invitation.id">Processing...</span>
+                        </button>
+                        
+                        <button (click)="refuseInvitation(invitation.id)" 
+                                class="btn btn-secondary ml-2"
+                                [disabled]="processingInvitation === invitation.id">
+                          <i class="fas fa-times"></i> 
+                          <span *ngIf="processingInvitation !== invitation.id">Decline</span>
+                          <span *ngIf="processingInvitation === invitation.id">Processing...</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+                
+                <div *ngIf="tableData.length === 0" class="text-center py-4">
+                  <h5 class="no-record">No team invitations available</h5>
+                  <p class="text-muted">When you receive team invitations, they will appear here</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Pagination Controls -->
+      <div class="row" *ngIf="totalData > pageSize">
+        <div class="col-md-12">
+          <div class="pagination-section">
+            <nav>
+              <ul class="pagination">
+                <li class="page-item" [class.disabled]="currentPage === 1">
+                  <a class="page-link" (click)="prevPage()">Previous</a>
+                </li>
+                <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index" 
+                    [class.active]="currentPage === i+1">
+                  <a class="page-link" (click)="goToPage(i+1)">{{i+1}}</a>
+                </li>
+                <li class="page-item" [class.disabled]="currentPage === totalPages">
+                  <a class="page-link" (click)="nextPage()">Next</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+[
+  {
+    "Name": "Nouveau profil",
+    "Projects": [
+      {
+        "Path": "gestionEmployer\\gestionEmployer.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "ApiGateway\\ApiGateway.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "serviceMail\\serviceMail.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "gestionSite\\gestionSite.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "gestionUtilisateur\\gestionUtilisateur.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "chatEtInvitation\\chatEtInvitation.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "gestionEquipe\\gestionEquipe.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "gestionReservation\\gestionReservation.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "Auth\\Auth.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

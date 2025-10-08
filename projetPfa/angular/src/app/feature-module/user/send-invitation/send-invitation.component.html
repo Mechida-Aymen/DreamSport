@@ -1,0 +1,125 @@
+<!-- Sort By -->
+<div class="row">
+  <div class="col-lg-12">
+    <div class="sortby-section court-sortby-section">
+      <div class="sorting-info">
+        <div class="row d-flex align-items-center">
+          <div class="col-xl-6 col-lg-6 col-sm-12 col-12">
+            <div class="coach-court-list">
+              <ul class="nav">
+                <li><a [routerLink]="routes.userInvitation">Users</a></li>
+                <li><a [routerLink]="routes.teamInvitation">Teams</a></li>
+                <li><a class="active" [routerLink]="routes.userInvitation">Send invitation</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="court-tab-content">
+      <div class="card card-tableset">
+        <div class="card-body">
+          <div class="coache-head-blk">
+            <div class="row align-items-center">
+              <div class="col-md-5">
+                <div class="court-table-head">
+                  <h4>Send Invitations</h4>
+                  <p>Search users to send invitations</p>
+                </div>
+              </div>
+              <div class="col-md-7">
+                <div class="table-search-top Invitation-search-top">
+                  <div id="tablefilter" class="w-100">
+                    <div class="dataTables_filter">
+                      <label class="w-100 d-block">
+                        <input [(ngModel)]="searchDataValue"
+                               (ngModelChange)="onSearchChange($event)"
+                               class="form-control custom-search-input" 
+                               placeholder="Search ..." />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="table-responsive table-datatble mt-4">
+            <div class="card dashboard-card upcoming-card">
+              <div class="notification-coach">
+                <!-- Loading indicator -->
+                <div *ngIf="isLoading" class="text-center my-3">
+                  <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+                
+                <!-- Results -->
+                <ng-container *ngIf="!isLoading">
+                  <div class="user-results-container">
+                    <div *ngFor="let user of filteredUsers" class="user-card">
+                      <div class="user-avatar">
+                        <img [src]="user.imageUrl || 'https://pub-ae615910610b409dbb3d91c073aa47e6.r2.dev/avatar-02.jpg'" alt="User image" class="avatar-img">
+                      </div>
+                      <div class="user-info">
+                        <h5 class="user-name">
+                          {{ user.nom }} {{ user.prenom }}
+                          <span *ngIf="user.username" class="username">{{ user.username }}</span>
+                        </h5>
+                        <p *ngIf="user.bio" class="user-bio">{{ user.bio }}</p>
+                      </div>
+                      <div class="invite-action">
+                        <button *ngIf="!user.areFriends && !user.hasPendingInvitation" 
+                                (click)="sendInvitation(user)" 
+                                class="btn btn-primary btn-invite"
+                                [disabled]="user.sending">
+                          <span *ngIf="!user.sending">
+                            <i class="fas fa-paper-plane me-2"></i> Send
+                          </span>
+                          <span *ngIf="user.sending">
+                            <i class="fas fa-spinner fa-spin me-2"></i> Sending...
+                          </span>
+                        </button>
+                        
+                        <span *ngIf="user.areFriends" class="text-muted">
+                          Already friends
+                        </span>
+                        
+                        <span *ngIf="!user.areFriends && user.hasPendingInvitation" class="text-muted">
+                          Invitation pending
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- No results message -->
+                  <div *ngIf="searchDataValue && filteredUsers.length === 0" class="no-results">
+                    <div class="no-results-content">
+                      <i class="fas fa-search no-results-icon"></i>
+                      <h5>No users found for "{{ searchDataValue }}"</h5>
+                      <p>Try different search terms</p>
+                    </div>
+                  </div>
+                  
+                  <!-- Initial message -->
+                  <div *ngIf="!searchDataValue && !isLoading" class="start-searching">
+                    <div class="start-searching-content">
+                      <i class="fas fa-users start-searching-icon"></i>
+                      <h5>Start typing to search for users</h5>
+                      <p>Search by name, username or bio</p>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

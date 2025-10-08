@@ -1,0 +1,9 @@
+export interface editEmployee {
+    id: number;
+    nom: string;
+    prenom: string;
+    phoneNumber: string;
+    username: string;
+    email: string;
+    imageUrl: string;
+}

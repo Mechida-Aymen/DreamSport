@@ -1,0 +1,71 @@
+.featured-venues-slider {
+    position: relative;
+  
+    .featured-venues-item {
+      background: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s ease-in-out;
+    }
+  
+    .listing-item {
+      position: relative;
+    }
+  
+    .listing-content {
+      padding: 15px;
+      text-align: center;
+    }
+  
+    .listing-title a {
+      font-size: 18px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+  
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+    }
+  
+    .navigation a {
+      font-weight: bold;
+    }
+  
+    /*** Boutons de navigation ***/
+    .owl-nav {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      pointer-events: none; /* Pour éviter que le conteneur bloque les clics */
+    }
+  
+    .owl-nav button {
+      background: transparent !important;
+      border: none;
+      font-size: 32px; /* Agrandir les icônes */
+      font-weight: bold;
+      cursor: pointer;
+      transition: color 0.3s ease-in-out;
+      pointer-events: all; /* Assure que les boutons restent cliquables */
+    }
+  
+  
+  
+    .owl-prev {
+      position: absolute;
+      left: -40px; /* Ajuster la position */
+    }
+  
+    .owl-next {
+      position: absolute;
+      right: -40px;
+    }
+  }
+  

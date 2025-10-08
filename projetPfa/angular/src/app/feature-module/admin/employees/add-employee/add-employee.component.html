@@ -1,0 +1,251 @@
+<h2 mat-dialog-title class="text-2xl font-bold mb-4 text-primary">Add Employee</h2>
+
+<mat-dialog-content class="!pb-6">
+  <form [formGroup]="addForm" (ngSubmit)="onSubmit()" class="form-container">
+    <!-- Image Upload Section -->
+<!-- Image Upload Section -->
+<div class="row mb-4">
+  <div class="col-md-12">
+    <div class="file-upload-text">
+      <div class="file-upload">
+        <img [src]="imagePreview || 'https://pub-ae615910610b409dbb3d91c073aa47e6.r2.dev/avatar-02.jpg'" 
+             class="img-fluid avatar-img rounded-circle" 
+             alt="Employee Image">
+        <label for="imageUpload" class="upload-label">
+          <i class="feather icon-edit"></i>
+        </label>
+        <input type="file" 
+               id="imageUpload" 
+               (change)="onFileSelected($event)" 
+               accept="image/jpeg, image/png, image/svg+xml"
+               class="d-none">
+      </div>
+      <h5>Avatar should be minimum 150×150 pixels. Supported formats: JPG, PNG, SVG</h5>
+      <div *ngIf="apiErrors['image']" class="text-danger small mt-2">
+        <i class="feather icon-alert-circle me-1"></i>
+        {{ apiErrors['image'] }}
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Personal Information Section -->
+    <div class="card mb-4 border-0 shadow-sm">
+      <div class="card-header bg-light">
+        <h5 class="mb-0 text-primary">
+          <i class="feather icon-user me-2"></i> Personal Information
+        </h5>
+      </div>
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-label">First Name</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light"><i class="feather icon-user text-muted"></i></span>
+                <input type="text"
+                       class="form-control"
+                       placeholder="First Name"
+                       formControlName="prenom"
+                       [ngClass]="{'is-invalid': addForm.get('prenom')?.touched && addForm.get('prenom')?.invalid}">
+              </div>
+              <div *ngIf="addForm.get('prenom')?.touched && addForm.get('prenom')?.invalid" class="invalid-feedback">
+                First name is required
+              </div>
+              <div *ngIf="apiErrors['Prenom']" class="text-danger small mt-1">
+                <i class="feather icon-alert-circle me-1"></i>
+                {{ apiErrors['Prenom'] }}
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-label">Last Name</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light"><i class="feather icon-user text-muted"></i></span>
+                <input type="text"
+                       class="form-control"
+                       placeholder="Last Name"
+                       formControlName="nom"
+                       [ngClass]="{'is-invalid': addForm.get('nom')?.touched && addForm.get('nom')?.invalid}">
+              </div>
+              <div *ngIf="addForm.get('nom')?.touched && addForm.get('nom')?.invalid" class="invalid-feedback">
+                Last name is required
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-label">Birthday</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light"><i class="feather icon-calendar text-muted"></i></span>
+                <input matInput
+                       [matDatepicker]="picker"
+                       [max]="maxBirthDate"
+                       placeholder="Birthday"
+                       class="form-control"
+                       formControlName="birthday"
+                       [ngClass]="{'is-invalid': addForm.get('birthday')?.touched && addForm.get('birthday')?.invalid}">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </div>
+              <div *ngIf="addForm.get('birthday')?.touched && addForm.get('birthday')?.invalid" class="invalid-feedback">
+                Birthday is required and must be before today
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-label">CIN</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light"><i class="feather icon-credit-card text-muted"></i></span>
+                <input type="text"
+                       class="form-control"
+                       placeholder="CIN"
+                       formControlName="cin"
+                       [ngClass]="{'is-invalid': addForm.get('cin')?.touched && addForm.get('cin')?.invalid}">
+              </div>
+              <div *ngIf="addForm.get('cin')?.touched && addForm.get('cin')?.invalid" class="invalid-feedback">
+                CIN is required
+              </div>
+              <div *ngIf="apiErrors['CIN']" class="text-danger small mt-1">
+                <i class="feather icon-alert-circle me-1"></i>
+                {{ apiErrors['CIN'] }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Information Section -->
+    <div class="card mb-4 border-0 shadow-sm">
+      <div class="card-header bg-light">
+        <h5 class="mb-0 text-primary">
+          <i class="feather icon-mail me-2"></i> Contact Information
+        </h5>
+      </div>
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light"><i class="feather icon-mail text-muted"></i></span>
+                <input type="email"
+                       class="form-control"
+                       placeholder="Email"
+                       formControlName="email"
+                       [ngClass]="{'is-invalid': addForm.get('email')?.touched && addForm.get('email')?.invalid}">
+              </div>
+              <div *ngIf="addForm.get('email')?.touched && addForm.get('email')?.invalid" class="invalid-feedback">
+                <span *ngIf="addForm.get('email')?.hasError('required')">Email is required</span>
+                <span *ngIf="addForm.get('email')?.hasError('email')">Please enter a valid email</span>
+              </div>
+              <div *ngIf="apiErrors['Email']" class="text-danger small mt-1">
+                <i class="feather icon-alert-circle me-1"></i>
+                {{ apiErrors['Email'] }}
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-label">Phone Number</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light"><i class="feather icon-phone text-muted"></i></span>
+                <input type="text"
+                       class="form-control"
+                       placeholder="Phone Number"
+                       formControlName="phoneNumber"
+                       [ngClass]="{'is-invalid': addForm.get('phoneNumber')?.touched && addForm.get('phoneNumber')?.invalid}">
+              </div>
+              <div *ngIf="addForm.get('phoneNumber')?.touched && addForm.get('phoneNumber')?.invalid" class="invalid-feedback">
+                Phone number is required
+              </div>
+              <div *ngIf="apiErrors['PhoneNumber']" class="text-danger small mt-1">
+                <i class="feather icon-alert-circle me-1"></i>
+                {{ apiErrors['PhoneNumber'] }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Professional Information Section -->
+    <div class="card mb-4 border-0 shadow-sm">
+      <div class="card-header bg-light">
+        <h5 class="mb-0 text-primary">
+          <i class="feather icon-briefcase me-2"></i> Professional Information
+        </h5>
+      </div>
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-label">Username</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light"><i class="feather icon-user text-muted"></i></span>
+                <input type="text"
+                       class="form-control"
+                       placeholder="Username"
+                       formControlName="username"
+                       [ngClass]="{'is-invalid': addForm.get('username')?.touched && addForm.get('username')?.invalid}">
+              </div>
+              <div *ngIf="addForm.get('username')?.touched && addForm.get('username')?.invalid" class="invalid-feedback">
+                Username is required
+              </div>
+              <div *ngIf="apiErrors['Username']" class="text-danger small mt-1">
+                <i class="feather icon-alert-circle me-1"></i>
+                {{ apiErrors['Username'] }}
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-label">Salary</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light"><i class="feather icon-dollar-sign text-muted"></i></span>
+                <input type="number"
+                       class="form-control"
+                       placeholder="Salary"
+                       formControlName="salaire"
+                       [ngClass]="{'is-invalid': addForm.get('salaire')?.touched && addForm.get('salaire')?.invalid}">
+              </div>
+              <div *ngIf="addForm.get('salaire')?.touched && addForm.get('salaire')?.invalid" class="invalid-feedback">
+                <span *ngIf="addForm.get('salaire')?.hasError('required')">Salary is required</span>
+                <span *ngIf="addForm.get('salaire')?.hasError('min')">Must be positive value</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="convenient-btns d-flex justify-content-end gap-3 mt-4">
+      <button type="button"
+              mat-stroked-button
+              mat-dialog-close
+              class="btn btn-outline-secondary px-4">
+        <i class="feather icon-x me-2"></i> Cancel
+      </button>
+      <button type="submit"
+              mat-raised-button
+              color="primary"
+              class="btn btn-primary px-4"
+              [disabled]="addForm.invalid || isSubmitting">
+        <span *ngIf="!isSubmitting ">
+          <i class="feather icon-save me-2 "></i> Add Employee
+        </span>
+        <span *ngIf="isSubmitting">
+          <i class="fa fa-spinner fa-spin me-2"></i> Adding...
+        </span>
+      </button>
+    </div>
+  </form>
+</mat-dialog-content>

@@ -1,0 +1,89 @@
+/*-----------------
+	8. Breadcrumb
+-----------------------*/
+
+.breadcrumb {
+	background: url('../../img/bg/breadcrumb-bg.jpg') $__secondary__dark__rgba no-repeat;
+	background-size: cover;
+		background-blend-mode: multiply;
+		padding: 60px 0;
+		position: $__relative;
+		&:before, &:after {
+			content: '';
+			background: $__gradient__color;
+			border-radius: $__full__width;
+		}
+		&.breadcrumb-list {
+			background: url('../../img/bg/breadcrumb-bg.jpg') $__secondary__dark__rgba no-repeat;
+			background-size: cover;
+			.container {
+				position: relative;
+			}
+		}
+		&:before {
+			@include position($__absolute,$__value__60,null,null,$__value__40);
+			width: $__value__20;
+			height: $__value__20;
+			@include respond-below(custom1200) {
+			top: 24px;
+			left: 24px;
+		}
+		}
+		&:after {
+			@include position($__absolute,$__value__30,130px,null,null);
+			width: $__value__30;
+			height: $__value__30;
+		}
+		span {
+			&.primary-right-round {
+				content: '';
+				@include position($__absolute,null,50px,50px,null);
+				width: 13px;
+				height: 13px;
+				background: $__primarylight;
+				border-radius: 13px;
+				@include respond-below(custom1200) {
+					top: 80px;
+				}
+			}
+		}
+		h1 {
+			margin-bottom: $__value__15;
+		}
+		ul {
+			position: $__relative;
+			color: $__white;
+  		li {
+  			padding-right: $__value__30;
+  			display: inline-block;
+  			position: $__relative;
+  			z-index: 1;
+  			&:after {
+  				@include position($__absolute,7px,10px,auto,auto);
+			    content: "\f105";
+			    font: normal normal normal 14px/1 FontAwesome;
+			    color: $__white;
+  			}
+  			&:last-child {
+  				&:after {
+  					display: none;
+  				}
+  			}
+	  		a {
+	  			color: $__white;
+				&:hover {
+					color: $__primarycolor;
+				}
+	  		}
+  		}
+  		&:after{
+  			@include position($__absolute,null,0,-60px,null);
+  			width: 147px;
+  			height: 74px;
+  			content: '';
+  			background: $__gradient__color;
+  			border-top-left-radius: 84px;
+			border-top-right-radius: 84px;
+  		}
+  	}
+}

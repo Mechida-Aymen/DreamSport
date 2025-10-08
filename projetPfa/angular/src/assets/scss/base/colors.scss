@@ -1,0 +1,72 @@
+/*-----------------
+	39. Color
+-----------------------*/
+
+:root {
+	--main-color:  #097E52; /* Valeur par défaut */
+	--sec-color: #192335; 
+	--main-light-color:#23B33A;
+	--success-color:#1BB333;
+  }
+
+$__primarycolor:var(--main-color);
+$__secondarycolor:var(--sec-color);
+$__primarylight:var(--main-light-color);
+$__success:#1BB333;
+$__darkgray:#6B7385;
+$__lightgray:#EAEDF0;
+$__dullgray:#EEEEEE;
+$__yellow__dark:#FFAA00;
+$__red:#F50303;
+$__darkash:#A0A0A0;
+$__lightash:#A8A8A8;
+$__whitesmoke:#F5F5F5;
+$__light__whitesmoke:#FAFAFA;
+$__dull__whitesmoke:#F9F9F6;
+$__white:#FFFFFF;
+$__darkblue:#1E3259;
+$__active_color: var(--success-color);
+$__parrot_green: #19C83F;
+$__star__blue: #0CAEF4;
+$__secondary__dark__rgba:rgba(36, 29, 57, 0.8);
+$__gradient__color: linear-gradient(105.55deg, var(--main-color) -6.68%, var(--main-light-color)43.13%, var(--success-color) 96.15%);
+$__reverse__gradient__color: linear-gradient(105.55deg, var(--success-color) -6.68%, var(--main-light-color) 43.13%,  var(--main-color) 96.15%);
+$__row__box__shadow: 0px 4px 44px rgba(211, 211, 211, 0.25);
+$__listing__box__shadow: 0px 4px 24px rgba(212, 212, 212, 0.25);
+$__warning__bg: rgba(245, 3, 3, 0.04);
+$__head__gray: linear-gradient(93.86deg, var(--main-color) -2.6%, var(--main-light-color) 67.39%, var(--success-color) 110.84%);
+$__bg__gray: linear-gradient(105.55deg, var(--main-color) -6.68%, var(--main-light-color) 43.13%, var(--success-color) 96.15%);
+$__warning__bg: rgba(245, 3, 3, 0.04);
+$__footer__bg: var(--sec-color);
+$__item__box__shadow: 0px 4px 24px rgba(201, 201, 201, 0.25);
+$__warning__text: #FF675B;
+$__input__group__border: #E2E7F1;
+$__facebook: #3080F8;
+$__instagram: #FF2D20;
+$__behance: #0066FF;
+$__behance_viloet: #7756C9;
+$__twitter: #35B6FF;
+$__footer__bg: #0A1A38;
+$__dull__text: #7C7C7C;
+$__black__light: rgba(168, 168, 168, 0.2);
+$__black__red: rgba(245, 3, 3, 0.2);
+$__bright__gray: #EAEDF0;
+$__dark__gradient__bg: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+$__light__white__bg: rgba(255, 255, 255, 0.95); 
+$__dark__viloet__bg: rgba(119, 86, 201, 0.2) ;
+$__dark__blue__bg: rgba(12, 174, 244, 0.2) ;
+$__pink: #F50366;
+$__dot__shadow: 0px 4px 14px rgba(160, 160, 160, 0.25);
+$__insta__gradient__bg: linear-gradient(315deg, #FBE18A 0.96%, #FCBB45 21.96%, #F75274 38.96%, #D53692 52.96%, #8F39CE 74.96%, #5B4FE9 100.96%);
+$__paid__color: rgba(27, 179, 51, 0.2);
+$__light__green: rgba(170, 244, 12, 0.3);
+$__greycolor: #E3E2E2;
+$__text_dark:#000;
+$__greenish__bg: rgba(255, 242, 242, 0.13); 
+$__gray__dark: #DBDBDB;
+$__gray__light: #DEDEDE;
+$__green__light: #20DC49;
+$__red__light: #D93F21;
+$__light__black: #474545;
+$__chat__green: #17DA9F;
+$__dark__red: #CA0D0D;

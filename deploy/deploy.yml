@@ -1,0 +1,120 @@
+- name: Deploy Application to VM2
+  hosts: vm2
+  become: yes
+  become_method: sudo
+  tasks:
+
+    # required dependencies
+    - name: Install prerequisite packages
+      apt:
+        name:
+          - ca-certificates
+          - curl
+          - gnupg
+          - lsb-release
+          - python3
+        state: present
+        update_cache: yes
+
+    # Add Docker
+    - name: Add Docker’s official GPG key
+      shell: |
+        install -m 0755 -d /etc/apt/keyrings
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+      args:
+        creates: /etc/apt/keyrings/docker.gpg
+
+    # Set up Docker repository
+    - name: Add Docker repository
+      copy:
+        dest: /etc/apt/sources.list.d/docker.list
+        content: |
+          deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
+
+    # Install Docker and Compose 
+    - name: Install Docker CE and Compose plugin
+      apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+        state: latest
+        update_cache: yes
+
+    # Start docker
+    - name: Start and enable Docker
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    # Copy docker-compose.yml to VM2
+    - name: Copy docker-compose.yml to VM2
+      copy:
+        src: /var/lib/jenkins/workspace/pfa-deploy/projetPfa/docker-compose.yml
+        dest: /home/aymen/projects/dreamsport/docker-compose.yml
+        owner: aymen
+        group: aymen
+        mode: '0644'
+
+    - name: Remove existing angular-app container if it exists
+      shell: |
+        if [ "$(docker ps -aq -f name=angular-app)" ]; then
+          docker rm -f angular-app
+        fi
+      ignore_errors: yes
+
+    # Pull Docker images 
+    - name: Pull all Docker images in the Docker Compose file
+      shell: docker compose -f /home/aymen/projects/dreamsport/docker-compose.yml pull
+      args:
+        chdir: /home/aymen/projects/dreamsport
+
+    # Stop and remove existing old containers
+    - name: Stop and remove existing Docker Compose containers
+      docker_compose:
+        project_src: /home/aymen/projects/dreamsport
+        state: absent
+
+    # Start Docker containers 
+    - name: Start Docker containers manually
+      shell: docker compose -f docker-compose.yml up -d
+      args:
+        chdir: /home/aymen/projects/dreamsport
+      ignore_errors: yes
+
+    # Wait for SQL Server to be ready
+    - name: Wait for SQL Server to be ready
+      wait_for:
+        host: "localhost"
+        port: 1433
+        timeout: 120   
+        delay: 10      
+        state: started
+
+    - name: Start Docker containers manually
+      shell: docker compose -f docker-compose.yml up -d
+      args:
+        chdir: /home/aymen/projects/dreamsport
+
+    # Install Nginx
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+
+    # Configure Nginx to serve frontend
+    - name: Configure Nginx to serve frontend
+      template:
+        src: nginx.conf.j2
+        dest: /etc/nginx/sites-available/default
+
+    # Restart Nginx to apply changes
+    - name: Restart Nginx to apply changes
+      service:
+        name: nginx
+        state: restarted
+        enabled: yes

@@ -1,0 +1,77 @@
+<div class="user-view">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="profile-detail-group">
+        <div class="card">
+          <form [formGroup]="createTeamForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="file-upload-text">
+                  <div class="file-upload">
+                    <img [src]="previewImage" 
+                         class="img-fluid avatar-img" 
+                         alt="Team Avatar">
+                    <span>
+                      <i class="feather icon-edit"></i>
+                      <input type="file" id="file-input" (change)="onFileSelected($event)" accept="image/jpeg, image/png, image/svg+xml">
+                    </span>
+                  </div>
+                  <h5>Avatar should be minimum 150×150 pixels. Supported formats: JPG, PNG, SVG</h5>
+                </div>
+              </div>
+              
+              <div class="col-lg-4 col-md-6">
+                <div class="input-space">
+                  <label for="name" class="form-label">Team Name*</label>
+                  <input type="text" class="form-control" id="name" 
+                         formControlName="name"
+                         placeholder="Enter team name">
+                  <small class="text-danger" *ngIf="createTeamForm.get('name')?.hasError('required') && createTeamForm.get('name')?.touched">
+                    Team name is required
+                  </small>
+                </div>
+              </div>
+              
+              <div class="col-lg-4 col-md-6">
+                <div class="input-space">
+                  <label class="form-label">Sport*</label>
+                  <mat-form-field class="search-box select w-100">
+                    <mat-select formControlName="sportId" placeholder="Select a sport">
+                      @for (sport of sportCategories; track sport.id) {
+                      <mat-option [value]="sport.id">
+                        {{sport.name}}
+                      </mat-option>
+                      }
+                    </mat-select>
+                    <mat-error *ngIf="createTeamForm.get('sportId')?.hasError('required')">
+                      Please select a sport
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              
+              <div class="col-lg-4 col-md-6">
+                <div class="input-space">
+                  <label for="description" class="form-label">Description*</label>
+                  <textarea class="form-control" id="description" 
+                            formControlName="description"
+                            rows="3" placeholder="Enter team description"></textarea>
+                  <small class="text-danger" *ngIf="createTeamForm.get('description')?.hasError('required') && createTeamForm.get('description')?.touched">
+                    Description is required
+                  </small>
+                </div>
+              </div>
+            </div>
+            
+            <div class="save-changes text-end">
+              <button type="submit" class="btn btn-secondary save-profile" [disabled]="createTeamForm.invalid || isLoading">
+                <span *ngIf="!isLoading">Create Team</span>
+                <span *ngIf="isLoading">Creating Team...</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

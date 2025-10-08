@@ -1,0 +1,168 @@
+/*-----------------
+    37. Error Pages
+-----------------------*/
+
+.content {
+	&.ellipses { 
+		position: $__relative;
+		padding-bottom: 0;
+		&:before {
+			position: $__absolute;
+			width: 850px;
+			height: 850px;
+			background: $__dull__whitesmoke;
+			border-radius: $__full__width;
+			content: '';
+			top: -495px;
+			right: -167px;
+			z-index: -1;
+			@include respond-below(custom991) {
+				display: $__none;
+			}
+		}
+		&:after {
+			width: 367px;
+			height: 367px;
+			border-radius: 367px;
+			background: $__active_color;
+			position: $__absolute;
+			bottom: 0;
+			left:-120px;
+			content: '';
+			z-index: -1;
+			@include respond-below(custom991) {
+				display: $__none;
+			}
+		}
+		&.maintenance {
+			margin-bottom: 60px;
+			padding-top: 0;
+			&:after{
+				display: none;
+			}
+		}
+	}
+}
+.coming-soon-page, .error-page {
+	overflow-x: hidden;
+	@include respond-below(custom767) {
+		height: 100vh;
+		display: flex;
+		display: -webkit-flex;
+		align-items:center;
+		-webkit-align-items:center;
+		justify-content: center;
+		-webkit-justify-content: center;
+	}
+	header {
+		margin-top: 60px;
+		@include respond-below(custom991) {
+			margin-top: 40px;
+		}
+	}
+
+}
+.coming-soon-page {
+	.content { 
+		padding: 0;
+		.text-img {
+			margin: 80px 0 80px 0;
+			text-align: center;
+			@include respond-below(custom991) {
+				margin: 40px 0 40px 0;
+			}
+			img {
+				@include respond-below(custom767) {
+					max-width: 220px;
+				}
+			}
+		}
+		h3, h2 {
+			margin: 0 0 15px 0;
+		}
+		p {
+			margin-bottom: 26px;
+			font-size: $__value__20;
+			@include respond-below(custom767) {
+				font-size: $__font__size__16;
+			}
+		}
+		.subscribe-style { 
+			width: 90%;
+			margin: 0 auto;
+			margin-bottom: 60px;
+		}
+		.play-img {
+			position: $__absolute;
+			bottom: 0;
+			@include respond-below(custom991) {
+				display: $__none;
+			}
+		}
+		.footer {
+			padding-top: 0;
+		}
+	}
+}
+.error-page {
+	header {
+		img {
+			@include respond-below(custom767) {
+				max-width: 180px;
+			}
+		}
+	}
+	.content {
+		padding-bottom: 60px;
+		&.ellipses { 
+			&:after {
+				display: $__none;
+			}
+		}
+		h3 {
+			margin: $__value__40 0 $__value__30 0;
+		}
+		p {
+			margin-bottom: $__value__40;
+		}
+	}
+}
+.terms-page {
+	h3 {
+		margin-bottom: 1rem;
+	}
+}
+.pricing-page {
+	.content {
+		padding-bottom: 0px;
+		@include respond-below(custom991) {
+			padding: 0px;
+		}
+	}
+	.featured-plan {
+		padding-bottom: 90px;
+		@include respond-below(custom991) {
+			padding-bottom: 40px;
+		}
+		@include respond-below(custom767) {
+			padding-bottom: 10px;
+		}
+	}
+}
+.condition-details {
+	p {
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+.errors-img {
+	margin: auto;
+	text-align: center;
+	@include respond-below(custom1399) {
+		max-width: 900px;
+	}
+	img {
+		margin-top: 40px;
+	}
+}

@@ -1,0 +1,238 @@
+<!-- Page Content -->
+<div class="content">
+    <div class="container">
+  
+      <!-- Sort By -->
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="sortby-section">
+            <div class="sorting-info">
+              <div class="row d-flex align-items-center">
+                <div class="col-xl-4 col-lg-3 col-sm-12 col-12">
+                  <div class="count-search">
+                    <a href="javascript:void(0);" class="btn btn-primary" 
+                        data-bs-toggle="modal" data-bs-target="#addCourtModal">
+                        <i ></i>Add Court
+                    </a>
+                  </div>
+                </div>
+                <div class="col-xl-8 col-lg-9 col-sm-12 col-12">
+                  <div class="sortby-filter-group">
+                   
+                    <div class="sortbyset">
+                        <span class="sortbytitle">Sort By</span>
+                        <div class="sorting-select">
+                          <mat-select   [(ngModel)]="selectedSport" [ngModelOptions]="{standalone: true}" class="select"  placeholder="Relevance" (selectionChange)="filterCourtsBySport()">
+                            @for (data of sportCategories; track data) {
+                              <mat-option [value]="data.name">
+                                {{data.name}}
+                              </mat-option>
+                            }
+                          </mat-select>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Sort By -->
+  
+      <div class="row justify-content-center">
+        @for (court of filteredTerrains; track court; let i = $index){
+        <!-- Featured Item -->
+        <div class="col-lg-4 col-md-6">
+          <div class="featured-venues-item">
+            <div class="listing-item listing-item-grid">
+              <div class="listing-img">
+                <a >
+                    @if (court.image=='string' || court.image == null) {
+                        <img src="assets/img/featured/featured-05.jpg" alt="Default court image">
+                      } @else {
+                        <img [src]="court.image" alt="Court image">
+                      }
+                </a>
+                <div class="fav-item-venues">
+                  <span class="tag tag-blue">{{ court.sport_Categorie.name }}</span>
+                </div>
+                <div class="hour-list">
+                  <h5 class="tag tag-primary">{{ court.terrainStatus.libelle }}</h5>
+                </div>
+              </div>
+              <div class="listing-content">
+                <h3 class="listing-title">
+                  <a >{{court.title}}</a>
+                </h3>
+                
+                <div class="listing-details-group">
+                  <p>{{court.description}}</p>
+                </div>
+                <div class="coach-btn">
+                  <ul>
+                    <li>
+                      
+                    </li>
+                    <li class="d-flex justify-content-end">
+                        <a href="javascript:void(0);" class="btn deactive-btn" 
+                           data-bs-toggle="modal" data-bs-target="#deactive" 
+                           (click)="setSelectedCourt(court)">
+                          <i class="me-1 feather icon-zap-off"></i>Delete
+                        </a>
+                      </li>
+                  </ul>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+    }
+        <!-- /Featured Item -->
+
+        
+      </div>
+    </div>
+  
+  </div>
+  <!-- /Page Content -->
+
+
+  <div class="modal custom-modal fade deactive-modal" id="deactive" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <a class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span class="align-center" aria-hidden="true"><i class="feather icon-x"></i></span>
+          </a>
+        </div>
+        <div class="modal-body">
+  
+          <!-- Deactive Account -->
+          <div class="account-deactive">
+            <img src="assets/img/icons/courtDelete.png" alt="Icon">
+            <h3>Are You Sure You Want to Delete The {{deletingCourt?.title}} Court?</h3>
+            <p>If yes please click “Yes” button</p>
+            <div class="convenient-btns">
+                <a href="javascript:void(0);" data-bs-dismiss="modal" 
+                   class="btn btn-primary d-inline-flex align-items-center" 
+                   (click)="deleteCourt(deletingCourt.id)">
+                  Yes <span><i class="feather icon-arrow-right-circle ms-2"></i></span>
+                </a>
+                <a href="javascript:void(0);" data-bs-dismiss="modal" 
+                   class="btn btn-secondary d-inline-flex align-items-center">
+                  No <span><i class="feather icon-arrow-right-circle ms-2"></i></span>
+                </a>
+              </div>
+          </div>
+          <!-- /Deactive Account -->
+  
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Add Court Modal -->
+<div class="modal custom-modal fade" id="addCourtModal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header justify-content-between">
+        <h5 class="modal-title">Add New Court</h5>
+        <a class="close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal('addCourtModal')">
+          <span aria-hidden="true"><i class="feather icon-x"></i></span>
+        </a>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="courtForm" (ngSubmit)="addCourt()">
+          <!-- Court Image Upload -->
+          <div class="mb-3">
+            <div class="file-upload-text">
+              <div class="file-upload">
+                <img [src]="imagePreview || 'assets/img/icons/img-icon.svg'" 
+                    class="img-fluid avatar-img" 
+                    alt="Court Image">
+                <span>
+                  <i class="feather icon-edit"></i>
+                  <input type="file" 
+                        id="court-image-input" 
+                        (change)="onFileSelected($event)"
+                        accept="image/*">
+                </span>
+              </div>
+              <h5>Image should be minimum 150×150 pixels. Supported formats: JPG, PNG, SVG</h5>
+            </div>
+          </div>
+
+          <!-- Court Name -->
+          <div class="mb-3">
+            <label for="courtName" class="form-label">Court Name</label>
+            <input type="text" class="form-control" id="courtName" formControlName="title"
+                   [ngClass]="{ 'is-invalid': courtForm.get('title')?.touched && courtForm.get('title')?.invalid }">
+            <div *ngIf="courtForm.get('title')?.touched && courtForm.get('title')?.invalid" class="invalid-feedback">
+              Court name is required
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="mb-3">
+            <label for="courtDescription" class="form-label">Description</label>
+            <textarea class="form-control" id="courtDescription" formControlName="description" rows="3"
+                      [ngClass]="{ 'is-invalid': courtForm.get('description')?.touched && courtForm.get('description')?.invalid }"></textarea>
+            <div *ngIf="courtForm.get('description')?.touched && courtForm.get('description')?.invalid" class="invalid-feedback">
+              Description is required
+            </div>
+          </div>
+
+          <!-- Sport Type -->
+          <div class="mb-3">
+            <label for="sportType" class="form-label">Sport Type</label>
+            <select class="form-select" id="sportType" formControlName="idSport_Categorie"
+                    [ngClass]="{ 'is-invalid': courtForm.get('idSport_Categorie')?.touched && courtForm.get('idSport_Categorie')?.invalid }">
+              <option value="">Select a sport</option>
+              <option *ngFor="let sport of sportCategories" [value]="sport.id">
+                {{ sport.name }}
+              </option>
+            </select>
+            <div *ngIf="courtForm.get('idSport_Categorie')?.touched && courtForm.get('idSport_Categorie')?.invalid" class="invalid-feedback">
+              Sport type is required
+            </div>
+          </div>
+
+          <!-- Terrain Status -->
+          <div class="mb-3">
+            <label for="terrainStatus" class="form-label">Court Status</label>
+            <select class="form-select" id="terrainStatus" formControlName="terrainStatusId"
+                    [ngClass]="{ 'is-invalid': courtForm.get('terrainStatusId')?.touched && courtForm.get('terrainStatusId')?.invalid }">
+              <option value="">Select a status</option>
+              <option *ngFor="let status of terrainStatuses" [value]="status.id">
+                {{ status.libelle }}
+              </option>
+            </select>
+            <div *ngIf="courtForm.get('terrainStatusId')?.touched && courtForm.get('terrainStatusId')?.invalid" class="invalid-feedback">
+              Status is required
+            </div>
+          </div>
+
+          <div class="convenient-btns d-flex justify-content-end">
+            <button type="button" class="btn btn-secondary d-inline-flex align-items-center me-2"
+            data-bs-dismiss="modal" (click)="closeModal('addCourtModal')">
+              <i class="feather icon-x-circle me-2"></i> Cancel
+            </button>
+            <button 
+                    type="submit" class="btn btn-primary d-inline-flex align-items-center"
+                    data-bs-dismiss="modal" [disabled]="courtForm.invalid || isUploading">
+              <span *ngIf="!isUploading">
+                <i class="feather icon-check-circle me-2"></i> Save
+              </span>
+              <span *ngIf="isUploading">
+                <i class="fa fa-spinner fa-spin me-2"></i> Saving...
+              </span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

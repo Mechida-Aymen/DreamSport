@@ -1,0 +1,177 @@
+<div class="content court-bg">
+  <div class="container">
+    <div class="coach-court-list profile-court-list">
+      <ul class="nav">
+        <li><a class="active" [routerLink]="routes.userProfile">Profile</a></li>
+        <li><a [routerLink]="routes.userChangepassword">Change Password</a></li>
+        <li><a [routerLink]="routes.userOthersettings">Other Settings</a></li>
+      </ul>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="profile-detail-blk">
+          <ul>
+            <li class="active"><a [routerLink]="routes.userProfile">Profile Details</a></li>
+          </ul>
+        </div>
+        <div class="profile-detail-group">
+          <div class="card">
+            <form [formGroup]="profileForm" (ngSubmit)="saveChanges()">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="file-upload-text">
+                    <div class="file-upload">
+                      <img [src]="avatarUrl" 
+                          class="img-fluid avatar-img" 
+                          alt="User Avatar">
+                      <span>
+                        <i class="feather icon-edit"></i>
+                        <input type="file" 
+                              id="file-input" 
+                              (change)="onFileSelected($event)"
+                              accept="image/*">
+                      </span>
+                    </div>
+                    <h5>Image should be minimum 150×150 pixels. Supported formats: JPG, PNG, SVG</h5>
+                  </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                  <div class="input-space">
+                    <label for="lastName" class="form-label">Lastname</label>
+                    <input type="text" 
+                           class="form-control" 
+                           id="lastName" 
+                           formControlName="lastName"
+                           [class.is-invalid]="profileForm.get('lastName')?.invalid && 
+                                             (profileForm.get('lastName')?.dirty || 
+                                              profileForm.get('lastName')?.touched)">
+                    <div *ngIf="profileForm.get('lastName')?.invalid && 
+                               (profileForm.get('lastName')?.dirty || 
+                                profileForm.get('lastName')?.touched)" 
+                         class="invalid-feedback">
+                      Lastname is required
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                  <div class="input-space">
+                    <label for="firstName" class="form-label">Firstname</label>
+                    <input type="text" 
+                           class="form-control" 
+                           id="firstName" 
+                           formControlName="firstName"
+                           [class.is-invalid]="profileForm.get('firstName')?.invalid && 
+                                              (profileForm.get('firstName')?.dirty || 
+                                               profileForm.get('firstName')?.touched)">
+                    <div *ngIf="profileForm.get('firstName')?.invalid && 
+                              (profileForm.get('firstName')?.dirty || 
+                               profileForm.get('firstName')?.touched)" 
+                         class="invalid-feedback">
+                      Firstname is required
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                  <div class="input-space">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" 
+                           class="form-control" 
+                           id="username" 
+                           formControlName="username"
+                           [class.is-invalid]="profileForm.get('username')?.invalid && 
+                                             (profileForm.get('username')?.dirty || 
+                                              profileForm.get('username')?.touched)">
+                    <div *ngIf="profileForm.get('username')?.invalid && 
+                              (profileForm.get('username')?.dirty || 
+                               profileForm.get('username')?.touched)" 
+                         class="invalid-feedback">
+                      Username is required
+                    </div>
+                    <div *ngIf="backendErrors['Username']" class="text-danger">
+                      {{ backendErrors['Username'] }}
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                  <div class="input-space">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" 
+                           class="form-control" 
+                           id="email" 
+                           formControlName="email"
+                           [class.is-invalid]="profileForm.get('email')?.invalid && 
+                                             (profileForm.get('email')?.dirty || 
+                                              profileForm.get('email')?.touched)">
+                    <div *ngIf="profileForm.get('email')?.invalid && 
+                              (profileForm.get('email')?.dirty || 
+                               profileForm.get('email')?.touched)" 
+                         class="invalid-feedback">
+                      Valid email is required
+                    </div>
+                    <div *ngIf="backendErrors['Email']" class="text-danger">
+                      {{ backendErrors['Email'] }}
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                  <div class="input-space">
+                    <label for="phoneNumber" class="form-label">Phone Number</label>
+                    <input type="text" 
+                           class="form-control" 
+                           id="phoneNumber" 
+                           formControlName="phoneNumber"
+                           [class.is-invalid]="profileForm.get('phoneNumber')?.invalid && 
+                                             (profileForm.get('phoneNumber')?.dirty || 
+                                              profileForm.get('phoneNumber')?.touched)">
+                    <div *ngIf="profileForm.get('phoneNumber')?.invalid && 
+                              (profileForm.get('phoneNumber')?.dirty || 
+                               profileForm.get('phoneNumber')?.touched)" 
+                         class="invalid-feedback">
+                      Phone number is required
+                    </div>
+                    <div *ngIf="backendErrors['PhoneNumber']" class="text-danger">
+                      {{ backendErrors['PhoneNumber'] }}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="input-space">
+                    <label for="bio" class="form-label">Biography</label>
+                    <textarea class="form-control" 
+                              id="bio" 
+                              formControlName="bio"
+                              rows="4"
+                              placeholder="Tell us about yourself..."></textarea>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="save-changes text-end">
+                <button type="button" 
+                        class="btn btn-primary reset-profile" 
+                        (click)="resetForm()"
+                        [disabled]="isLoading">
+                  Reset
+                </button>
+                <button type="submit" 
+                        class="btn btn-secondary save-profile" 
+                        [disabled]="profileForm.invalid || isLoading">
+                  <span *ngIf="!isLoading">Save Changes</span>
+                  <span *ngIf="isLoading">
+                    <i class="fa fa-spinner fa-spin"></i> Saving...
+                  </span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

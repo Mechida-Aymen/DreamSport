@@ -1,0 +1,79 @@
+/*-----------------
+    33. Invitation
+-----------------------*/
+
+.Invitation-page {
+	.card {
+		box-shadow: $__row__box__shadow;
+		border: $__none;
+		.head-info {
+			h4 {
+				margin-bottom: 14px;
+			}
+			h5 {
+				margin-bottom: 0
+			}
+		}
+		hr {
+			margin: $__value__40 0;
+		}
+		.from-to {
+			padding: 24px;
+			margin-bottom: $__value__30;
+		}
+		table {
+			border-collapse: collapse;
+			border: 1px solid $__bright__gray;
+        	border-radius: 3px;
+			tr {
+				border: 1px solid #EAEDF0;
+				th {
+					background: $__dull__whitesmoke;
+				}
+				th, td {
+					border-width: 0;
+					padding: $__value__10;
+				}
+				td {
+					color: $__darkgray;
+				}
+			}
+			&.short-info {
+				border: $__none;
+				tr {
+					border: $__none;
+					td {
+						line-height: 30px;
+						padding: 0;
+					}
+				}
+			}
+			&.total {
+				border: $__none;
+        		tr {
+        			border: $__none;
+        			td {
+        				padding: 0 0 12px 0;
+						background: transparent;
+        				h6 {
+        					margin-bottom: 0;
+        				}
+        			}
+        		}
+			}
+		}
+		.total-wrap {
+			padding: $__value__20 $__value__20 8px $__value__20;
+			margin-top: $__value__15;
+			border-radius: 3px;
+		}
+		.payment-detail {
+			margin-top: 15px;
+			background: $__whitesmoke;
+			padding: $__value__20;
+			h6 {
+				margin-bottom: 15px;
+			}
+		}
+	}
+}

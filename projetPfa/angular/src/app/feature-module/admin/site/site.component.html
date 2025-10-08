@@ -1,0 +1,285 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <form [formGroup]="siteForm" (ngSubmit)="saveSiteSettings()">
+        <!-- Logo Upload -->
+        <div class="row mb-4">
+          <div class="col-md-12 text-center">
+            <div class="mb-3">
+              <div class="border rounded p-4 d-inline-block position-relative">
+                <!-- Loading state -->
+                <div *ngIf="isUploading && currentUploadField === 'Logo'" class="position-absolute top-50 start-50 translate-middle">
+                  <div class="spinner-border text-primary"></div>
+                </div>
+                
+                <!-- Logo preview -->
+                <img [src]="siteForm.value.Logo || 'assets/img/icons/img-icon.svg'" 
+                     [class.opacity-25]="isUploading && currentUploadField === 'Logo'"
+                     class="img-fluid mb-2" style="max-height: 150px;">
+                
+                <p class="mb-1">Upload Logo</p>
+                <label class="btn btn-link" [class.disabled]="isUploading">
+                  <i class="feather icon-edit"></i>
+                  <input type="file" class="d-none" 
+                         (change)="onFileSelected($event, 'Logo')" 
+                         accept="image/*"
+                         [disabled]="isUploading">
+                </label>
+              </div>
+              <small class="text-muted d-block">
+                Upload a logo with a minimum size of 150 * 150 pixels (JPG, PNG, SVG).
+              </small>
+              <div *ngIf="backendErrors['Logo']" class="text-danger">
+                {{ backendErrors['Logo'] }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Basic Info -->
+        <div class="row">
+          <div class="col-lg-4 col-md-6 mb-3">
+            <label class="form-label">Site Name</label>
+            <input type="text" class="form-control" 
+                   formControlName="Name" 
+                   placeholder="Enter Site Name"
+                   [class.is-invalid]="siteForm.get('Name')?.invalid && 
+                                     (siteForm.get('Name')?.dirty || 
+                                      siteForm.get('Name')?.touched)">
+            <div *ngIf="siteForm.get('Name')?.invalid && 
+                        (siteForm.get('Name')?.dirty || 
+                         siteForm.get('Name')?.touched)" 
+                 class="invalid-feedback">
+              Site name is required
+            </div>
+            <div *ngIf="backendErrors['Name']" class="text-danger">
+              {{ backendErrors['Name'] }}
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mb-3">
+            <label class="form-label">Domain</label>
+            <div class="input-group">
+              <span class="input-group-text">https://</span>
+              <input type="text" class="form-control" 
+                     formControlName="DomainName" 
+                     placeholder="yourdomain.com"
+                     [class.is-invalid]="siteForm.get('DomainName')?.invalid && 
+                                       (siteForm.get('DomainName')?.dirty || 
+                                        siteForm.get('DomainName')?.touched)">
+            </div>
+            <div *ngIf="siteForm.get('DomainName')?.invalid && 
+                       (siteForm.get('DomainName')?.dirty || 
+                        siteForm.get('DomainName')?.touched)" 
+                 class="invalid-feedback">
+              Please enter a valid domain
+            </div>
+            <div *ngIf="backendErrors['DomainName']" class="text-danger">
+              {{ backendErrors['DomainName'] }}
+            </div>
+          </div>
+
+          <!-- Primary Color Section -->
+          <div class="col-lg-4 col-md-6 mb-3">
+            <label class="form-label">Primary Color</label>
+            <div class="d-flex align-items-center gap-3">
+              <!-- Color picker with enhanced Bootstrap styling -->
+              <div class="position-relative">
+                <input type="color" 
+                       class="form-control form-control-color p-0 border-2" 
+                       style="width: 40px; height: 40px; cursor: pointer;"
+                       formControlName="CouleurPrincipale"
+                       (input)="onColorChange('CouleurPrincipale', $event)">
+                <span class="position-absolute top-100 start-50 translate-middle mt-1">
+                  <i class="bi bi-eyedropper text-muted small"></i>
+                </span>
+              </div>
+              
+              <!-- Hex input -->
+              <input type="text" 
+                     class="form-control flex-grow-1" 
+                     [value]="siteForm.value.CouleurPrincipale"
+                     (input)="onTextColorChange('CouleurPrincipale', $event)"
+                     placeholder="#3f51b5">
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="row">
+          <div class="col-lg-4 col-md-6 mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" 
+                   formControlName="Email" 
+                   placeholder="contact@example.com"
+                   [class.is-invalid]="siteForm.get('Email')?.invalid && 
+                                     (siteForm.get('Email')?.dirty || 
+                                      siteForm.get('Email')?.touched)">
+            <div *ngIf="siteForm.get('Email')?.invalid && 
+                       (siteForm.get('Email')?.dirty || 
+                        siteForm.get('Email')?.touched)" 
+                 class="invalid-feedback">
+              Please enter a valid email
+            </div>
+            <div *ngIf="backendErrors['Email']" class="text-danger">
+              {{ backendErrors['Email'] }}
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mb-3">
+            <label class="form-label">Phone</label>
+            <input type="tel" class="form-control" 
+                   formControlName="PhoneNumber" 
+                   placeholder="+1 (123) 456-7890"
+                   [class.is-invalid]="siteForm.get('PhoneNumber')?.invalid && 
+                                     (siteForm.get('PhoneNumber')?.dirty || 
+                                      siteForm.get('PhoneNumber')?.touched)">
+            <div *ngIf="siteForm.get('PhoneNumber')?.invalid && 
+                       (siteForm.get('PhoneNumber')?.dirty || 
+                        siteForm.get('PhoneNumber')?.touched)" 
+                 class="invalid-feedback">
+              Please enter a valid phone number
+            </div>
+            <div *ngIf="backendErrors['PhoneNumber']" class="text-danger">
+              {{ backendErrors['PhoneNumber'] }}
+            </div>
+          </div>
+
+          <!-- Secondary Color Section -->
+          <div class="col-lg-4 col-md-6 mb-3">
+            <label class="form-label">Secondary Color</label>
+            <div class="d-flex align-items-center gap-3">
+              <!-- Color picker with enhanced Bootstrap styling -->
+              <div class="position-relative">
+                <input type="color" 
+                       class="form-control form-control-color p-0 border-2" 
+                       style="width: 40px; height: 40px; cursor: pointer;"
+                       formControlName="CouleurSecondaire"
+                       (input)="onColorChange('CouleurSecondaire', $event)">
+                <span class="position-absolute top-100 start-50 translate-middle mt-1">
+                  <i class="bi bi-eyedropper text-muted small"></i>
+                </span>
+              </div>
+              
+              <!-- Hex input -->
+              <input type="text" 
+                     class="form-control flex-grow-1" 
+                     [value]="siteForm.value.CouleurSecondaire"
+                     (input)="onTextColorChange('CouleurSecondaire', $event)"
+                     placeholder="#ff4081">
+            </div>
+          </div>
+        </div>
+
+        <!-- Background Image -->
+        <div class="row mb-4">
+          <div class="col-md-12">
+            <label class="form-label">Background Image</label>
+            <div class="card position-relative">
+              <div class="card-body p-0">
+                <div class="ratio ratio-16x9 bg-light">
+                  <!-- Loading state -->
+                  <div *ngIf="isUploading && currentUploadField === 'Background'" 
+                       class="d-flex justify-content-center align-items-center">
+                    <div class="spinner-border text-primary"></div>
+                  </div>
+                  
+                  <!-- Background preview -->
+                  <div *ngIf="!(isUploading && currentUploadField === 'Background')"
+                       [style.backgroundImage]="'url(' + (siteForm.value.Background || 'assets/img/placeholder.jpg') + ')'" 
+                       [class.opacity-25]="isUploading && currentUploadField === 'Background'"
+                       class="bg-cover bg-center rounded">
+                    <label class="btn btn-primary position-absolute bottom-0 end-0 m-3" [class.disabled]="isUploading">
+                      <i class="feather icon-edit"></i>
+                      <input type="file" class="d-none" 
+                             (change)="onFileSelected($event, 'Background')" 
+                             accept="image/*"
+                             [disabled]="isUploading">
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button type="button" class="btn btn-link text-danger mt-2" 
+                    (click)="removeBackground()"
+                    [disabled]="!siteForm.value.Background || isUploading">
+              <i class="feather icon-trash-2"></i> Remove Background
+            </button>
+            <div *ngIf="backendErrors['Background']" class="text-danger">
+              {{ backendErrors['Background'] }}
+            </div>
+          </div>
+        </div>
+
+        <!-- About Us -->
+        <div class="row mb-4">
+          <div class="col-md-12">
+            <label class="form-label">About Us</label>
+            <textarea class="form-control" 
+                      formControlName="AboutUs" 
+                      rows="4" 
+                      placeholder="Information about your organization"
+                      [class.is-invalid]="siteForm.get('AboutUs')?.invalid && 
+                                        (siteForm.get('AboutUs')?.dirty || 
+                                         siteForm.get('AboutUs')?.touched)"></textarea>
+            <div *ngIf="siteForm.get('AboutUs')?.invalid && 
+                       (siteForm.get('AboutUs')?.dirty || 
+                        siteForm.get('AboutUs')?.touched)" 
+                 class="invalid-feedback">
+              About Us is required
+            </div>
+            <div *ngIf="backendErrors['AboutUs']" class="text-danger">
+              {{ backendErrors['AboutUs'] }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Address -->
+        <div class="row mb-4">
+          <div class="col-md-12">
+            <h5 class="mb-3">Address</h5>
+            <div class="row">
+              <div class="col-md-12 mb-3">
+                <label class="form-label">Full Address</label>
+                <textarea class="form-control" 
+                          formControlName="Addresse" 
+                          rows="2" 
+                          placeholder="Enter full address"
+                          [class.is-invalid]="siteForm.get('Addresse')?.invalid && 
+                                            (siteForm.get('Addresse')?.dirty || 
+                                             siteForm.get('Addresse')?.touched)"></textarea>
+                <div *ngIf="siteForm.get('Addresse')?.invalid && 
+                           (siteForm.get('Addresse')?.dirty || 
+                            siteForm.get('Addresse')?.touched)" 
+                     class="invalid-feedback">
+                  Address is required
+                </div>
+                <div *ngIf="backendErrors['Addresse']" class="text-danger">
+                  {{ backendErrors['Addresse'] }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="row">
+          <div class="col-md-12 text-end">
+            <button type="button" class="btn btn-outline-secondary me-2" 
+                    (click)="resetForm()"
+                    [disabled]="isSaving || isUploading">
+              Reset
+            </button>
+            <button type="submit" class="btn btn-primary" 
+                    [disabled]="siteForm.invalid || isSaving || isUploading">
+              <span *ngIf="!isSaving">Save Changes</span>
+              <span *ngIf="isSaving">
+                <i class="fa fa-spinner fa-spin"></i> Saving...
+              </span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

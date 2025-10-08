@@ -1,0 +1,188 @@
+/*-----------------
+    21. Sidebar
+-----------------------*/
+
+.sidebar-group {
+    @extend %display-flex-center;
+    @extend %justify-content-between;
+    border-bottom: 1px solid $__bright__gray;
+    @include respond-below(custom767) {  
+        display: block;
+        @include margin-padding(0 0 20px, 0 0 20px);
+    }
+    @include margin-padding(0 0 20px, 0 0 40px);
+    .sidebar-header-left {        
+        .filter-btn {
+            border: 1px solid $__bright__gray;
+            background: transparent;
+            border-radius: 10px;
+            padding: 8px 22px;
+            color: $__secondarycolor;
+            -webkit-transition: all 0.5s;
+            -moz-transition: all 0.5s;
+            -o-transition: all 0.5s;
+            transition: all 0.5s;
+            &:hover {
+                background: $__primarycolor;
+                border-color: $__primarycolor;
+                color: $__white;
+                span {
+                    i {
+                        color: $__white;
+                        -webkit-transition: all 0.5s;
+                        -moz-transition: all 0.5s;
+                        -o-transition: all 0.5s;
+                        transition: all 0.5s;
+                    }
+                }
+            }
+            span {
+                i {
+                    margin-right: 5px;
+                    color: $__primarycolor;
+                    -webkit-transition: all 0.5s;
+                    -moz-transition: all 0.5s;
+                    -o-transition: all 0.5s;
+                    transition: all 0.5s;
+                }
+            }
+        }
+    }
+}
+.sidebar-overlay {
+    display: $__none;
+    z-index: 99;
+    height: $__full__height;
+    width: $__full__width;
+    @include position($__fixed,60px,null,null,0);
+    background-color: rgba(0, 0, 0, 0.6);
+    &.opened {
+        display: $__block;
+        z-index: 99;
+    } 
+}
+.toggle-sidebar {
+    width: 416px;
+    padding: 24px;
+    position: fixed;
+    left: -450px;
+    top: 0;
+    height: 100%;
+    background: $__white;
+    z-index: 9999;
+    border-radius: 0px 20px 20px 0px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    overflow-y: auto;
+    @include transition(all 0.8s ease);
+    @include respond-below(custom767) { 
+        width: 300px;
+        left: -340px;
+    }
+    &.open-sidebar {
+        left: 0;
+        -webkit-transition: all 0.8s ease;
+        -ms-transition: all 0.8s ease;
+        transition: all 0.8s ease;
+        @include respond-below(custom991) {
+            border-radius: 10px;
+        }
+    }
+    .sidebar-header {
+        @extend %display-flex-center;
+        @extend %justify-content-between;
+        @include margin-padding(0 0 30px, null);
+        .sidebar-closes {
+            i {
+                color: $__red;
+            }
+        }
+        h2 {
+            margin-bottom: 0;
+        }
+    }
+    .sidebar-body-filter {
+        .listing-item {
+            .listing-content {
+                padding: 0;
+                background: transparent;
+                border: 0;
+                box-shadow: none;
+            }
+        }
+    }
+}
+
+.open-filter {
+    .custom_check {
+        color: #EAEDF0;
+        font-size: $__font__size__14;
+        font-weight: $__regular;
+        display: inline-block;
+        position: relative;
+        margin-bottom: 15px;
+        padding-left: 30px;
+        cursor: pointer;
+        font-weight: 400;
+        user-select: none;
+
+        input:checked~.checkmark {
+            background-color: $__primarycolor;
+            border-color: $__primarycolor;
+
+            &:after {
+                display: $__block;
+            }
+        }
+
+        input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 19px;
+            width: 19px;
+            border: 1px solid #C4C4C4;
+            background-color: #fff;
+            border-radius: 6px;
+            transition: all 0.3s ease-in-out;
+
+            input {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+            }
+
+            input:checked~.checkmark {
+                background-color: $__primarycolor;
+                border-color: $__primarycolor;
+
+                &:after {
+                    display: $__block;
+                }
+            }
+
+            &:after {
+                content: "\f00c";
+                font-family: "Font Awesome 5 Free";
+                font-weight: 900;
+                position: $__absolute;
+                display: $__none;
+                left: 4px;
+                top: 2px;
+                color: $__white;
+                font-size: 9px;
+            }
+
+        }
+
+    }
+
+    i {
+        transition: 0.2s;
+    }
+}

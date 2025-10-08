@@ -1,0 +1,32 @@
+{
+    "data": [
+      {
+        "id": 1,
+        "courtname": "Leap Sports Academy",
+        "noofcourt": 1,
+        "location": "Portland, OR",
+        "amount": "160",
+        "maxguest": "1",
+        "additionalguest": "2",
+        "addedon": "Mon, Jul 12",
+        "img": "assets/img/booking/booking-01.jpg",
+        "status":true
+      },
+      {
+        "id": 2,
+        "courtname": "Wing Sports Academy",
+        "noofcourt": 2,
+        "location": "Grand Rapids, MI",
+        "amount": "140",
+        "maxguest": "1",
+        "additionalguest": "2",
+        "addedon": "Wed, Jul 14",
+        "img": "assets/img/booking/booking-02.jpg",
+        "status":true
+      }
+
+     
+    ],
+    "totalData": 2
+  }
+  

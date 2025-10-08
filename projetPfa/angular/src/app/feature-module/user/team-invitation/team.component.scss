@@ -1,0 +1,22 @@
+.notify-btn-group .btn {
+    min-width: 100px;
+    position: relative;
+  }
+  
+  .notify-btn-group .btn[disabled] {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+  
+  .notify-btn-group .btn i {
+    margin-right: 5px;
+  }
+  
+  .team-avatar {
+    border: 2px solid #eee;
+    transition: transform 0.3s;
+  }
+  
+  .team-avatar:hover {
+    transform: scale(1.05);
+  }

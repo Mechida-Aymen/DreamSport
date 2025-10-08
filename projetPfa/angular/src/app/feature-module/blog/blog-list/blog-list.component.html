@@ -1,0 +1,55 @@
+<div *ngIf="tenantData$ | async as tenantData">
+
+  <!-- Page Content -->
+  <section class="section featured-venues latest-news">
+    <div class="container">
+      <div class="section-heading aos" data-aos="fade-up">
+        <h2><span>News</span></h2>
+        <p class="sub-title">
+          Get the latest buzz from the badminton world - stay informed and inspired by the thrilling updates and remarkable achievements in the sport.
+        </p>
+      </div>
+      <div class="row">
+        
+        <!-- Affichage des annonces -->
+        <owl-carousel-o *ngIf="tenantData?.annonces?.length > 0" [options]="topVenueOwlOptions" class="featured-venues-slider">
+          <ng-container *ngFor="let slide of tenantData.annonces">
+            <ng-template carouselSlide>
+              <div class="featured-venues-item">
+                <div class="listing-item">
+                  
+                  <div class="listing-content news-content">
+                    <div class="listing-venue-owner">
+                      <div class="navigation">
+                        <a *ngIf="tenantData.siteInfo && tenantData.siteInfo.length > 0">
+                          {{ tenantData.siteInfo[0].name }}
+                        </a>
+                        <span class="d-flex">
+                          <i class="feather icon-calendar"></i> {{ formatDate(slide.launchedAt) }}
+                        </span>
+                      </div>
+                    </div>
+                    <h3 class="listing-title">
+                      <a href="javascript:void(0);">{{ slide.description }}</a>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </ng-container>
+        </owl-carousel-o>
+
+        <!-- Message lorsqu'il n'y a aucune annonce -->
+        <ng-template #noNews>
+          <p>No news available.</p>
+        </ng-template>
+
+        <div *ngIf="!tenantData?.annonces?.length">
+          <p>No news available at the moment. Please check back later.</p>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+</div>
+<!-- /Page Content -->

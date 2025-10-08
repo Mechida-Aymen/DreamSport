@@ -1,0 +1,243 @@
+/*-----------------
+    Add Court
+-----------------------*/
+.add-court {
+	.venue-options {
+		margin-bottom: 50px;
+		&.option-list-court {
+			padding: 20px 20px 5px 20px
+		}
+		ul {
+			@extend %justify-content-center;
+			@extend %equal-heights;
+		}
+	}
+	&.venue-coach-details { 
+		form { 
+			.accordion-body{
+				padding: 24px;
+				@include respond-below(custom767) {
+					padding: 20px;
+				}
+				.input-space {
+					@include respond-below(custom767) {
+						margin-bottom: 20px;
+					}
+				}
+			}
+			.accordion-item {
+				.accordion-header {
+					margin-left: 24px;
+    				margin-right: 24px;
+					.accordion-button {
+						padding: 24px 0;
+					}
+				}
+				h4 {
+					span {
+						color: $__darkgray;
+						margin-left: 5px;
+					}
+				}
+				&#basic-info, &#venue-price {
+					.input-space {
+						&:last-child {
+							@include respond-below(custom767) {
+								margin-top: 15px;
+							}
+						}
+					}
+				}
+				&#rules {
+					.add-rules {
+						color: $__red;
+						@extend %display-flex-center;
+						i {
+							margin-right: 5px;
+						}
+						&:hover {
+							color: $__primarycolor;
+						}
+					}
+					.error-add-rule {
+						display: $__none;
+					}
+					.rules-wraper {
+						width: $__full__width;
+						li {
+							padding: $__value__10;
+							border-radius: $__value__10;
+							background: $__dull__whitesmoke;
+							margin-right: 24px;
+							margin-bottom: 24px;
+							@extend %display-inline-flex;
+							@extend %align-items-center;
+
+							&:last-child {
+								margin-right: 0;
+							}
+							i {
+								color: $__darkash;
+								margin-right: 5px;
+							}
+							@include respond-below(custom479) {
+								width: 100%;
+								margin-right: 0;
+							}
+						}
+					}
+				}
+				&#includes, &#amenities {
+					.accordion-body {
+						padding-bottom: 0;
+						ul {
+							li {
+								background: $__none;
+								padding: 0;
+								margin: 0 70px 24px 0;
+								@extend %display-flex-center;
+								@include respond-below(custom991) {
+									margin-right: 15px;
+								}
+								&:last-child {
+									margin-right: 0;
+								}
+								&:hover {
+									label {
+										color: $__primarycolor;
+									}
+								}
+								label {
+									cursor: pointer;
+									color: $__darkgray;
+								}
+								.form-check-input {
+									width: 20px;
+									height: 20px;
+								}
+							}
+						}
+					}
+				}
+				&#gallery {
+					.file-upload-text {
+						&.appointment-upload {
+							margin-bottom: 0;
+							#file-input {
+								width: $__full__width;
+							    height: inherit;
+							    position: $__absolute;
+							    left: 0;
+							    top: 0;
+							    cursor: pointer;
+							    opacity: 0;
+							}
+							h5 {
+								line-height: 1.5;
+								border-bottom: none;
+								padding-bottom: 0;
+								margin-bottom: 0;
+							}
+						}
+					}
+				}
+				&#availability {
+					.save-changes {
+						.btn:first-child {
+							@include respond-below(custom575) {
+								margin-bottom: 15px;
+								display: inline-block;
+							}
+						}
+					}
+				}
+			}
+			.btn-row {
+				margin: 24px 0 80px 0;
+			}
+			.select2-container--default {
+				&.select2-container--focus {
+					.select2-selection--single {
+						.select2-selection__rendered {
+							color: #192335;
+						}
+					}
+				}
+				.select2-selection--single {
+					.select2-selection__rendered {
+						color: $__darkgray;
+					}
+					.select2-selection__arrow {
+						b {
+							border: 0;
+							background-image: url(../../img/icons/down-arrow.svg);
+							width: 11px;
+							height: 6px;
+							@include transition(all 0.5s ease);
+							line-height: 60px;
+						}
+					}
+				}
+				&.select2-container--open {
+					.select2-selection--single {
+						.select2-selection__arrow b {
+							transform: rotate(-180deg);
+							-webkit-transform: rotate(-180deg);
+							@include transition(all 0.5s ease);
+						}
+					}
+				}
+			}
+		}
+	}
+}
+#add-review {
+	.modal-dialog {
+		max-width: 650px;
+	}
+	.terms-accept {
+		a {
+			color: $__primarycolor;
+			&:hover {
+				color: $__secondarycolor;
+			}
+		}
+		label {
+			cursor: pointer;
+		}
+		#terms_accept {
+			margin-right: 5px;
+		}
+	}
+	.star-rating {
+		direction: rtl;
+		text-align: left;
+		width: auto;
+		input[type=radio] { 
+			display: none;
+			-webkit-transition: all 0.4s ease;
+		    -ms-transition: all 0.4s ease;
+		    transition: all 0.4s ease;
+		    &:checked {
+		    	~ label { 
+					color: #f2b600;
+				}
+			} 
+		}
+		label {
+		    color: #bbb;
+		    cursor: pointer;
+		    font-size: 18px;
+		    padding: 0;
+		    -webkit-transition: all 0.3s ease-in-out;
+		    -ms-transition: all 0.3s ease-in-out;
+		    transition: all 0.3s ease-in-out;
+		    &:hover {
+		    	color: #f2b600;
+		    	~ label{
+		    		color: #f2b600;
+		    	}
+		    }
+		}
+	}
+}

@@ -1,0 +1,1459 @@
+{
+  "Routes": [
+    {
+      // Route pour gérer les équipes (POST)
+      "DownstreamPathTemplate": "/api/equipe",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionequipe",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/equipe",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      // Route pour mettre à jour une équipe (PUT)
+      "DownstreamPathTemplate": "/api/equipe",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionequipe",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/equipe",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    {
+      // Route pour supprimer une équipe (DELETE)
+      "DownstreamPathTemplate": "/api/equipe/{equipeId}/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionequipe",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/equipe/{equipeId}/{AdminId}",
+      "UpstreamHttpMethod": [ "DELETE" ]
+    },
+    {
+      // Route pour ajouter un membre à une équipe (POST)
+      "DownstreamPathTemplate": "/api/members",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionequipe",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/members",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      // Route pour virer un membre d'une équipe (DELETE)
+      "DownstreamPathTemplate": "/api/members/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionequipe",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/members/{AdminId}",
+      "UpstreamHttpMethod": [ "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/equipe/capitaine-quitte",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionequipe",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/equipe/capitaine-quitte",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/equipe/ChangerCapitaine",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionequipe",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/equipe/ChangerCapitaine",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    //Get Equipe membre
+    {
+      // intern
+      "DownstreamPathTemplate": "/api/equipe/{teamId}/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionequipe",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/equipe/{teamId}/{AdminId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    //Get Equipe
+
+    {
+      // intern
+      "DownstreamPathTemplate": "/api/equipe/get/{teamId}/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionequipe",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/equipe/get/{teamId}/{AdminId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    //verification si le membre exist dans l'equipe
+    {
+      "DownstreamPathTemplate": "/api/equipe/check-membership/{userId}/{adminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionequipe",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/equipe/check-membership/{userId}/{adminId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    //--------------------------------------------------------Gestion des Utilisateurs-------------------------------------------
+
+    {
+      // Route pour ajouter un utilisateur (POST)
+      "DownstreamPathTemplate": "/api/user",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionutilisateur",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/users",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      // Route pour ajouter un utilisateur (POST)
+      "DownstreamPathTemplate": "/api/user/get-right/{id}/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionutilisateur",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/users/get-right/{id}/{AdminId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Employee"
+      }
+    },
+    {
+      // Route pour ajouter un utilisateur (POST)
+      "DownstreamPathTemplate": "/api/user/pagination",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionutilisateur",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/users/pagination",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Employee"
+      }
+    },
+    {
+      // Route pour mettre à jour un utilisateur (PUT)
+      "DownstreamPathTemplate": "/api/user/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionutilisateur",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/users/{id}",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    {
+      // Route pour mettre à jour un utilisateur (PUT)
+      "DownstreamPathTemplate": "/api/user/{userId}/status",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionutilisateur",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/users/{userId}/status",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Employee"
+      }
+    },
+    {
+      // Route pour mettre à jour un utilisateur (PUT)
+      "DownstreamPathTemplate": "/api/user",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionutilisateur",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/users",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    {
+      // Route pour supprimer un utilisateur (DELETE)
+      "DownstreamPathTemplate": "/api/user/{id}/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionutilisateur",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/users/{id}/{AdminId}",
+      "UpstreamHttpMethod": [ "DELETE" ]
+    },
+    {
+      // Route pour mettre à jour les données sportives d'un utilisateur (PUT)
+      "DownstreamPathTemplate": "/api/user/update-sport-data/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionutilisateur",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/users/update-sport-data/{id}",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    {
+      // Route pour récupérer le mot de passe d'un utilisateur (PUT)
+      "DownstreamPathTemplate": "/api/user/recover-password",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionutilisateur",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/users/recover-password",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    {
+      //intern
+      "DownstreamPathTemplate": "/api/user/ResetConteur/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionutilisateur",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/users/ResetConteur/{id}",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    {
+      //intern
+      "DownstreamPathTemplate": "/api/user/check-reservation-annule/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionutilisateur",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/users/check-reservation-annule/{id}",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    {
+      //intern
+      // Route pour récupérer le mot de passe d'un utilisateur (get)
+      "DownstreamPathTemplate": "/api/user/get/{id}/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionutilisateur",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/users/get/{id}/{AdminId}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      // intern
+      "DownstreamPathTemplate": "/api/user/validate",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionutilisateur",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/users/validate",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      // intern
+      "DownstreamPathTemplate": "/api/user/Register-facebook",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionutilisateur",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/users/Register-facebook",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      // intern
+      "DownstreamPathTemplate": "/api/user/facebook-validate/{id}/{AdminId}/{type}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionutilisateur",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/users/facebook-validate/{id}/{AdminId}/{type}",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+
+
+    //Route pour chercher un utilisateur search GET
+
+    {
+      "DownstreamPathTemplate": "/api/user/search/{searchTerm}/{id}/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionutilisateur",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/users/search/{searchTerm}/{id}/{AdminId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    //change password
+    {
+
+      "DownstreamPathTemplate": "/api/user/changePassworduser",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionutilisateur",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/users/changePassworduser",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+
+    //--------------------------------------------------------Gestion des Annonces-------------------------------------------
+
+    {
+      // Route pour récupérer les annonces par adminId (GET)
+      "DownstreamPathTemplate": "/api/annonces/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionsite",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/annonces/{AdminId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      // Route pour ajouter une annonce (POST)
+      "DownstreamPathTemplate": "/api/annonces",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionsite",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/annonces",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Admin"
+      }
+    },
+    {
+      // Route pour supprimer une annonce (DELETE)
+      "DownstreamPathTemplate": "/api/annonces/{annoncesId}/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionsite",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/annonces/{annoncesId}/{AdminId}",
+      "UpstreamHttpMethod": [ "DELETE" ]
+    },
+
+    //--------------------------------------------------------Gestion des FAQs-------------------------------------------
+
+    {
+      "DownstreamPathTemplate": "/api/faq/{adminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionsite",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/faq/{adminId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      // Route pour ajouter une FAQ (POST)
+      "DownstreamPathTemplate": "/api/faq",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionsite",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/faq",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Admin"
+      }
+    },
+    {
+      // Route pour mettre à jour une FAQ (PUT)
+      "DownstreamPathTemplate": "/api/faq",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionsite",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/faq",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    {
+      // Route pour supprimer une FAQ (DELETE)
+      "DownstreamPathTemplate": "/api/faq/{faqId}/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionsite",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/faq/{faqId}/{AdminId}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Admin"
+      }
+    },
+
+    //--------------------------------------------------------Gestion des Sites-------------------------------------------
+
+    {
+      // Route pour récupérer les informations du site par adminId (GET)
+      "DownstreamPathTemplate": "/api/site/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionsite",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/site/{AdminId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      // intern
+      // Route pour récupérer les informations du site par adminId (GET)
+      "DownstreamPathTemplate": "/api/site/name/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionsite",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/site/name/{AdminId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      // Route pour mettre à jour les informations du site (PUT)
+      "DownstreamPathTemplate": "/api/site",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionsite",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/site",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Admin"
+      }
+    },
+    {
+      // Route pour ajouter un site (POST)
+      "DownstreamPathTemplate": "/api/site",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionsite",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/site",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+
+    //--------------------------------------------------------Gestion des Terrains-------------------------------------------
+
+    {
+      // Route pour récupérer les terrains d'un administrateur (GET)
+      "DownstreamPathTemplate": "/api/terrain/{idAdmin}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionsite",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/terrain/{idAdmin}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      // Route pour ajouter un terrain (POST)
+      "DownstreamPathTemplate": "/api/terrain",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionsite",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/terrain",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Admin"
+      }
+    },
+    {
+      // Route pour mettre à jour un terrain (PUT)
+      "DownstreamPathTemplate": "/api/terrain",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionsite",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/terrain",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    {
+      // Route pour supprimer un terrain (DELETE)
+      "DownstreamPathTemplate": "/api/terrain/{id}/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionSite",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/terrain/{id}/{AdminId}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Admin"
+      }
+    },
+    {
+      //intern
+      // Route pour Get terrain by id
+      "DownstreamPathTemplate": "/api/terrain/by-id/{id}/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionSite",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/terrain/by-id/{id}/{AdminId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/terrain/update-status",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionSite",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/terrain/update-status",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Employee"
+      }
+    },
+
+    //--------------------------------------------------------Gestion des Statuts de Terrains-------------------------------------------
+
+    {
+      // Route pour récupérer les statuts de terrains (GET)
+      "DownstreamPathTemplate": "/api/terrainstatus/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionSite",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/terrainstatus/{AdminId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      // Route pour ajouter un statut de terrain (POST)
+      "DownstreamPathTemplate": "/api/terrainstatus",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionSite",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/terrainstatus",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      // Route pour supprimer un statut de terrain (DELETE)
+      "DownstreamPathTemplate": "/api/terrainstatus/{StatusId}/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionSite",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/terrainstatus/{StatusId}/{AdminId}",
+      "UpstreamHttpMethod": [ "DELETE" ]
+    },
+    {
+      // intern
+      // Route pour récupérer les SportCategories (GET)
+      "DownstreamPathTemplate": "/api/SportCategorie/execute/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionSite",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/SportCategorie/execute/{AdminId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+
+
+
+    //--------------------------------------------------------Gestion des Employer-------------------------------------------
+
+    {
+      // Route pour récupérer un employé par ID
+      "DownstreamPathTemplate": "/api/employee/get/{id}/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionemployer",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/employee/get/{id}/{AdminId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Employee"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/employee/admin/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionemployer",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/employee/admin/{AdminId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Admin"
+      }
+    },
+    {
+      // intern
+      "DownstreamPathTemplate": "/api/admin/validate/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionemployer",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/admin/validate/{AdminId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/admin/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionemployer",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/admin/{AdminId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Admin"
+      }
+    },
+    {
+      // Route pour récupérer le mot de passe d'un utilisateur (PUT)
+      "DownstreamPathTemplate": "/api/employee/recover-password",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionemployer",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/employee/recover-password",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    {
+      // Route pour récupérer le mot de passe d'un utilisateur (PUT)
+      "DownstreamPathTemplate": "/api/admin/recover-password",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionemployer",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/admin/recover-password",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    {
+      // Route pour ajouter un employé (POST)
+      "DownstreamPathTemplate": "/api/employee",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionemployer",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/employee",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Admin"
+      }
+    },
+    {
+      // Route pour mettre à jour un employé (PUT)
+      "DownstreamPathTemplate": "/api/employee",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionemployer",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/employee",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "Role": [ "Admin", "Employee" ]
+      }
+    },
+    {
+      // Route pour supprimer un employé par ID (DELETE)
+      "DownstreamPathTemplate": "/api/employee/{id}/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionemployer",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/employee/{id}/{AdminId}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Admin"
+      }
+    },
+    //Auth Employer
+    {
+      // intern
+      "DownstreamPathTemplate": "/api/employee/validate",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionemployer",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/employee/validate",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/employee/search/{searchTerm}/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionemployer",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/employee/search/{searchTerm}/{AdminId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    //Auth Admin
+    {
+      "DownstreamPathTemplate": "/api/Admin/validate",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionemployer",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/admin/validate",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      // Route pour mettre à jour un admin (PUT)
+      "DownstreamPathTemplate": "/api/admin",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionemployer",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/admin",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Admin"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/admin/ajouter",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionemployer",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/ajouter",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    //route change password employee
+    {
+      // Route pour supprimer un employé par ID (DELETE)
+      "DownstreamPathTemplate": "/api/employee/changePassword",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionemployer",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/employee/changePassword",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Employee"
+      }
+    },
+
+    //route change password admin
+    {
+
+      "DownstreamPathTemplate": "/api/admin/changeAdminPassword",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionemployer",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/admin/changeAdminPassword",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Admin"
+      }
+    },
+    // -------------------------------------------------------Mail Service----------------------------------
+    {
+      //intern
+      // Route pour envoyer email
+      "DownstreamPathTemplate": "/api/Mail/send",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "servicemail",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Mail/send",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    //--------------------------------------------------------Chat et invitation ---------------------------------------
+    {
+      "DownstreamPathTemplate": "/api/InvitationMember/send",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chatetinvitation",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/InvitationMember/send",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    //---------------------------------------------------Chat et Invitation - Refuser Invitation---------------------------------------------------------
+
+    // Routes pour BlockController
+    {
+      "DownstreamPathTemplate": "/api/block/block",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chatetinvitation",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/block/block",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/block/unblock",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chatetinvitation",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/block/unblock",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/block/blocked/{currentUserId}/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chatetinvitation",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/block/blocked/{currentUserId}/{AdminId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/block/is-blocked/{targetUserId}/{currentUserId}/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chatetinvitation",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/block/is-blocked/{targetUserId}/{currentUserId}/{AdminId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/block/statusbetween/{userId1}/{userId2}/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chatetinvitation",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/block/status-between/{userId1}/{userId2}/{AdminId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    // Routes pour ChatAmisController
+    {
+      "DownstreamPathTemplate": "/api/chatamis/{userId}/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chatetinvitation",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/chatamis/{userId}/{AdminId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/chatamis/isAmisChat/{idMember1}/{idMember2}/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chatetinvitation",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/chatamis/isAmisChat/{idMember1}/{idMember2}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/chatamis/send",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chatetinvitation",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/chatamis/send",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/chatamis/{chatAmisId}/conversation/{AdminId}?page={page}&pageSize={pageSize}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chatetinvitation",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/chatamis/{chatAmisId}/conversation",
+      "UpstreamHttpMethod": [ "GET" ],
+      "Priority": 0,
+      "AddQueriesToRequest": {
+        "page": "{page}",
+        "pageSize": "{pageSize}"
+      }
+    },
+
+    // Routes pour ChatTeamController
+    {
+      "DownstreamPathTemplate": "/api/ChatTeam/{teamId}/members/{memberId}/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chatetinvitation",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/chatteam/{teamId}/members/{memberId}/{AdminId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/ChatTeam/{teamId}/conversation/{AdminId}?page={page}&pageSize={pageSize}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chatetinvitation",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/chatteam/{teamId}/conversation/{AdminId}?page={page}&pageSize={pageSize}",
+      "UpstreamHttpMethod": [ "GET" ]
+
+    },
+    {
+      "DownstreamPathTemplate": "/api/ChatTeam/mark-as-seen",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chatetinvitation",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/chatteam/mark-as-seen",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/ChatTeam/mark-all-as-seen",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chatetinvitation",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/chatteam/mark-all-as-seen",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/ChatTeam/send",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chatetinvitation",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/chatteam/send",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+
+
+    {
+      "DownstreamPathTemplate": "/api/InvitationMember/Refuser/{id}/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chatetinvitation",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/InvitationMember/Refuser/{id}/{AdminId}",
+      "UpstreamHttpMethod": [ "DELETE" ]
+    },
+    // Route pour accepter une invitation
+    {
+      "DownstreamPathTemplate": "/api/InvitationMember/Accepter/{invitationId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chatetinvitation",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/InvitationMember/Accepter/{invitationId}",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    // Route pour envoyer une invitation team
+
+    {
+      "DownstreamPathTemplate": "/api/InvitationTeam",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chatetinvitation",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/InvitationTeam",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+
+    //nbr invitation GET
+    {
+      "DownstreamPathTemplate": "/api/InvitationMember/user-invitations/{userId}/{adminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chatetinvitation",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/InvitationMember/user-invitations/{userId}/{adminId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    //route pour envoyer invitation avec signalR
+    //{
+    //    "DownstreamPathTemplate": "/invitationHub",
+    //    "DownstreamScheme": "http",
+    //    "DownstreamHostAndPorts": [
+    //        {
+    //            "Host": "chatetinvitation",
+    //            "Port": 8080
+    //        }
+    //    ],
+    //    "UpstreamPathTemplate": "/invitationHub",
+    //    "UpstreamHttpMethod": [ "GET", "POST" ]
+    //},
+
+
+    //nbr invitation equipe to member  GET
+
+    {
+      "DownstreamPathTemplate": "/api/InvitationTeam/team-invitations/{userId}/{adminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chatetinvitation",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/InvitationTeam/team-invitations/{userId}/{adminId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    // Route pour accepter une invitation team
+    {
+      "DownstreamPathTemplate": "/api/InvitationTeam/accepter/{invitationId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chatetinvitation",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/InvitationTeam/accepter/{invitationId}",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    // Route pour refuser une invitation team
+    {
+      "DownstreamPathTemplate": "/api/InvitationTeam/Refuser/{id}/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chatetinvitation",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/InvitationTeam/Refuser/{id}/{AdminId}",
+      "UpstreamHttpMethod": [ "DELETE" ]
+    },
+
+    //-------------------------------------------------------- reservation service ----------------------------------------
+    {
+      "DownstreamPathTemplate": "/api/reservation/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionreservation",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/reservation/{AdminId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/reservation",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionreservation",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/reservation",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/reservation/update-status",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionreservation",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/reservation/update-status",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Employee"
+      }
+    },
+
+
+    // Get all reservation DateTime
+    {
+      "DownstreamPathTemplate": "/api/reservation/upcoming/{idTerrain}/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionreservation",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/reservation/upcoming/{idTerrain}/{AdminId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/reservation/requests-list/{AdminId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gestionreservation",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/reservation/requests-list/{AdminId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Employee"
+      }
+    },
+    //------------------------------------------------------- auth service ---------------------------------------------------------------
+    {
+      "DownstreamPathTemplate": "/api/Login/User",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "auth",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Login/User",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Login/Admin",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "auth",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Login/Admin",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Login/Employer",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "auth",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Login/Employer",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Login/RefreshToken",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "auth",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Login/RefreshToken",
+      "UpstreamHttpMethod": [ "POST" ],
+      "CorsOptions": {
+        "AllowedOrigins": [ "https://localhost:4200" ], // Replace with your frontend URL
+        "AllowCredentials": true, // Allow cookies to be sent and received
+        "AllowedHeaders": [ "*" ],
+        "AllowedMethods": [ "GET", "POST", "PUT", "DELETE" ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Login/Logout",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "auth",
+          "Port": 8080
+        }
+
+      ],
+      "UpstreamPathTemplate": "/gateway/Login/Logout",
+      "UpstreamHttpMethod": [ "POST" ]
+    }
+
+  ],
+
+  
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:7000"
+  }
+}

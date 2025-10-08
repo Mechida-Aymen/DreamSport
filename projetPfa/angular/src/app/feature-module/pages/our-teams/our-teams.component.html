@@ -1,0 +1,44 @@
+
+
+<!-- Page Content -->
+<div class="content">
+
+  <div class="container">
+    <section class="ourteam">
+      <div class="row">
+        @for (data of ourteams; track data) {
+          <div class="col-12 col-sm-6 col-md-4 col-lg-3 team-item" >
+            <div class="info text-center">
+              <div class="wrap">
+                <div class="prfile-pic">
+                  <img [src]="data.img" class="img-fluid" alt="team-01">
+                </div>
+                <div class="short-info">
+                  <h4>{{data.name }}</h4>
+                  <h6>{{data.role}}</h6>
+                </div>
+              </div>
+              <div class="more">
+                <div class="short-info">
+                  <h4>{{data.name }}</h4>
+                  <h6>{{data.role}}</h6>
+                </div>
+                <p>{{data.para}}</p>
+                <ul class="social-medias d-inline-flex">
+                  <li class="facebook"><a href="javascript:void(0);"><i class="fa-brands fa-facebook-f"></i></a></li>
+                  <li class="instagram"><a href="javascript:void(0);"><i class="fa-brands fa-instagram"></i></a></li>
+                  <li class="twitter"><a href="javascript:void(0);"><i class="fa-brands fa-twitter"></i></a></li>
+                  <li class="pinterest"><a href="javascript:void(0);"><i class="fa-brands fa-pinterest"></i></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        }
+
+      </div>
+    </section>
+  </div>
+
+</div>
+<!-- /Page Content -->
+

@@ -1,0 +1,210 @@
+/*-----------------
+    7. Footer
+-----------------------*/
+
+.footer {
+    background-color: $__secondarycolor;
+    padding: 60px 0 0;
+    float: $__left;
+    width: $__full__width;
+	@include respond-below(custom767) {
+		padding: 40px 0 0;
+	}
+    .footer-join {
+    	max-width: 744px;
+    	margin: 0 $__auto;
+    	width: $__full__width;
+    	text-align: $__center;
+    	padding-bottom: 60px;
+		@include respond-below(custom767) {
+			padding-bottom: 40px;
+		}
+    	h2 {
+    		color: $__white;
+    	}
+    }
+    .footer-title {
+    	font-weight: $__semibold;
+    	color: $__white;
+    	margin-bottom: 25px;
+    }
+    .footer-top {
+    	padding: 40px 0;
+    	border-top: 1px solid #1D3563;
+		@include respond-below(custom991) {
+			padding: 40px 0 20px;
+		}
+	    .footer-menu {
+			@include respond-below(custom991) {
+                margin-bottom: 20px;
+            }
+	    	ul {
+	    		li {
+	    			margin-bottom: 10px;
+	    			&:last-child {
+	    				margin-bottom: 0;
+	    			}
+	    			a {
+	    				color: $__darkgray;
+	    				&:hover {
+	    					color: $__primarycolor;
+	    				}
+	    			}
+	    		}
+	    	}
+			.social-icon {
+				ul {
+					li {
+						margin-bottom: 0;
+						a {
+							@include transition(all 0.5s ease-in-out 0s);
+							&:hover {
+								i {
+									color: $__white;
+								}
+							}
+							&.facebook, &.linked-in{
+								&:hover {
+									background: $__facebook;
+								}
+							}
+							&.twitter {
+								&:hover {
+									background: $__twitter;
+								}
+							}
+							&.instagram {
+								&:hover {
+									background: $__instagram;
+								}
+							}
+						}
+					}
+				}
+			}
+	    }
+    }
+    .footer-bottom {
+    	padding: 20px 0;
+    	border-top: 1px solid #1D3563;
+    }
+	.footer-address-blk {
+		.footer-call {
+			p {
+				color: $__white;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;
+			}
+		}
+	}
+	.social-icon {
+		margin: 20px 0 0;
+		ul {
+			display: -webkit-inline-box;
+			display: -ms-inline-flexbox;
+			display: inline-flex;
+			list-style: none;
+			padding: 0;
+			li {
+				margin-right: 12px;
+				a {
+					background: $__black__light;
+					font-size: 18px;
+					transition: all 0.4s ease 0s;
+					border-radius: 50%;
+					padding: 15px 15px;
+					@extend %flex-align-center;
+					height: 24px;
+					width: 24px;
+					i {
+						color: $__white;
+						font-size: $__font__size__14;
+					}
+					&:hover {
+						i {
+							color: $__primarycolor;
+						}	
+					}
+				}
+			}
+		}
+	}
+	.dropdown-blk {
+		ul {
+			flex-direction: row;
+			color: #000000;
+			gap: 14px;
+			justify-content: flex-end;
+			@include respond-below(custom767) {
+				justify-content: center;
+			}
+			li {
+				min-width: 100px;
+				text-align: center;
+				.lang-select {
+					.select-icon {
+						position: absolute;
+						top: 55%;
+						left: -7px;
+						transform: translateY(-50%);
+						-webkit-transform: translateY(-50%);
+						-ms-transform: translateY(-50%);
+						z-index: 9;
+						color: $__darkgray;
+					}
+				}
+			}
+		}
+		.select2-container--default {
+			span { 
+				&.select2-dropdown {
+					border: none;
+				}
+			}
+			.select2-selection--single {
+				background: $__transparent;
+				height: 25px;
+				.select2-selection__rendered {
+					background: $__transparent;
+					height: 25px;
+					line-height: 25px;
+					color: $__darkgray;
+					padding-left: 15px;
+					text-align: $__right;
+				}
+				.select2-selection__arrow {
+					height: 25px;
+					top: 0;
+					b {
+						border: 0;
+						background-image: url(../../img/icons/down-arrow.svg);
+						width: 11px;
+						height: 6px;
+						@include transition(all 0.5s ease);
+					}
+				}
+			}
+			&.select2-container--open {
+				.select2-selection--single {
+					.select2-selection__arrow b {
+						transform: rotate(-180deg);
+						-webkit-transform: rotate(-180deg);
+						@include transition(all 0.5s ease);
+					}
+				}
+			}
+		}
+	}
+	.copyright-text {
+		@include respond-below(custom767) {
+			text-align: center;
+			margin-bottom: 10px;
+		}
+	}
+}
+.main-wrapper {
+	float: left;
+	width: 100%;
+	overflow: clip;
+}

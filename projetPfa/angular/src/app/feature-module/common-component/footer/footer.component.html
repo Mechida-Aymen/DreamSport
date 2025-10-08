@@ -1,0 +1,85 @@
+
+
+<!-- Footer -->
+<footer class="footer" *ngIf="tenantData$ | async as tenantData">
+  <div class="container">
+
+    @if (!isLoggedIn) {
+    <!-- Footer Join -->
+    <div class="footer-join aos" data-aos="fade-up">
+      <h2>We Welcome Your Passion And Expertise</h2>
+      <p class="sub-title">Join our empowering sports community today and grow with us.</p>
+      <a [routerLink]="routes.register" class="btn btn-primary"><i class="feather icon-user-plus"></i> Join With Us</a>
+    </div>
+    <!-- /Footer Join -->
+  }
+    <!-- Footer Top -->
+    <div class="footer-top">
+      <div class="row justify-content-center"> <!-- Ajout des classes -->
+        <div class="col-lg-2 col-md-6">
+          <div class="footer-widget footer-menu">
+            <h4 class="footer-title">Contact us</h4>
+            <div class="footer-address-blk">
+              <div class="footer-call">
+                <span>Toll free Customer Care</span>
+                <p *ngIf="tenantData.siteInfo && tenantData.siteInfo.length > 0">
+                  {{ tenantData.siteInfo[0].phoneNumber }}
+                </p>
+              </div>
+              <div class="footer-call">
+                <span>Need Live Support</span>
+                <p *ngIf="tenantData.siteInfo && tenantData.siteInfo.length > 0">
+                  {{ tenantData.siteInfo[0].email }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+          <div class="footer-widget footer-menu">
+            <h4 class="footer-title">Quick Links</h4>
+            <ul>
+              <li><a [routerLink]="routes.aboutus">About us</a></li>
+              <li><a [routerLink]="routes.bloglist">Blogs</a></li>
+              <li><a [routerLink]="routes.contactUs">Contact us</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+          <div class="footer-widget footer-menu">
+            <h4 class="footer-title">Support</h4>
+            <ul>
+              <li><a [routerLink]="routes.faq">Faq</a></li>
+              <li><a [routerLink]="routes.privacyPolicy">Privacy Policy</a></li>
+              <li><a [routerLink]="routes.termsCondition">Terms & Conditions</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- /Footer Top -->
+  </div>
+
+  <!-- Footer Bottom -->
+  <div class="footer-bottom">
+    <div class="container">
+      <!-- Copyright -->
+      <div class="copyright">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <div class="copyright-text">
+              <p class="mb-0" *ngIf="tenantData.siteInfo && tenantData.siteInfo.length > 0">&copy; 2025 {{ tenantData.siteInfo[0].domainName }}  - All rights reserved.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /Copyright -->
+    </div>
+  </div>
+  <!-- /Footer Bottom -->
+
+</footer>
+
+
+<!-- /Footer -->

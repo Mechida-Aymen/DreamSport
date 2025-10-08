@@ -1,0 +1,14 @@
+.form-control.is-invalid{
+    background-image: none;
+}
+.group-img i-feather{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+

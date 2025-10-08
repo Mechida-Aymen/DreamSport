@@ -1,0 +1,381 @@
+<div *ngIf="spinner.loading$ | async" class="spinner-overlay">
+  <div class="spinner"></div>
+</div>
+<!-- Page Content -->
+<div class="content" *ngIf="tenantData$ | async as tenantData">
+  <div class="container wrapper no-padding">
+    <div class="row no-margin vph-100">
+      <div class="col-12 col-sm-12 col-lg-6 no-padding">
+        <div class="banner-bg login">
+          <div class="row no-margin h-100">
+            <div class="col-sm-10 col-md-10 col-lg-10 mx-auto">
+              <div class="h-100 d-flex justify-content-center align-items-center">
+                <div class="text-bg register text-center">
+                  <button type="button" class="btn btn-limegreen text-capitalize">
+                    <i class="fa-solid fa-thumbs-up me-3"></i>Login User &
+                    Coach
+                  </button>
+                  <p>
+                    Log in right away for our advanced sports software solutions, created to address issues in regular
+                    sporting events and activities.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-12 col-lg-6 no-padding">
+        <div class="dull-pg">
+          <div class="row no-margin vph-100 d-flex align-items-center justify-content-center">
+            <div class="col-sm-10 col-md-10 col-lg-10 mx-auto">
+              <header class="text-center">
+                <a href="javascript:void(0)">
+                  <img *ngIf="imageUrl" [src]="imageUrl" class="img-fluid" alt="Logo" />
+                </a>
+              </header>
+              <div class="shadow-card">
+                <h2>Welcome Back</h2>
+                <p>Login into your account</p>
+
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link active d-flex align-items-center" id="user-tab" data-bs-toggle="tab"
+                      data-bs-target="#user" type="button" role="tab" aria-controls="user" aria-selected="true">
+                      <span class="d-flex justify-content-center align-items-center"></span>I am a User
+                    </button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link d-flex align-items-center" id="coach-tab" data-bs-toggle="tab"
+                      data-bs-target="#coach" type="button" role="tab" aria-controls="coach" aria-selected="false">
+                      <span class="d-flex justify-content-center align-items-center"></span>I am an Employee
+                    </button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link d-flex align-items-center" id="admin-tab" data-bs-toggle="tab"
+                      data-bs-target="#admin" type="button" role="tab" aria-controls="admin" aria-selected="false">
+                      <span class="d-flex justify-content-center align-items-center"></span>
+                      I am an Admin
+                    </button>
+                  </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                  <div class="tab-pane fade show active" id="user" role="tabpanel" aria-labelledby="user-tab">
+                    <!-- Login Form -->
+                    <form [formGroup]="form" (ngSubmit)="user()">
+                      <div class="form-group">
+                        <div class="group-img">
+                          <i class="feather icon-user"></i>
+                          <div class="invalid-feedback" *ngIf="user_error" style="display: block;">
+                            {{ user_error }}
+                          </div>
+                          <input type="text" class="form-control" placeholder="Email" formControlName="email" [ngClass]="{
+                                'is-invalid':
+                                  f['email'].touched && f['email'].invalid
+                              }" />
+                          @if (f['email'].touched && f['email'].invalid) {
+                          <div class="invalid-feedback">
+                            @if (
+                            f['email'].errors &&
+                            f['email'].errors['required']
+                            ) {
+                            <div>
+                              Email is required.
+                            </div>
+                            }
+                            @if (
+                            f['email'].errors &&
+                            f['email'].errors['email']
+                            ) {
+                            <div>
+                              Please, enter valid email address.
+                            </div>
+                            }
+                          </div>
+                          }
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="pass-group group-img">
+                          <i [ngClass]="
+                              show_password === true
+                              ? 'toggle-password-confirm feather icon-eye-off'
+                              : 'toggle-password-confirm feather icon-eye'"
+                            (click)="show_password = !show_password"></i>
+                          <input type="password" class="form-control pass-input" placeholder="Password"
+                            [type]="show_password ? 'password' : 'text'" formControlName="password" [ngClass]="{
+                                'is-invalid':
+                                  f['password'].touched && f['password'].invalid
+                              }" />
+                          @if (
+                          f['password'].touched && f['password'].invalid
+                          ) {
+                          <div class="invalid-feedback">
+                            @if (
+                            f['password'].errors &&
+                            f['password'].errors['required']
+                            ) {
+                            <div>
+                              Password is required.
+                            </div>
+                            }
+                          </div>
+                          }
+                        </div>
+                      </div>
+                      <div class="form-group d-sm-flex align-items-center justify-content-between">
+                        <div class="form-check form-switch d-flex align-items-center justify-content-start">
+
+                        </div>
+                        <span><a class="forgot-pass" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal"
+                            (click)="setUserType('User')">
+                            Forgot Password
+                          </a>
+                        </span>
+                      </div>
+                      <button
+                        class="btn btn-secondary register-btn d-inline-flex justify-content-center align-items-center w-100 btn-block"
+                        type="submit">
+                        Sign In<i class="feather icon-arrow-right-circle ms-2"></i>
+                      </button>
+                      <div class="form-group">
+                        <div class="login-options text-center">
+                          <span class="text">Or continue with</span>
+                        </div>
+                      </div>
+                      <div class="form-group mb-0">
+                        <ul class="social-login d-flex justify-content-center align-items-center">
+                          <li class="text-center">
+                            <button type="button"
+                              class="btn btn-social d-flex align-items-center justify-content-center"
+                              (click)="Googlelogin()">
+                              <img src="/assets/img/icons/google.svg" class="img-fluid" alt="google" />
+                              <span>Google</span>
+                            </button>
+
+                          </li>
+                          <li class="text-center">
+                            <button type="button"
+                              class="btn btn-social d-flex align-items-center justify-content-center"
+                              (click)='facebookLogin()'>
+                              <img src="/assets/img/icons/facebook.svg" class="img-fluid" alt="facebook" />
+                              <span>Facebook</span>
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
+                    </form>
+                    <div class="bottom-text text-center mt-5"> <!-- mt-3 = 16px top margin -->
+                      <p>
+                        Don't have an account? <a [routerLink]="routes.register">Sign up!</a>
+                      </p>
+                    </div>
+                    <!-- /Login Form -->
+                  </div>
+                  <div class="tab-pane fade" id="coach" role="tabpanel" aria-labelledby="coach-tab">
+                    <!-- Login Form -->
+                    <form [formGroup]="form" (ngSubmit)="employee()">
+                      <div class="form-group">
+                        <div class="group-img">
+                          <i class="feather icon-user"></i>
+                          <div class="invalid-feedback" *ngIf="employee_error" style="display: block;">
+                            {{ employee_error }}
+                          </div>
+                          <input type="text" class="form-control" placeholder="Email" formControlName="email" [ngClass]="{
+                              'is-invalid':
+                                f['email'].touched && f['email'].invalid
+                            }" />
+                          @if (f['email'].touched && f['email'].invalid) {
+                          <div class="invalid-feedback">
+                            @if (
+                            f['email'].errors &&
+                            f['email'].errors['required']
+                            ) {
+                            <div>
+                              Email is required.
+                            </div>
+                            }
+                            @if (
+                            f['email'].errors &&
+                            f['email'].errors['email']
+                            ) {
+                            <div>
+                              Please, enter valid email address.
+                            </div>
+                            }
+                          </div>
+                          }
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="pass-group group-img">
+                          <i [ngClass]="
+                            show_password1 === true
+                            ? 'toggle-password-confirm feather icon-eye-off'
+                            : 'toggle-password-confirm feather icon-eye'"
+                            (click)="show_password1 = !show_password1"></i>
+                          <input type="password" class="form-control pass-input" placeholder="Password"
+                            [type]="show_password1 ? 'password' : 'text'" formControlName="password" [ngClass]="{
+                              'is-invalid':
+                                f['password'].touched && f['password'].invalid
+                            }" />
+                          @if (
+                          f['password'].touched && f['password'].invalid
+                          ) {
+                          <div class="invalid-feedback">
+                            @if (
+                            f['password'].errors &&
+                            f['password'].errors['required']
+                            ) {
+                            <div>
+                              Password is required.
+                            </div>
+                            }
+                          </div>
+                          }
+                        </div>
+                      </div>
+                      <div class="form-group d-sm-flex align-items-center justify-content-between">
+                        <div class="form-check form-switch d-flex align-items-center justify-content-start">
+
+                        </div>
+                        <span>
+                          <a class="forgot-pass" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal"
+                            (click)="setUserType('Employee')">
+                            Forgot Password
+                          </a>
+
+                        </span>
+                      </div>
+                      <button
+                        class="btn btn-secondary register-btn d-inline-flex justify-content-center align-items-center w-100 btn-block"
+                        type="submit">
+                        Sign In<i class="feather icon-arrow-right-circle ms-2"></i>
+                      </button>
+
+
+                    </form>
+                    <!-- /Login Form -->
+                  </div>
+                  <div class="tab-pane fade" id="admin" role="tabpanel" aria-labelledby="admin-tab">
+                    <!-- Login Form -->
+                    <form [formGroup]="adminForm" (ngSubmit)="admin()">
+                      <div class="form-group">
+                        <div class="group-img">
+                          <i class="feather icon-user"></i>
+                          <div class="invalid-feedback" *ngIf="admin_error" style="display: block;">
+                            {{ admin_error }}
+                          </div>
+                          <input type="text" class="form-control" placeholder="Username" formControlName="login"
+                            [ngClass]="{
+            'is-invalid':
+              adminForm.get('login')?.touched && adminForm.get('login')?.invalid
+          }" />
+                          @if (adminForm.get('login')?.touched && adminForm.get('login')?.invalid) {
+                          <div class="invalid-feedback">
+                            @if (adminForm.get('login')?.errors?.['required']) {
+                            <div>Username is required.</div> <!-- Changed message -->
+                            }
+                            <!-- Removed email validation since we're not using email anymore -->
+                          </div>
+                          }
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="pass-group group-img">
+                          <i [ngClass]="
+            show_password_admin === true
+            ? 'toggle-password-confirm feather icon-eye-off'
+            : 'toggle-password-confirm feather icon-eye'" (click)="show_password_admin = !show_password_admin"></i>
+                          <input type="password" class="form-control pass-input" placeholder="Password"
+                            [type]="show_password_admin ? 'password' : 'text'" formControlName="password" [ngClass]="{
+              'is-invalid':
+                adminForm.get('password')?.touched && adminForm.get('password')?.invalid
+            }" />
+                          @if (adminForm.get('password')?.touched && adminForm.get('password')?.invalid) {
+                          <div class="invalid-feedback">
+                            @if (adminForm.get('password')?.errors?.['required']) {
+                            <div>Password is required.</div>
+                            }
+                          </div>
+                          }
+                        </div>
+                      </div>
+                      <div class="form-group d-sm-flex align-items-center justify-content-between">
+                        <div class="form-check form-switch d-flex align-items-center justify-content-start">
+
+                        </div>
+                        <span>
+                          <a class="forgot-pass" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal"
+                            (click)="setUserType('Admin')">
+                            Forgot Password
+                          </a>
+                        </span>
+                      </div>
+                      <button
+                        class="btn btn-secondary register-btn d-inline-flex justify-content-center align-items-center w-100 btn-block"
+                        type="submit">
+                        Sign In<i class="feather icon-arrow-right-circle ms-2"></i>
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Page Content -->
+
+
+<!-- Forgot Password Modal -->
+<div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0">
+        <h5 class="modal-title fs-5">Password Assistance</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div *ngIf="showSuccessMessage" class="alert alert-success">
+        <div class="d-flex align-items-center">
+          <i class="feather icon-check-circle me-2"></i>
+          <div>
+            <h6 class="mb-1">Reset link sent!</h6>
+            <p class="mb-0">
+              We've sent instructions to <strong>{{successEmail}}</strong>.
+              Please check your inbox and spam folder.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="forgotPasswordForm" (ngSubmit)="onForgotPasswordSubmit()">
+          <div class="mb-3">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-control" formControlName="email" placeholder="Enter registered email"
+              [ngClass]="{ 'is-invalid': forgotPasswordForm.get('email')?.touched && forgotPasswordForm.get('email')?.invalid }">
+            <div class="invalid-feedback">
+              <div *ngIf="forgotPasswordForm.get('email')?.errors?.['required']">Email is required</div>
+              <div *ngIf="forgotPasswordForm.get('email')?.errors?.['email']">Invalid email format</div>
+            </div>
+          </div>
+          <div *ngIf="timeRemaining > 0" class="alert alert-warning mt-3">
+            Please wait {{timeRemaining}} seconds before requesting another reset link.
+          </div>
+          <div class="d-flex justify-content-end gap-2">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-primary" [disabled]="forgotPasswordForm.invalid || timeRemaining > 0">
+              Reset Password
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,232 @@
+/*-----------------
+    16. Book Coach
+-----------------------*/
+
+.master-academy {
+	.white-bg {
+		padding: $__value__20;
+		min-width: 115px;
+		@include respond-below(custom575) {
+			margin-top: $__value__20;
+		}
+		p {
+			font-size: $__font__size__14;
+		}
+	}
+}
+
+  /* Style pour les créneaux horaires */
+  .time-slot {
+	background-color: $__secondarycolor;
+	color:white;
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .time-slot.disabled {
+    background-color: $__lightgray;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+.coach-types {
+	.border-block { 
+		border: 1px solid $__lightgray;
+		border-radius: 10px;
+		padding: 24px;
+		@include respond-below(custom767) {
+			padding: 20px;
+		}
+		ul {
+			margin-top: 20px;
+			flex-wrap: wrap;
+			li {
+				width: 19rem;
+				text-align: left;
+				height: 5.5rem;
+				border-radius: $__value__5;
+				padding: 24px;
+				color: $__white;
+				background: $__darkgray;
+				cursor: pointer;
+				@include transition(all 0.5s ease-in-out 0s);
+				p{
+					color: $__white;
+					padding-right: 85px;
+					margin-bottom: 0;
+					@include respond-below(custom575) {
+						padding-right: 0;
+					}
+				}
+				&:hover, &.active {
+					background: $__primarycolor;
+					h6 {
+						font-weight: $__medium;
+					}
+				}
+				&:first-child {
+					@include respond-below(custom767) {
+						margin-right: 0 !important;
+						margin-bottom: 15px;
+					}
+				}
+			}
+		}
+	}
+}
+.booking-date {
+	.time-slot {
+		border:1px solid $__lightgray;
+		border-radius: $__value__5;
+		height: $__value__60;
+		@extend %display-flex;
+		@extend %justify-content-center;
+		@extend %align-items-center;
+		margin-bottom: 24px;
+		cursor: pointer;
+		span {
+			color: $__dullgray;
+			font-size: $__font__size__14;
+		}
+		.reserved{
+          
+			color:$__secondarycolor !important;
+		}
+		
+		i {
+			display: $__none;
+			margin-left: 7px;
+		}
+		&.active {
+			span { 
+				color: $__secondarycolor;
+				font-size: $__font__size__16;
+				font-weight: $__medium;
+			}
+		}
+		&.checked {
+			border-color: $__primarycolor;
+			span {
+				color: $__primarycolor;
+				font-size: $__font__size__16;
+				font-weight: $__medium;
+			}
+			i {
+				display: $__block;
+				color: $__primarycolor;
+				font-weight: $__bold;
+			}
+		}
+	}
+	.date-slider {
+		text-align: $__center;
+		width: 95%;
+		margin-left: $__auto;
+		margin-right: $__auto;
+		.booking-date-item {
+			p {
+				margin-bottom: 0;
+			}
+		}
+	}
+}
+
+
+
+.coach {
+	ul {
+		&.booking-info {
+			li {
+				margin-right: 6.25rem;
+			}
+		}
+	}
+	&.lessons {
+		.booking-steps {
+			li { 
+				padding-right: 20px;
+				&:after {
+					right: 7px;
+				}
+			}
+		}
+		.lesson-types {
+			li {
+				margin-right: $__value__80;
+				@include respond-below(custom991) {
+					margin-bottom: 0;
+					margin-right: 40px;
+				}
+				@include respond-below(custom767) {
+					margin-right: 0;
+				}
+				@include respond-below(custom575) {
+					margin-bottom: $__value__20;
+				}
+				text-align: center;
+				&:last-child {
+					margin-right: 0;
+				}
+				a {
+					margin-bottom: $__value__20;
+					@extend %display-flex;
+					@extend %justify-content-center;
+					@extend %align-items-center;
+					padding: 24px 50px;
+					border: 1px solid $__lightgray;
+					h6 {
+						position: $__relative;
+						display: inline-block;
+						margin-bottom: 0;
+						i {
+							position: $__absolute;
+							right: -24px;
+							top: 2px;
+							display: none;
+							margin-left: 10px;
+							color: $__primarylight;
+						}
+					}
+					
+				}
+				&.active {
+					a {
+						background: $__dull__whitesmoke;
+						i{
+							display: inline-block;
+						}
+					}
+				}
+				p {
+					margin-bottom: 0;
+				}
+			}
+		}
+	}
+}
+.alert-danger {
+	padding: $__value__10;
+	background: $__warning__bg;
+	color: $__red;
+	border: $__none;
+	strong {
+		font-size: $__font__size__18;
+		font-weight: $__semibold;
+	}
+}
+.card {
+	&.time-date-card {
+		padding-bottom: 0;
+		@include respond-below(custom991) {
+			margin-bottom: 20px;
+		}
+	}
+	.lesson-types {
+		@include respond-below(custom767) {
+			display: block !important;
+		}
+	}
+}

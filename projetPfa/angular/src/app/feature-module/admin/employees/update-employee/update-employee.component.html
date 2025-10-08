@@ -1,0 +1,208 @@
+<h2 mat-dialog-title class="text-2xl font-bold mb-4 text-primary">Update Employee</h2>
+
+<mat-dialog-content class="!pb-6">
+  <form [formGroup]="updateForm" (ngSubmit)="onSubmit()" class="form-container">
+    <!-- Image Upload Section -->
+    <div class="text-center mb-4">
+      <div class="image-upload-wrapper mx-auto" style="width: 150px; height: 150px;">
+        <div class="image-preview-container position-relative" 
+             style="width: 150px; height: 150px;">
+          <img [src]="imagePreview || data.employee.imageUrl || 'assets/img/placeholder-user.png'" 
+               class="preview-image rounded-circle border border-3 border-primary"
+               style="width: 150px; height: 150px; object-fit: cover;"
+               alt="Employee Image">
+          <label for="imageUpload" class="upload-label bg-primary position-absolute"
+                 style="bottom: 10px; right: 10px;">
+            <i class="feather icon-camera text-white"></i>
+          </label>
+          <input type="file" 
+                 id="imageUpload" 
+                 accept="image/*" 
+                 (change)="onFileSelected($event)"
+                 class="d-none">
+        </div>
+        <small class="text-muted mt-2 d-block">JPG, PNG or SVG (Max 2MB)</small>
+        <div *ngIf="apiErrors['image']" class="text-danger small mt-2">
+          <i class="feather icon-alert-circle me-1"></i>
+          {{ apiErrors['image'] }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Personal Information Section -->
+    <div class="card mb-4 border-0 shadow-sm">
+      <div class="card-header bg-light">
+        <h5 class="mb-0 text-primary">
+          <i class="feather icon-user me-2"></i> Personal Information
+        </h5>
+      </div>
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-label">First Name</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light"><i class="feather icon-user text-muted"></i></span>
+                <input type="text"
+                       class="form-control"
+                       placeholder="First Name"
+                       formControlName="prenom"
+                       [ngClass]="{'is-invalid': updateForm.get('prenom')?.touched && updateForm.get('prenom')?.invalid}">
+              </div>
+              <div *ngIf="updateForm.get('prenom')?.touched && updateForm.get('prenom')?.invalid" class="invalid-feedback">
+                First name is required
+              </div>
+              <div *ngIf="apiErrors['Prenom']" class="text-danger small mt-1">
+                <i class="feather icon-alert-circle me-1"></i>
+                {{ apiErrors['Prenom'] }}
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-label">Last Name</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light"><i class="feather icon-user text-muted"></i></span>
+                <input type="text"
+                       class="form-control"
+                       placeholder="Last Name"
+                       formControlName="nom"
+                       [ngClass]="{'is-invalid': updateForm.get('nom')?.touched && updateForm.get('nom')?.invalid}">
+              </div>
+              <div *ngIf="updateForm.get('nom')?.touched && updateForm.get('nom')?.invalid" class="invalid-feedback">
+                Last name is required
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-label">Birthday</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light"><i class="feather icon-calendar text-muted"></i></span>
+                <input matInput
+                       [matDatepicker]="picker"
+                       placeholder="Birthday"
+                       class="form-control"
+                       formControlName="birthday"
+                       [ngClass]="{'is-invalid': updateForm.get('birthday')?.touched && updateForm.get('birthday')?.invalid}">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </div>
+              <div *ngIf="updateForm.get('birthday')?.touched && updateForm.get('birthday')?.invalid" class="invalid-feedback">
+                Birthday is required
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Information Section -->
+    <div class="card mb-4 border-0 shadow-sm">
+      <div class="card-header bg-light">
+        <h5 class="mb-0 text-primary">
+          <i class="feather icon-mail me-2"></i> Contact Information
+        </h5>
+      </div>
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light"><i class="feather icon-mail text-muted"></i></span>
+                <input type="email"
+                       class="form-control"
+                       placeholder="Email"
+                       formControlName="email"
+                       [ngClass]="{'is-invalid': updateForm.get('email')?.touched && updateForm.get('email')?.invalid}">
+              </div>
+              <div *ngIf="updateForm.get('email')?.touched && updateForm.get('email')?.invalid" class="invalid-feedback">
+                <span *ngIf="updateForm.get('email')?.hasError('required')">Email is required</span>
+                <span *ngIf="updateForm.get('email')?.hasError('email')">Please enter a valid email</span>
+              </div>
+              <div *ngIf="apiErrors['Email']" class="text-danger small mt-1">
+                <i class="feather icon-alert-circle me-1"></i>
+                {{ apiErrors['Email'] }}
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-label">Phone Number</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light"><i class="feather icon-phone text-muted"></i></span>
+                <input type="text"
+                       class="form-control"
+                       placeholder="Phone Number"
+                       formControlName="phoneNumber"
+                       [ngClass]="{'is-invalid': updateForm.get('phoneNumber')?.touched && updateForm.get('phoneNumber')?.invalid}">
+              </div>
+              <div *ngIf="updateForm.get('phoneNumber')?.touched && updateForm.get('phoneNumber')?.invalid" class="invalid-feedback">
+                Phone number is required
+              </div>
+              <div *ngIf="apiErrors['PhoneNumber']" class="text-danger small mt-1">
+                <i class="feather icon-alert-circle me-1"></i>
+                {{ apiErrors['PhoneNumber'] }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Professional Information Section -->
+    <div class="card mb-4 border-0 shadow-sm">
+      <div class="card-header bg-light">
+        <h5 class="mb-0 text-primary">
+          <i class="feather icon-briefcase me-2"></i> Professional Information
+        </h5>
+      </div>
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-label">Salary</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light"><i class="feather icon-dollar-sign text-muted"></i></span>
+                <input type="number"
+                       class="form-control"
+                       placeholder="Salary"
+                       formControlName="salaire"
+                       [ngClass]="{'is-invalid': updateForm.get('salaire')?.touched && updateForm.get('salaire')?.invalid}">
+              </div>
+              <div *ngIf="updateForm.get('salaire')?.touched && updateForm.get('salaire')?.invalid" class="invalid-feedback">
+                <span *ngIf="updateForm.get('salaire')?.hasError('required')">Salary is required</span>
+                <span *ngIf="updateForm.get('salaire')?.hasError('min')">Must be positive value</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-end gap-3 mt-4">
+      <button type="button"
+              mat-stroked-button
+              mat-dialog-close
+              class="btn btn-outline-secondary px-4">
+        <i class="feather icon-x me-2"></i> Cancel
+      </button>
+      <button type="submit"
+              mat-raised-button
+              color="primary"
+              class="btn btn-primary px-4"
+              [disabled]="updateForm.invalid || isSubmitting">
+        <span *ngIf="!isSubmitting">
+          <i class="feather icon-save me-2"></i> Update Employee
+        </span>
+        <span *ngIf="isSubmitting">
+          <i class="fa fa-spinner fa-spin me-2"></i> Updating...
+        </span>
+      </button>
+    </div>
+  </form>
+</mat-dialog-content>

@@ -1,0 +1,128 @@
+
+
+<!-- Page Content -->
+<div class="content court-bg">
+  <div class="container">
+
+    <!-- Sort By -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="sortby-section court-sortby-section">
+          <div class="sorting-info">
+            <div class="row d-flex align-items-center">
+              <div class="col-xl-6 col-lg-6 col-sm-12 col-12">
+                <div class="coach-court-list">
+                  <ul class="nav">
+                    <li>
+                      <a [class.active]="selectedTab === 'all'" [routerLink]="routes.coachCourts" (click)="allCourts()">All Courts</a>
+                    </li>
+                                    
+                  </ul>
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-sm-12 col-12">
+                <div class="sortby-filter-group court-sortby">
+                  <span class="sortbytitle">Sort By :  </span>
+                 
+                  <div class="sortbyset">
+                    <span class="sortbytitle">Sport</span>
+                    <div class="sorting-select">
+                      <mat-select   [(ngModel)]="selectedSport" [ngModelOptions]="{standalone: true}" class="select"  placeholder="Relevance" (selectionChange)="filterCourtsBySport()">
+                        @for (data of sportCategories; track data) {
+                          <mat-option [value]="data.name">
+                            {{data.name}}
+                          </mat-option>
+                        }
+                      </mat-select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Sort By -->
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="court-tab-content">
+          <div class="card card-tableset">
+            <div class="card-body">
+              <div class="coache-head-blk">
+                <div class="row align-items-center">
+                  <div class="col-md-6">
+                    <div class="court-table-head">
+                      <h4>Courts</h4>
+                      <p>Explore top-quality courts for your sporting activities</p>
+                    </div>
+                  </div>
+                  
+                  </div>
+                </div>
+                <div class="table-responsive">
+                  <table matSort (matSortChange)="sortData($event)"  matSortActive="Sno" matSortDirection="asc"
+                    matSortDisableClear  class="table table-borderless datatable">
+                    <thead class="thead-light">
+                      <tr>
+                        <th mat-sort-header="courtname">Court Name</th>
+                        <th mat-sort-header="location">Description</th>
+                        <th mat-sort-header="amount">Sport</th>
+                        <th mat-sort-header="maxguest">Max Guest</th>
+                        <th mat-sort-header="Status">Status</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @for (data of filteredTerrains; track data; let i = $index) {
+                        <tr>
+                          <td>
+                            <h2 class="table-avatar">
+                              @if (data.image=='string' || data.image == null) {
+                                <a href="javascript:void(0);" class="avatar avatar-sm  flex-shrink-0"><img class="avatar-img" src="assets/img/featured/featured-05.jpg" alt="User Image"></a>
+                              }@else {
+                                <a href="javascript:void(0);" class="avatar avatar-sm  flex-shrink-0"><img class="avatar-img" [src]="data.image" alt="User Image"></a>
+                              }
+
+                              <span class="table-head-name flex-grow-1">
+                                <a href="javascript:void(0);">{{data.title}}</a>
+                              </span>
+                            </h2>
+                          </td>
+                          <td class="text-wrap text-break">{{data.description}}</td>
+                          <td>{{data.sport_Categorie.name}}<span class="pay-dark"></span></td>
+                          <td>{{data.sport_Categorie.nombreMax}}</td>
+                          <td>
+                            <mat-select
+                              [(ngModel)]="selectedStatuses[data.id]"
+                              [ngModelOptions]="{ standalone: true }"
+                              class="select"
+                              [placeholder]="data.terrainStatus.libelle"
+                            >
+                              @for (statu of terrainStatuses; track statu) {
+                                <mat-option [value]="statu.id">
+                                  {{ statu.libelle }}
+                                </mat-option>
+                              }
+                            </mat-select>
+                          </td>
+                          <td class="text-end">
+                            <a href="javascript:void(0);" class="btn btn-secondary save-profile" (click)="StatusUpdatingList(data.id)">Save Change</a>
+                          </td>
+                        </tr>
+                      }
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <app-custom-pagination></app-custom-pagination>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- /Page Content -->

@@ -1,0 +1,140 @@
+/*-----------------
+    24. Services
+-----------------------*/
+
+.services {
+	.nav {
+		li {
+			padding-right: 24px;
+			&:last-child {
+				margin-right: 0;
+			}
+			.nav-link {
+				padding: 13px $__value__30;
+				border-radius: 5px;
+				color: $__secondarycolor;
+				@include respond-below(custom767) {
+					padding: 10px 15px;
+				}
+				&:hover, &.active {
+					background: $__secondarycolor;
+					color: $__white;
+				}
+			}
+		}
+	}
+	.tab-pane {
+		margin-top: $__value__40;
+		.listing-item {
+			margin-bottom: 24px;
+			img {
+				border-radius: 6px 6px 0 0;
+				width: 100%;
+			}
+			p {
+				margin-bottom: 24px;
+			}
+		}
+	}
+}
+.services-detail-page {
+	.banner {
+		img {
+			border-radius: 6px;
+		}
+	}
+	h2 {
+		margin: 24px 0 10px 0;
+		font-size: 36px;
+		@include respond-below(custom991) {
+			font-size:$__font__size__32;
+		}
+	}
+	.dull-bg {
+		margin: 24px 0;
+		padding: 15px;
+	}
+	.our-benefits {
+		margin-bottom: 24px;
+		.info {
+			padding: 24px;
+			@include respond-below(custom991) {
+				padding-left: 0;
+				padding-bottom: 0;
+			}
+			ul {
+				li {
+					margin-bottom: 12px;
+					display: $__flex;
+					align-items: $__center;
+					span {
+						width: calc(100% - 24px);
+					}
+					&:last-child {
+						margin-bottom: 0;
+					}
+					i {
+						margin-right: 10px;
+						width: 14px;
+						height: 14px;
+						border-radius: 14px;
+						border: 2px solid $__primarycolor;
+						font-size: 8px;
+					    text-align: center;
+					    line-height: 11px;
+					    color: $__primarycolor;
+					}
+				}
+			}
+		}
+	}
+	.pagination {
+		margin-top: 64px;
+		padding: 35px;
+		@include respond-below(custom991) {
+			margin-top: 0;
+			padding: 35px 0 0 0;
+		}
+		a {
+			&:hover {
+				color: $__primarycolor;
+				h4 {
+					color: $__primarycolor;
+				}
+			}
+		}
+		.icon {
+			img {
+					@include transition(all 0.5s ease-in-out 0s);
+				&:hover {
+					filter: invert(50%) sepia(20%) saturate(7478%) hue-rotate(100deg) brightness(70%) contrast(40%);
+				}
+			}
+		}
+		.prev, .next {
+			width: 44px;
+			height: 44px;
+			border: 1px solid $__bright__gray;
+			display: inline-block;
+			border-radius: 44px;
+			cursor: pointer;
+			@include transition(all 0.5s ease-in-out 0s);
+			i {
+				@include transition(all 0.5s ease-in-out 0s);
+			}
+			&:hover {
+				background: $__primarycolor;
+				border-color: $__primarycolor;
+				i {
+					color: $__white;
+				}
+			}
+		}
+		.prev {
+			margin-right: 15px;
+		}
+		.next {
+			margin-left: 15px;
+		}
+	}
+}

@@ -1,0 +1,12 @@
+<!-- team.component.html -->
+<div class="team-container">
+    <ng-container [ngSwitch]="userStatus">
+      <ng-container *ngSwitchCase="'loading'">
+        <div class="loading-message">Loading team data ...</div>
+      </ng-container>
+  
+      <app-capitaine *ngSwitchCase="'capitaine'" [teamData]="teamData"></app-capitaine>
+      <app-capitaine *ngSwitchCase="'member'" [teamData]="teamData"></app-capitaine>
+      <app-team-user *ngSwitchCase="'user'"></app-team-user>
+    </ng-container>
+  </div>

@@ -1,0 +1,169 @@
+<!-- Page Content -->
+<div class="content court-bg">
+  <div class="container">
+    <div class="coach-court-list profile-court-list">
+      <ul class="nav">
+        <li><a class="active" [routerLink]="routes.coachProfile">Profile</a></li>
+        <li><a [routerLink]="routes.coach_setting_password">Change Password</a></li>
+      </ul>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="profile-detail-blk">
+          <ul>
+            <li class="active"><a [routerLink]="routes.coachProfile">Profile Details</a></li>
+          </ul>
+        </div>
+        <div class="profile-detail-group">
+          <div class="card">
+            <form [formGroup]="employeeForm" (ngSubmit)="saveChanges()">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="file-upload-text">
+                    <!-- Change the image tag to use avatarUrl getter -->
+                    <div class="file-upload">
+                      <img [src]="avatarUrl" 
+                          class="img-fluid avatar-img" 
+                          alt="Employee Avatar">
+                      <span>
+                        <i class="feather icon-edit"></i>
+                        <input type="file" 
+                              id="file-input" 
+                              (change)="onFileSelected($event)"
+                              accept="image/*">
+                      </span>
+                    </div>
+                    <h5>Image should be minimum 150×150 pixels. Supported formats: JPG, PNG, SVG</h5>
+                  </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                  <div class="input-space">
+                    <label for="nom" class="form-label">Lastname</label>
+                    <input type="text" 
+                           class="form-control" 
+                           id="nom" 
+                           formControlName="nom"
+                           [class.is-invalid]="employeeForm.get('nom')?.invalid && 
+                                             (employeeForm.get('nom')?.dirty || 
+                                              employeeForm.get('nom')?.touched)">
+                    <div *ngIf="employeeForm.get('nom')?.invalid && 
+                               (employeeForm.get('nom')?.dirty || 
+                                employeeForm.get('nom')?.touched)" 
+                         class="invalid-feedback">
+                      Lastname is required
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                  <div class="input-space">
+                    <label for="prenom" class="form-label">Firstname</label>
+                    <input type="text" 
+                           class="form-control" 
+                           id="prenom" 
+                           formControlName="prenom"
+                           [class.is-invalid]="employeeForm.get('prenom')?.invalid && 
+                                              (employeeForm.get('prenom')?.dirty || 
+                                               employeeForm.get('prenom')?.touched)">
+                    <div *ngIf="employeeForm.get('prenom')?.invalid && 
+                              (employeeForm.get('prenom')?.dirty || 
+                               employeeForm.get('prenom')?.touched)" 
+                         class="invalid-feedback">
+                      Firstname is required
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                  <div class="input-space">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" 
+                           class="form-control" 
+                           id="username" 
+                           formControlName="username"
+                           [class.is-invalid]="employeeForm.get('username')?.invalid && 
+                                             (employeeForm.get('username')?.dirty || 
+                                              employeeForm.get('username')?.touched)">
+                    <div *ngIf="employeeForm.get('username')?.invalid && 
+                              (employeeForm.get('username')?.dirty || 
+                               employeeForm.get('username')?.touched)" 
+                         class="invalid-feedback">
+                      Username is required
+                    </div>
+                    <div *ngIf="backendErrors['Username']" class="text-danger">
+                      {{ backendErrors['Username'] }}
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                  <div class="input-space">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" 
+                           class="form-control" 
+                           id="email" 
+                           formControlName="email"
+                           [class.is-invalid]="employeeForm.get('email')?.invalid && 
+                                             (employeeForm.get('email')?.dirty || 
+                                              employeeForm.get('email')?.touched)">
+                    <div *ngIf="employeeForm.get('email')?.invalid && 
+                              (employeeForm.get('email')?.dirty || 
+                               employeeForm.get('email')?.touched)" 
+                         class="invalid-feedback">
+                      Valid email is required
+                    </div>
+                    <div *ngIf="backendErrors['Email']" class="text-danger">
+                      {{ backendErrors['Email'] }}
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                  <div class="input-space">
+                    <label for="phoneNumber" class="form-label">Phone Number</label>
+                    <input type="text" 
+                           class="form-control" 
+                           id="phoneNumber" 
+                           formControlName="phoneNumber"
+                           [class.is-invalid]="employeeForm.get('phoneNumber')?.invalid && 
+                                             (employeeForm.get('phoneNumber')?.dirty || 
+                                              employeeForm.get('phoneNumber')?.touched)">
+                    <div *ngIf="employeeForm.get('phoneNumber')?.invalid && 
+                              (employeeForm.get('phoneNumber')?.dirty || 
+                               employeeForm.get('phoneNumber')?.touched)" 
+                         class="invalid-feedback">
+                      Phone number is required
+                    </div>
+                    <div *ngIf="backendErrors['PhoneNumber']" class="text-danger">
+                      {{ backendErrors['PhoneNumber'] }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="save-changes text-end">
+                <button type="button" 
+                        class="btn btn-primary reset-profile" 
+                        (click)="resetForm()"
+                        [disabled]="isLoading">
+                  Reset
+                </button>
+                <button type="submit" 
+                        class="btn btn-secondary save-profile" 
+                        [disabled]="employeeForm.invalid || isLoading">
+                  <span *ngIf="!isLoading">Save Changes</span>
+                  <span *ngIf="isLoading">
+                    <i class="fa fa-spinner fa-spin"></i> Saving...
+                  </span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Page Content -->

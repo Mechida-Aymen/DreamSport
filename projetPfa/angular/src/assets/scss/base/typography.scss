@@ -1,0 +1,77 @@
+/*-----------------
+    1. Typography
+-----------------------*/
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+$__body__font__family: 'Outfit', sans-serif;
+$__body__font__size:16px;
+
+$__bold:700;
+$__semibold:600;
+$__medium:500;
+$__regular:400;
+$__light:300;
+
+$__font__size__12:12px;
+$__font__size__13:13px;
+$__font__size__14:14px;
+$__font__size__15:15px;
+$__font__size__16:16px;
+$__font__size__18:18px;
+$__font__size__20:20px;
+$__font__size__24:24px;
+$__font__size__28:28px;
+$__font__size__30:30px;
+$__font__size__32:32px;
+$__font__size__36:36px;
+$__font__size__62:62px;
+
+h1{
+	font-weight:$__bold;
+	font-size:$__font__size__36;
+	@include respond-below(custom991) {
+		font-size:$__font__size__32;
+	}
+}
+h2{
+	font-weight:$__bold;
+	font-size:$__font__size__32;
+	@include respond-below(custom991) {
+		font-size:$__font__size__30;
+	}
+	@include respond-below(custom767) {
+		font-size:$__font__size__28;
+	}
+}
+h3{
+	font-weight:$__semibold;
+	font-size:$__font__size__24;
+	@include respond-below(custom991) {
+		font-size:$__font__size__20;
+	}
+	@include respond-below(custom767) {
+		font-size:$__font__size__18;
+	}
+}
+h4{
+	font-weight:$__semibold;
+	font-size:$__font__size__20;
+	@include respond-below(custom991) {
+		font-size:$__font__size__18;
+	}
+}
+h5{
+	font-weight:$__semibold;
+	font-size:$__font__size__18;
+	@include respond-below(custom991) {
+		font-size:$__font__size__16;
+	}
+}
+h6{
+	font-weight:$__medium;
+	font-size:$__font__size__16;
+	@include respond-below(custom991) {
+		font-size:$__font__size__15;
+	}
+}

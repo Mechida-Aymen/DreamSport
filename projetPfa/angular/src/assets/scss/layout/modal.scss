@@ -1,0 +1,19 @@
+/*-----------------
+	11. Modals
+-----------------------*/
+
+#bookingconfirmModal {
+	.modal-dialog {
+		max-width: 480px;
+		.modal-content {
+			padding: $__value__40;
+			.modal-header, .modal-body, .modal-footer {
+				padding: 0;
+				border: $__none;
+			}
+			.modal-body {
+				margin: $__value__25 0;
+			}
+		}
+	}
+}

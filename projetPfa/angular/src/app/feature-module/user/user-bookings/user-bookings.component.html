@@ -1,0 +1,21 @@
+
+<section class="booking-steps py-30">
+    <div class="container">
+      <ul class="d-lg-flex justify-content-center align-items-center">
+        <li routerLinkActive="active">
+          <h5>
+            <a [routerLink]="routes.userBookings"
+              ><span>1</span>Type of Booking</a
+            >
+          </h5>
+        </li>
+        <li routerLinkActive="active">
+          <h5>
+            <a [routerLink]="routes.usertimedate"><span>2</span>Time & Date</a>
+          </h5>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+<router-outlet></router-outlet> 

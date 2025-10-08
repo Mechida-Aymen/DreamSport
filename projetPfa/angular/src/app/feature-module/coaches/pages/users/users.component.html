@@ -1,0 +1,226 @@
+<!-- Page Content -->
+<div class="content court-bg">
+    <div class="container">
+  
+      <!-- Sort By -->
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="sortby-section court-sortby-section">
+            <div class="sorting-info">
+              <div class="row d-flex align-items-center">
+                <div class="col-xl-6 col-lg-6 col-sm-12 col-12">
+                  <div class="coach-court-list">
+                    <ul class="nav">
+                      <li>
+                        <a [class.active]="selectedTab === 'all'" (click)="allUsers()">All Users</a>
+                      </li>
+                      <li>
+                        <a [class.active]="selectedTab === 'notBlocked'" (click)="inblocked()">Not Blocked Users</a>
+                      </li>
+                      <li>
+                        <a [class.active]="selectedTab === 'blocked'" (click)="blocked()"> Blocked Users</a>
+                      </li>                    
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Sort By -->
+  
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="court-tab-content">
+            <div class="card card-tableset">
+              <div class="card-body">
+                <div class="coache-head-blk">
+                  <div class="row align-items-center">
+                    <div class="col-md-6">
+                      <div class="court-table-head">
+                        <h4>Users</h4>
+                        <p>Manages your Users</p>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="dataTables_filter">
+                          <label>
+                            <input
+                              [(ngModel)]="searchDataValue"
+                              (ngModelChange)="searchData(searchDataValue)"
+                              class="form-control"
+                              placeholder="Search by name, surname or username..."
+                              [ngModelOptions]="{standalone: true}"
+                            />
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="table-responsive">
+                    <table  (matSortChange)="sortData($event)" matSort matSortActive="Sno" matSortDirection="asc"
+                      matSortDisableClear  class="table table-borderless datatable">
+                      <thead class="thead-light">
+                        <tr>
+                          <th mat-sort-header="user">User</th>
+                          <th mat-sort-header="username">Username</th>
+                          <th mat-sort-header="email">Email</th>
+                          <th mat-sort-header="phonenumber">Phone Number</th>
+                          <th mat-sort-header="Status">Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @for (data of tableShowed; track data; let i = $index) {
+                          <tr>
+                            <td>
+                              <h2 class="table-avatar">
+                                <a href="javascript:void(0);" class="avatar avatar-sm  flex-shrink-0"><img class="avatar-img" [src]="data.imageUrl" alt="User Image"></a>
+                                <span class="table-head-name flex-grow-1">
+                                  
+                                  <span> {{data.firstName + " " + data.lastName}}</span>
+                                </span>
+                              </h2>
+                            </td>
+                            <td>{{data.username}}</td>
+                            <td><span class="pay-dark">{{data.email}}</span></td>
+                            <td >{{data.phoneNumber}}</td>
+                            <td class="table-inset-btn">
+                              <div class="interset-btn">
+                                <div class="status-toggle d-inline-flex align-items-center">
+                                  <input
+                                    type="checkbox"
+                                    class="check"
+                                    id="{{ 'status_' + i }}"
+                                    [(ngModel)]="data.isBlocked"
+                                    (click)="openStatusModal(data)"
+                                  />
+                                  <label class="checktoggle" for="{{ 'status_' + i }}">checkbox</label>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        }
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-footer">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div id="tablelength">
+                      <div class="dataTables_length">
+                        <label>Show
+                          <select [(ngModel)]="pageSize" (ngModelChange)="changePageSize(pageSize)" 
+                                  class="custom-select custom-select-sm form-control form-control-sm">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                          </select>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div id="tablepage">
+                      <ul class="pagination">
+                        <li class="page-item" [ngClass]="{ disabled: currentPage === 1 }">
+                          <a (click)="getMoreData('previous')" class="page-link" href="javascript:void(0);" tabindex="-1">
+                            <i class="feather icon-chevrons-left"></i>
+                          </a>
+                        </li>
+              
+                        @for (item of pageNumberArray; track item; let i = $index) {
+                          <li class="page-item" 
+                              [class.active]="item === currentPage"
+                              [ngClass]="
+                                (pageNumberArray[currentPage - 2] > item &&
+                                  item !== 1 &&
+                                  pageNumberArray.length > 6) ||
+                                (pageNumberArray[currentPage] < item &&
+                                  item !== 1 &&
+                                  pageNumberArray.length > 6 &&
+                                  pageNumberArray.length !== item)
+                                  ? 'hide-page-no'
+                                  : 'show-page-no'
+                              ">
+                            <a (click)="moveToPage(item)" class="page-link" href="javascript:void(0);">
+                              {{ item }}
+                            </a>
+                          </li>
+                          @if (i === 0 && pageNumberArray.length > 6 && currentPage > 2) {
+                            <li class="page-item"
+                                [hidden]="currentPage === 1"
+                                (click)="moveToPage(currentPage - 2)">
+                              <a class="page-link" href="javascript:void(0);"> ... </a>
+                            </li>
+                          }
+                          @if (i === pageNumberArray.length - 2 && pageNumberArray.length > 6) {
+                            <li [hidden]="
+                                  currentPage >= pageNumberArray[pageNumberArray.length - 2] ||
+                                  totalData < serialNumberArray[serialNumberArray.length - 1]
+                                "
+                                class="page-item"
+                                (click)="moveToPage(currentPage + 2)">
+                              <a class="page-link" href="javascript:void(0);"> ... </a>
+                            </li>
+                          }
+                        }
+              
+                        <li class="page-item"
+                            [ngClass]="{
+                              disabled:
+                                currentPage === pageNumberArray[pageNumberArray.length - 1] ||
+                                tableData.length === 0
+                            }">
+                          <a (click)="getMoreData('next')" class="page-link" href="javascript:void(0);">
+                            <i class="feather icon-chevrons-right"></i>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+    <!-- /Page Content -->
+
+<!--Status model-->
+<!-- Status Update Modal -->
+<div class="modal custom-modal fade" id="userStatusModal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span class="align-center" aria-hidden="true"><i class="feather icon-x"></i></span>
+        </a>
+      </div>
+      <div class="modal-body">
+        <div class="account-status-change">
+          <img src="assets/img/icons/user-status.png" alt="Icon">
+          <h3>Are you sure you want to {{selectedUser?.isBlocked ? 'block' : 'unblock'}} {{selectedUser?.firstName}} {{selectedUser?.lastName}}?</h3>
+          <p>This will {{selectedUser?.isBlocked ? 'prevent' : 'allow'}} the user from reserving.</p>
+          <div class="convenient-btns">
+            <a href="javascript:void(0);" data-bs-dismiss="modal" 
+               class="btn btn-primary d-inline-flex align-items-center" 
+               (click)="confirmStatusChange()">
+              Yes <span><i class="feather icon-arrow-right-circle ms-2"></i></span>
+            </a>
+            <a href="javascript:void(0);" 
+                class="btn btn-secondary d-inline-flex align-items-center"
+                (click)="cancelStatusChange()"> <!-- Updated this line -->
+              No <span><i class="feather icon-arrow-right-circle ms-2"></i></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

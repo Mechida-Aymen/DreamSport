@@ -1,0 +1,269 @@
+services:
+  # SQL Server service
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=YourStrongPassword123
+    ports:
+      - "1433:1433"
+    networks:
+      - app-network
+    volumes:
+      - sql_data:/var/opt/mssql
+
+  # Redis service
+  redis:
+    image: redis:6.2
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - app-network
+
+  # RabbitMQ service
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=password
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "check_port_connectivity"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+  # gestionSite service
+  gestionsite:
+    build:
+      context: .  # Use the root directory as the build context
+      dockerfile: gestionSite/Dockerfile    # Make sure this folder is renamed to lowercase on disk
+    container_name: gestionsite
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=gestionSite;User=sa;Password=YourStrongPassword123;Encrypt=False;TrustServerCertificate=True
+      - RabbitMQ__Host=rabbitmq
+      - Redis__Host=redis
+    ports:
+      - "5150:8080"
+    depends_on:
+      sqlserver:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+      redis:
+        condition: service_started
+    networks:
+      - app-network
+    volumes:
+      - ./gestionSite:/src/gestionSite  # Only for development if needed
+      - ./Shared.Messaging:/src/Shared.Messaging
+
+# gestionEmployer service
+  gestionemployer:
+    build:
+      context: .
+      dockerfile: gestionEmployer/Dockerfile
+    container_name: gestionemployer
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=gestionEmployer;User=sa;Password=YourStrongPassword123;Encrypt=False;TrustServerCertificate=True
+      - RabbitMQ__Host=rabbitmq
+      - Redis__Host=redis
+    ports:
+      - "5097:8080"
+    depends_on:
+      - sqlserver
+      - rabbitmq
+      - redis
+    networks:
+      - app-network
+    volumes:
+      - ./gestionEmployer:/src/gestionemployer  # Only for development if needed
+
+  # Auth service
+  auth:
+    build:
+      context: .
+      dockerfile: Auth/Dockerfile
+    container_name: auth
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=auth;User=sa;Password=YourStrongPassword123;Encrypt=False;TrustServerCertificate=True
+      - RabbitMQ__Host=rabbitmq
+      - Redis__Host=redis
+    ports:
+      - "5181:8080"
+    depends_on:
+      - rabbitmq
+    networks:
+      - app-network
+    volumes:
+      - ./Auth:/src/auth
+
+  # gestionUtilisateur service
+  gestionutilisateur:
+    build:
+      context: . 
+      dockerfile: gestionUtilisateur/Dockerfile
+    container_name: gestionutilisateur
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=gestionUtilisateur;User=sa;Password=YourStrongPassword123;Encrypt=False;TrustServerCertificate=True
+      - RabbitMQ__Host=rabbitmq
+      - Redis__Host=redis
+    ports:
+      - "5255:8080"
+    depends_on:
+      - sqlserver
+      - rabbitmq
+      - redis
+    networks:
+      - app-network
+    volumes:
+      - ./gestionUtilisateur:/src/gestionutilisateur
+
+  # gestionEquipe service
+  gestionequipe:
+    build:
+      context: .
+      dockerfile: gestionEquipe/Dockerfile
+    container_name: gestionequipe
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=gestionEquipe;User=sa;Password=YourStrongPassword123;Encrypt=False;TrustServerCertificate=True
+      - RabbitMQ__Host=rabbitmq
+      - Redis__Host=redis
+    ports:
+      - "5108:8080"
+    depends_on:
+      sqlserver:
+        condition: service_started
+      rabbitmq:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks:
+      - app-network
+    volumes:
+      - ./gestionEquipe:/src/gestionequipe
+
+  # gestionReservation service
+  gestionreservation:
+    build:
+      context: . 
+      dockerfile: gestionReservation/Dockerfile
+    container_name: gestionreservation
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=gestionReservation;User=sa;Password=YourStrongPassword123;Encrypt=False;TrustServerCertificate=True
+      - RabbitMQ__Host=rabbitmq
+      - Redis__Host=redis
+    ports:
+      - "5169:8080"
+    depends_on:
+      - sqlserver
+      - rabbitmq
+      - redis
+    networks:
+      - app-network
+    volumes:
+      - ./gestionReservation:/src/gestionreservation
+
+    # serviceMail service
+  servicemail:
+    build:
+      context: . 
+      dockerfile: serviceMail/Dockerfile
+    container_name: servicemail
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - Redis__Host=redis
+    ports:
+      - "5193:8080"
+    depends_on:
+      - redis
+    networks:
+      - app-network
+
+  # chatEtInvitation service
+  chatetinvitation:
+    build:
+      context: .
+      dockerfile: chatEtInvitation/Dockerfile
+    container_name: chatetinvitation
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080;https://+:8443
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=chatEtInvitation;User=sa;Password=YourStrongPassword123;Encrypt=False;TrustServerCertificate=True
+      - RabbitMQ__Host=rabbitmq
+      - Redis__Host=redis
+    ports:
+      - "5270:8080"  # HTTP port mapped
+      - "8443:8443"  # HTTPS port mapped
+    depends_on:
+      sqlserver:
+        condition: service_started
+      rabbitmq:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks:
+      - app-network
+    volumes:
+      - ./chatEtInvitation:/src/chatetinvitation
+
+# API Gateway (Ocelot) service
+  apigateway:
+    build:
+      context: . 
+      dockerfile: ApiGateway/Dockerfile
+    container_name: apigateway
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "5010:8080"  # Exposes port 5010 on the host, mapped to port 80 inside the container
+    depends_on:
+      - gestionsite
+      - gestionemployer
+      - gestionreservation
+      - gestionequipe
+      - servicemail
+      - gestionutilisateur
+      - auth
+      - chatetinvitation
+    networks:
+      - app-network
+    volumes:
+      - ./ApiGateway:/src/apigateway  # Bind the Ocelot configuration file for routing
+
+  angular-app:
+    build:
+      context: .
+      dockerfile: /angular/Dockerfile
+    container_name: angular-app
+    environment:
+      - NODE_ENV=development
+    ports:
+      - "4200:4200"
+    depends_on:
+      - apigateway
+    networks:
+      - app-network
+    volumes:
+      - ./angular:/app
+      - /app/node_modules
+    
+
+volumes:
+  sql_data:
+
+networks:
+  app-network:
+    driver: bridge

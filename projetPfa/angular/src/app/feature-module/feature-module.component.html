@@ -1,0 +1,59 @@
+@if (loading$ | async) {
+<div id="global-loader">
+  <div class="loader-img">
+    <img src="assets/img/loader.png" class="img-fluid" alt="" />
+  </div>
+</div>
+}
+<div class="main-wrapper" [ngClass]="{
+    'menu-opened': showMiniSidebar === true,
+    'coach-detail' : page === 'coach-detail',
+   
+    'blog': page === 'blog-grid' ||page === 'bloggridsidebar' 
+            || page === 'blog-list' || last === 'blog-list-sidebar-left' || last === 'blog-list-sidebar-right'
+            || page === 'blog-details ' || last === 'blog-details-sidebar-left' || last === 'blog-details-sidebar-right'
+            || page === 'blog-carousel',
+    'authentication-pages':page === 'login' ||
+                           page === 'forgot-password' ||
+                           page === 'register',
+    'aboutus-page':page === 'about-us',
+    'events-page innerpagebg':page === 'events',
+    'event-details-page':page === 'event-details',
+    'innerpagebg':page === 'faq',
+    'gallery-page innerpagebg':page === 'gallery',
+    'coming-soon-page':page === 'maintenance' ||  page === 'coming-soon',
+    'ourteam-page':page === 'our-teams',
+    'pricing-page':page === 'pricing',
+    'terms-page innerpagebg':page === 'privacy-policy' || page === 'terms',
+    'services-page innerpagebg':page === 'services',
+    'services-detail-page':page === 'service-detail',
+    'error-page':page === 'error404',
+    'testimonials-page innerpagebg':last === 'testimonials-grid'|| last === 'testimonials-carousel',
+    'contact-us-page' : page === 'contact-us',
+    'venue-coach-details': page === 'venue-details' || page === 'coach-detail' || page === 'add-court',
+    'Invitation-page innerpagebg': last === 'Invitation',
+    'coach lessons':last === 'lesson-type',
+    'add-court':page === 'add-court',
+    'coach':last === 'lesson-order-confirm' || last === 'lesson-timedate' || last === 'lesson-personalinfo' || last === 'lesson-payment' || last ==='lesson-type',
+    'lessons':last === 'lesson-order-confirm' || last === 'lesson-timedate' || last === 'lesson-personalinfo'  || last === 'lesson-payment' || last ==='lesson-type'
+  }">
+  @if (header) {
+  <app-header></app-header>
+  }
+
+  <router-outlet></router-outlet>
+  @if (mainFooter) {
+  <app-footer></app-footer>
+  }
+  <!-- scrollToTop start -->
+  @if (base === 'home') {
+  <div (click)="scrollToTop()" class="progress-wrap active-progress" [class.active-progress]="strokeValue < progress">
+    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+      <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s"
+        attr.stroke-dasharray="{{ progress + 'px' + ',' + progress + 'px' }}"
+        attr.stroke-dashoffset="{{ strokeValue + 'px' }}"></path>
+    </svg>
+  </div>
+  }
+  <!-- scrollToTop end -->
+</div>

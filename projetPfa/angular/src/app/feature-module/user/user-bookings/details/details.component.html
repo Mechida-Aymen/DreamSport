@@ -1,0 +1,79 @@
+<!-- Page Content -->
+<div class="content book-cage">
+    <div class="container">
+        <!-- Sport Category Filter Buttons -->
+        <div class="mb-4">
+            <label class="form-label">Filter by sport category:</label>
+            <div class="d-flex flex-wrap gap-2">
+                <button class="btn btn-custom-outline" 
+        [class.active]="selectedCategoryId === null"
+        (click)="onSportCategoryChange(null)">
+    All categories
+</button>
+
+@for (category of sportCategories; track category.id) {
+    <button class="btn btn-custom-outline" 
+            [class.active]="selectedCategoryId === category.id"
+            (click)="onSportCategoryChange(category.id)">
+        {{ category.name }}
+    </button>
+}
+            </div>
+        </div>
+
+        <!-- List of Terrains -->
+        <div class="row">
+            @for (terrain of filteredTerrains; track terrain.id) {
+                <div class="col-12 col-sm-12 col-md-6 col-lg-4 mb-4">
+                    <div class="featured-venues-item" [class.disabled-terrain]="isTerrainDisabled(terrain)">
+                        <div class="listing-item">
+                            <!-- Terrain Image -->
+                            <div class="listing-img">
+                                <a [routerLink]="isTerrainDisabled(terrain) ? null : [routes.usertimedate, terrain.id]"
+                                   [class.disabled-link]="isTerrainDisabled(terrain)">
+                                    <img [src]="terrain.image" 
+                                         class="img-fluid" 
+                                         [class.opacity-50]="isTerrainDisabled(terrain)"
+                                         alt="{{ terrain.title }}">
+                                </a>
+                                <!-- Terrain Title and Status Badge -->
+                                <div class="tags-container">
+                                    <span class="tag tag-blue">{{ terrain.title }}</span>
+                                    @if (isTerrainDisabled(terrain)) {
+                                        <span class="tag tag-red">
+                                            {{ getStatusLabel(terrain.terrainStatusId) }}
+                                        </span>
+                                    }
+                                </div>
+                            </div>
+
+                            <!-- Terrain Details -->
+                            <div class="listing-content news-content">
+                                <!-- Description -->
+                                <h3 class="listing-title blog-title">
+                                    <a [routerLink]="isTerrainDisabled(terrain) ? null : [routes.usertimedate, terrain.id]"
+                                       [class.disabled-link]="isTerrainDisabled(terrain)">
+                                        {{ terrain.description }}
+                                    </a>
+                                </h3>
+
+                                <!-- Sport Category and Status Icons -->
+                                <div class="listing-button read-new">
+                                    <ul class="nav">
+                                        <li>
+                                            <a [class.disabled]="isTerrainDisabled(terrain)">
+                                                <i [class]="isTerrainDisabled(terrain) ? 'bi bi-ban text-danger' : 'bi bi-heart text-primary'"></i>
+                                                {{ getSportCategoryName(terrain.idSport_Categorie) }}
+                                            </a>
+                                        </li>
+                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

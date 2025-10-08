@@ -1,0 +1,1039 @@
+{
+	"info": {
+		"_postman_id": "c2393a26-e946-49e5-991e-5560c3c8b16d",
+		"name": "PFA_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42417123"
+	},
+	"item": [
+		{
+			"name": "Ajouter Equipe",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Tenant-ID",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"sportId\": 0,\r\n  \"name\": \"string\",\r\n  \"description\": \"string\",\r\n  \"avatar\": \"string\",\r\n  \"captainId\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5010/gateway/equipe",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"gateway",
+						"equipe"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modifier Equipe",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Tenant-ID",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 1,\r\n  \"sportId\": 1,\r\n  \"name\": \"adnane1\",\r\n  \"description\": \"string\",\r\n  \"avatar\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5010/gateway/equipe",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"gateway",
+						"equipe"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Supprimer equipe",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Tenant-ID",
+						"value": "2",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5010/gateway/equipe/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"gateway",
+						"equipe",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ajouter Membre a l equipe",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Tenant-ID",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": 5,\r\n  \"equipeId\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5010/gateway/members",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"gateway",
+						"members"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "supprimer membre de l equipe",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Tenant-ID",
+						"value": "2",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": 5,\r\n  \"equipeId\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5010/gateway/members",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"gateway",
+						"members"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ajouter utilisateur",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Tenant-ID",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nom\": \"string\",\r\n  \"prenom\": \"string\",\r\n  \"username\": \"strbbbing\",\r\n  \"birthday\": \"2025-02-23T20:50:53.407Z\",\r\n  \"genre\": \"string\",\r\n  \"phoneNumber\": \"000000000\",\r\n  \"email\": \"string@aymen.com\",\r\n  \"password\": \"string\",\r\n  \"passwordConfirmed\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5010/gateway/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"gateway",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modifier Utilisateur",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Tenant-ID",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nom\": \"string\",\r\n  \"prenom\": \"string\",\r\n  \"username\": \"string\",\r\n  \"birthday\": \"2025-02-23T21:45:52.053Z\",\r\n  \"genre\": \"string\",\r\n  \"phoneNumber\": \"string\",\r\n  \"email\": \"string\",\r\n  \"password\": \"string\",\r\n  \"passwordConfirmed\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5010/gateway/users/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"gateway",
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modifier Profile Utilisateur",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Tenant-ID",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"bio\": \"xtr\",\r\n  \"imageUrl\": \"trx\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5010/gateway/users/update-sport-data/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"gateway",
+						"users",
+						"update-sport-data",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Recover password utilisateur",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Tenant-ID",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"string@aymen.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5010/gateway/users/recover-password",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"gateway",
+						"users",
+						"recover-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modifier profile sportif",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Tenant-ID",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"bio\": \"aaaaaaaaaaaaaaaaaaaaaa\",\r\n  \"imageUrl\": \"bbbbbbbbbbbb\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5010/gateway/users/update-sport-data/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"gateway",
+						"users",
+						"update-sport-data",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Supprimer Utilisateur",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Tenant-ID",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5010/gateway/users/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"gateway",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET annonces",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Tenant-ID",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5010/gateway/annonces",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"gateway",
+						"annonces"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ajouter annonce",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Tenant-ID",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"description\": \"strln\",\r\n  \"launchedAt\": \"2025-02-23T22:37:40.296Z\",\r\n  \"lifeTimeBySeconds\": 5000000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5010/gateway/annonces",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"gateway",
+						"annonces"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Supprimer Annonce",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Tenant-ID",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5010/gateway/annonces/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"gateway",
+						"annonces",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get faq",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Tenant-ID",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5010/gateway/faq",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"gateway",
+						"faq"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ajouter Faq",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Tenant-ID",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"question\": \"string111111111\",\r\n  \"response\": \"string0000000\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5010/gateway/faq",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"gateway",
+						"faq"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modifier Faq",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Tenant-ID",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 1,\r\n  \"question\": \"modifier\",\r\n  \"response\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5010/gateway/faq",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"gateway",
+						"faq"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Supprimer Faq",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Tenant-ID",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5010/gateway/faq/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"gateway",
+						"faq",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Site with Admin Id",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Tenant-ID",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5010/gateway/site",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"gateway",
+						"site"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modifier site info",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Tenant-ID",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 1,\r\n  \"name\": \"string\",\r\n  \"logo\": \"string\",\r\n  \"description\": \"string\",\r\n  \"email\": \"string\",\r\n  \"phoneNumber\": \"string\",\r\n  \"aboutUs\": \"string\",\r\n  \"couleurPrincipale\": \"string\",\r\n  \"couleurSecondaire\": \"string\",\r\n  \"background\": \"string\",\r\n  \"addresse\": \"string\",\r\n  \"domainName\": \"string\"\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5010/gateway/site",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"gateway",
+						"site"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ajouter site",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Tenant-ID",
+						"value": "2",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5010/gateway/site",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"gateway",
+						"site"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get terrain",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Tenant-ID",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5010/gateway/terrain",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"gateway",
+						"terrain"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ajouter terrain",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Tenant-ID",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"test\",\r\n  \"description\": \"string\",\r\n  \"image\": \"string\",\r\n  \"terrainStatusId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5010/gateway/terrain",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"gateway",
+						"terrain"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modifier terrain",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Tenant-ID",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 1,\r\n  \"title\": \"string\",\r\n  \"description\": \"string\",\r\n  \"image\": \"string\",\r\n  \"terrainStatusId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5010/gateway/terrain",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"gateway",
+						"terrain"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Supprimer terrain",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Tenant-ID",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5010/gateway/terrain/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"gateway",
+						"terrain",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ajouter Employee",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Tenant-ID",
+						"value": "2",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \r\n  \"nom\": \"med\",\r\n  \"prenom\": \"string\",\r\n  \"birthday\": \"2025-02-22T16:08:27.327Z\",\r\n  \"phoneNumber\": \"000000000\",\r\n  \"cin\": \"meemeedo\",\r\n  \"email\": \"m@gamil.com\",\r\n  \"username\": \"meed\",\r\n  \"password\": \"12345\",\r\n  \"salaire\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5010/gateway/employee",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"gateway",
+						"employee"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Employee by ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Tenant-ID",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5010/gateway/employee/get/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"gateway",
+						"employee",
+						"get",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modifier Employee",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Tenant-ID",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 1,\r\n  \"nom\": \"string\",\r\n  \"prenom\": \"string\",\r\n  \"birthday\": \"2025-02-23T23:26:53.984Z\",\r\n  \"phoneNumber\": \"string\",\r\n  \"email\": \"string\",\r\n  \"username\": \"string\",\r\n  \"salaire\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5010/gateway/employee",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"gateway",
+						"employee"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Supprimer Employee",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Tenant-ID",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5010/gateway/employee/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"gateway",
+						"employee",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

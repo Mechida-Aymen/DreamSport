@@ -1,0 +1,64 @@
+<div class="coach-court-list profile-court-list">
+    <ul class="nav">
+        <li><a [routerLink]="routes.userProfile">Profile</a></li>
+        <li><a [routerLink]="routes.userChangepassword">Change Password</a></li>
+        <li><a class="active" [routerLink]="routes.userOthersettings">Other Settings</a></li>
+    </ul>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="profile-detail-group">
+            <div class="card ">
+                <form>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="deactivate-account-blk">
+                                <div class="deactivate-detail">
+                                    <h4>Deactivate Account</h4>
+                                    <p>Click delete button to deactivate the account</p>
+                                </div>
+                                <button type="button" class="btn deactive-btn" data-bs-toggle="modal" data-bs-target="#deactivateModal">
+                                    <i class="feather icon-zap-off"></i>Deactive Account
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+          
+        </div>
+    </div>
+</div>
+
+<!-- Modal de confirmation de désactivation -->
+<div class="modal fade" id="deactivateModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Account Deactivation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to deactivate your account? This action is irreversible and all your data will be permanently deleted.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" 
+                        class="btn btn-danger" 
+                        (click)="confirmDeactivate()"
+                        [disabled]="isDeactivating"
+                        data-bs-dismiss="modal">
+                    <span *ngIf="!isDeactivating">Confirm Deactivation</span>
+                    <span *ngIf="isDeactivating">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Processing...
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="success-mail" tabindex="-1" aria-hidden="true">
+</div>

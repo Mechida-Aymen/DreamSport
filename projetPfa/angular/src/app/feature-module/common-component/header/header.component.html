@@ -1,0 +1,144 @@
+<!-- Header -->
+<header class="header header-trans" [ngClass]="{
+  'add-header-bg': white_bg === true && base === 'home',
+  'header-sticky': base !== 'home',
+  'fixed-top': white_bg === true
+}">
+<div class="container-fluid">
+  <nav class="navbar navbar-expand-lg header-nav">
+    <div class="navbar-header">
+      <a id="mobile_btn" href="javascript:void(0);" (click)="toggleSidebar()">
+        <span class="bar-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </a>
+      <a [routerLink]="routes.home" class="navbar-brand logo">
+        @if (base === 'home') {
+        <img *ngIf="imageUrl" [src]="imageUrl" class="img-fluid" alt="Logo" />
+        }
+        @if (base !== 'home') {
+        <img *ngIf="imageUrl" [src]="imageUrl" class="img-fluid" alt="Logo" />
+        }
+      </a>
+    </div>
+    <div class="main-menu-wrapper">
+      <div class="menu-header">
+        <a [routerLink]="routes.home" class="menu-logo">
+          <img *ngIf="imageUrl" [src]="imageUrl" class="img-fluid" alt="Logo" />
+        </a>
+        <a id="menu_close" (click)="hideSidebar()" class="menu-close" href="javascript:void(0);">
+          <i class="fas fa-times"></i></a>
+      </div>
+      <ul class="main-nav">
+        <!-- Common links for all roles -->
+        <li [class.active]="base === 'home'" routerLinkActive="active">
+          <a [routerLink]="routes.home">Home</a>
+        </li>
+        <li [class.active]="base === 'contact-us'" routerLinkActive="active">
+          <a [routerLink]="routes.contactUs">Contact</a>
+        </li>
+        <li [class.active]="base === 'faq'" routerLinkActive="active">
+          <a [routerLink]="routes.faq">FAQ</a>
+        </li>
+        <li [class.active]="base === 'about-us'" routerLinkActive="active">
+          <a [routerLink]="routes.aboutus">About</a>
+        </li>
+
+        @if (isLoggedIn) {
+          <!-- Role-specific links -->
+          @if (userRole === 'User') {
+            <li [class.active]="base === 'user'" routerLinkActive="active">
+              <a [routerLink]="routes.user">Dashboard</a>
+            </li>
+          }
+          
+          @if (userRole === 'Employee') {
+            <li [class.active]="base === 'coaches'" routerLinkActive="active">
+              <a [routerLink]="routes.coachPages">Dashboard</a>
+            </li>
+          }
+          
+          @if (userRole === 'Admin') {
+            <li [class.active]="base === 'admin'" routerLinkActive="active">
+              <a [routerLink]="routes.admin">Dashboard</a>
+            </li>
+          }
+        }
+      </ul>
+      
+      <!-- Mobile-only links - Only visible in sidebar menu -->
+      @if (isLoggedIn) {
+        <ul class="main-nav mobile-only">
+          <li class="mobile-profile">
+            <a [routerLink]="routes.userProfile">Profile</a>
+          </li>
+          <li class="mobile-logout">
+            <a (click)="logout()">Logout</a>
+          </li>
+        </ul>
+      }
+    </div>
+    
+    @if (!isLoggedIn) {
+      <!-- Right side buttons for non-logged in users -->
+      <ul class="nav header-navbar-rht">
+        <li class="nav-item"> 
+          <div class="nav-link btn log-register" [ngClass]="base === 'pages'|| base === 'listings' || base === 'coaches' || base === 'contact-us' ? 'btn-primary' : 'btn-white'">
+            <a [routerLink]="routes.login"><span><i class="feather icon-users"></i></span>Login</a>
+            / <a [routerLink]="routes.register">Register</a>
+          </div>
+        </li>
+      </ul>
+    }
+    
+    @if (isLoggedIn) {
+      <!-- Right side user dropdown for logged in users -->
+      <ul class="nav header-navbar-rht logged-in">
+        <li class="nav-item dropdown has-arrow logged-item">
+          <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+            @if (userRole !== 'Admin') {
+              <span class="user-img">
+                <img class="rounded-circle" [src]="imageUser" width="31" alt="User Image" />
+              </span>
+            }
+            @if (userRole === 'Admin') {
+              <span class="user-img">
+                <i class="fas fa-user-cog admin-icon"></i>
+              </span>
+            }
+          </a>
+          <div class="dropdown-menu dropdown-menu-end">
+            <div class="user-header">
+              @if (userRole !== 'Admin') {
+                <div class="avatar avatar-sm">
+                  <img [src]="imageUser" alt="User Image" class="avatar-img rounded-circle" />
+                </div>
+              }
+              <div class="user-text">
+                <h6>{{Username}}</h6>
+                @if (userRole === 'User') {
+                  <a [routerLink]="routes.userProfile" class="text-profile mb-0">View Profile</a>
+                }
+                @if (userRole === 'Employee') {
+                  <a [routerLink]="routes.coach_profile_edit" class="text-profile mb-0">View Profile</a>
+                }
+                @if (userRole === 'Admin') {
+                  <a [routerLink]="routes.admin_profile_edit" class="text-profile mb-0">View Profile</a>
+                }
+              </div>
+            </div>
+           
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" (click)="logout()">
+              <i class="fas fa-sign-out-alt me-2"></i> Logout
+            </a>
+          </div>
+        </li>
+      </ul>
+    }
+  </nav>
+</div>
+</header>
+<!-- /Header -->

@@ -1,0 +1,30 @@
+/*---------------------
+    27. Testimonials
+-----------------------*/
+
+.testimonials-page, .testimonials-carousel {
+	.testimonial-group {
+		background: $__white;
+		border-radius: 10px;
+		margin-bottom: 24px;
+		.testimonial-review {
+			margin-bottom: 0;
+		}
+		.listing-venue-owner {
+			padding: 0 24px 24px 24px;
+		}
+	}
+}
+.testimonials-carousel {
+	.featured-slider-group {
+		.owl-carousel {
+			.owl-nav {
+				.owl-prev, .owl-next {
+					@include respond-below(custom991) {
+						top: -45px;
+					}
+				}
+			}
+		} 
+	}
+}

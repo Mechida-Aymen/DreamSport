@@ -1,0 +1,39 @@
+.search-box.select {
+    .mat-form-field {
+      &-wrapper {
+        padding: 0;
+      }
+      
+      &-underline {
+        display: none;
+      }
+      
+      &-flex {
+        background: #fff;
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+        padding: 8px 12px;
+        align-items: center;
+      }
+    }
+  
+    .mat-select {
+      &-value {
+        color: #333;
+        font-size: 14px;
+      }
+      
+      &-arrow {
+        color: #666;
+      }
+    }
+  
+    .mat-option {
+      padding: 8px 12px;
+      font-size: 14px;
+      
+      &:hover {
+        background: #f5f5f5;
+      }
+    }
+  }

@@ -1,0 +1,56 @@
+<div class="coach-court-list profile-court-list">
+  <ul class="nav">
+    <li><a [routerLink]="routes.userTeam">Team</a></li>
+    <li><a class="active" [routerLink]="routes.userTeamSetting">Setting</a></li>
+    <li><a [routerLink]="routes.userTeamInvitation">Invitation</a></li>
+  </ul>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="profile-detail-group">
+      <div class="card">
+        <form *ngIf="teamDetails">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="file-upload-text">
+                <div class="file-upload">
+                  <img [src]="teamDetails.avatar || 'assets/img/icons/img-icon.svg'" 
+                       class="img-fluid avatar-img" 
+                       alt="Team Avatar">
+                  <span>
+                    <i class="feather icon-edit"></i>
+                    <input type="file" id="file-input" (change)="onFileSelected($event)">
+                  </span>
+                </div>
+                <h5>Avatar Should be minimum 150 * 150 Supported File format JPG, PNG, SVG</h5>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <div class="input-space">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" 
+                       [(ngModel)]="teamDetails.name" 
+                       name="teamName"
+                       placeholder="Enter Name">
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <div class="input-space">
+                <label for="Bio" class="form-label">Description</label>
+                <textarea  type="text" class="form-control" id="Bio" 
+                       [(ngModel)]="teamDetails.description" 
+                       name="teamBio"
+                       placeholder="Enter Bio"></textarea>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="save-changes text-end" *ngIf="teamDetails">
+        <a href="javascript:void(0);" class="btn btn-primary reset-profile" (click)="resetChanges()">Reset</a>
+        <a href="javascript:void(0);" class="btn btn-secondary save-profile" (click)="saveChanges()">Save Change</a>
+      </div>
+    </div>
+  </div>
+</div>

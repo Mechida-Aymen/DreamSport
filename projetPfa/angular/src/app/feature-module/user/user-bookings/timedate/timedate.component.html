@@ -1,0 +1,93 @@
+<!-- Page Content -->
+<div class="content">
+  <div class="container">
+    <!-- Loading Spinner -->
+    <div *ngIf="isLoading" class="text-center my-5">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <div class="row text-center">
+      <!-- Section des dates et heures -->
+      <div class="col-12 col-sm-12 col-md-12 col-lg-8">
+        <div class="card">
+          <section class="booking-date">
+            <!-- Carrousel des dates -->
+            <div class="list-unstyled date-slider owl-theme mb-40">
+              <owl-carousel-o [options]="coachTimeDateOptions" #carousel>
+                @for (date of dates; track date) {
+                  <ng-template carouselSlide>
+                    <div class="booking-date-item">
+                      <h6>{{ date.date }}</h6>
+                      <p>{{ date.day }}</p>
+                    </div>
+                  </ng-template>
+                }
+              </owl-carousel-o>
+            </div>
+
+            <!-- Liste des heures disponibles -->
+            <div class="row">
+              @for (time of selectedTimes; track time) {
+                <div class="col-12 col-sm-4 col-md-4">
+                  <div
+                    class="time-slot"
+                    [ngClass]="{'active': time === selectedTime, 'checked': time === selectedTime, 'disabled': isTimeDisabled(time)}"
+                    (click)="!isTimeDisabled(time) && selectTime(time)"
+                  >
+                    @if (isTimeDisabled(time)) {
+                      <span class="reserved">Not Available</span>
+                    } @else {
+                      <span>{{ time }}</span>
+                    }
+                    <i class="fa-regular fa-check-circle"></i>
+                  </div>
+                </div>
+              }
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- Section des détails de réservation -->
+      <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+        <aside class="card booking-details">
+          <h3 class="border-bottom">Booking Details</h3>
+          <ul>
+            <li>
+              <i class="feather icon-calendar me-2"></i>
+              {{ selectedDate?.date }}
+            </li>
+            <li>
+              <i class="feather icon-clock me-2"></i>
+              {{ selectedTime }} - {{ endTime }}
+            </li>
+            <li>
+              <i class="feather icon-clock me-2"></i>
+              Total Hour : {{ totalHours }} Hrs
+            </li>
+          </ul>
+          <div class="d-grid btn-block">
+            <button type="button" class="btn btn-primary" (click)="bookReservation()">Book</button>
+            <!-- Afficher les messages d'erreur -->
+            @if (errorMessage) {
+              <div class="alert alert-danger mt-3">
+                {{ errorMessage }}
+              </div>
+            }
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- Bouton de retour -->
+    <div class="text-center btn-row">
+      <a class="btn btn-primary me-3 btn-icon" [routerLink]="routes.userBookings">
+        <i class="feather icon-arrow-left-circle me-1"></i> Back
+      </a>
+    </div>
+  </div>
+  <!-- /Container -->
+</div>
+<!-- /Page Content -->

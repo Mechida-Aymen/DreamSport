@@ -1,0 +1,207 @@
+/*-----------------
+    34. Wallet
+-----------------------*/
+
+.wallet-wrap {
+    background: $__primarycolor;
+    border-radius: 10px;
+    @include margin-padding(0 0 24px, 25px);
+	position: $__relative;
+	overflow: hidden;
+	&.wallet-modal {
+		margin-bottom: 15px;
+		.wallet-amt {
+			h5 {
+				font-size: $__font__size__14;
+				color: $__white;
+				margin-bottom: 10px;
+				font-weight: 400;
+			}
+		}
+	}
+	&:after {
+		position: absolute;
+		content:"";
+		background: rgba(170, 244, 12, 0.1);
+		width: 208px;
+		height: 208px;
+		top: 90px;
+		border-radius: 120px;
+		left: 130px;
+	}
+    h2 {
+        color: $__white;
+        font-size: $__font__size__36;
+		margin-bottom: 0;
+		font-weight: 700;
+        @include respond-below(custom1199) {
+            font-size: $__font__size__24;
+        }
+        @include respond-below(custom767) {
+            font-size: $__font__size__20;
+        }
+    }
+    .wallet-bal {
+        @extend %display-flex-center;
+		@extend %justify-content-between;
+        border-bottom: 1px solid $__dull__whitesmoke;
+        margin-bottom: 32px;
+		padding-bottom: 32px;
+        @include respond-below(custom575) {
+            display: $__block;
+            margin-bottom: 10px;
+			padding-bottom: 10px;
+        }
+        .wallet-img {
+            @extend %display-flex-center;
+			@include respond-below(custom767) {
+				margin-bottom: 15px;
+			}
+            span {
+                margin-right: 20px;
+            }
+            .wallet-amt {
+                h5 {
+                    color: $__white;
+                    margin-bottom: 10px;
+					font-size: $__font__size__14;
+                }
+            }
+        }
+		.payment-btn {
+			display: grid;
+			@include respond-below(custom767) {
+				display: $__block;
+			}
+			.balance-add {
+				border: 1px solid $__active_color;
+				color: $__active_color;
+				margin-bottom: 15px;
+				@include respond-below(custom767) {
+					margin-bottom: 0px;
+					margin-right: 10px;
+				}
+				&:hover {
+					background: $__active_color;
+					color: $__white;
+				}
+			}
+			.btn-transfer {
+				background: $__yellow__dark;
+				border: 1px solid $__yellow__dark;
+				color: $__white;
+				&:hover {
+					border: 1px solid $__secondarycolor;
+					background: $__secondarycolor;
+				}
+			}
+			.btn {
+				color: $__white;
+				margin-left: $__auto;
+				font-weight: 400;
+				display: $__inline__block;
+				min-width: 105px;
+				font-size: $__font__size__14;
+				padding: 10px 9px;
+				border-radius: 5px;
+				&.balance-add{
+					color: #AAF40C;
+					&:hover{
+						color: $__white
+					}
+				}
+			}
+		}
+    }
+    ul {
+        @extend %display-flex-center;
+		@extend %justify-content-between;
+		@include respond-below(custom767) {
+			display: $__block;
+		}
+        li {
+			@include respond-below(custom767) {
+				margin-bottom: 15px;
+			}
+			&:last-child {
+				@include respond-below(custom767) {
+					margin-bottom: 0px;
+				}
+			}
+            h6 {
+                color: $__white;
+                font-size: $__font__size__14;
+                font-weight: 400;
+                margin-bottom: 5px;
+            }
+			h3 {
+				color: $__white;
+				font-weight: 600;
+				margin-bottom: 0;
+			}
+        }
+    }
+}
+.your-card {
+	background: $__white;
+	box-shadow: $__row__box__shadow;
+	border-radius: 10px;
+	width: 100%;
+	margin-bottom: 24px;
+	padding: 24px;
+	.your-card-head {
+		@extend %display-flex-center;
+		@extend %justify-content-between;
+		margin-bottom: 20px;
+		h3 {
+			color: $__text_dark;
+			font-weight: 600;
+			margin-bottom: 0;
+		}
+		.btn {
+			border: 1px solid $__darkgray;
+			border-radius: 5px;
+			padding: 8px 9px;
+			font-size: $__font__size__14;
+			font-weight: 400;
+		}
+	}
+	.debit-card-blk {
+		padding: 15px;
+		max-width: 406px;
+		background: $__dull__whitesmoke;
+		border-radius: 10px;
+		@extend %display-flex-center;
+		@extend %justify-content-between;
+		.debit-card-balence {
+			span {
+				font-size: $__font__size__14;
+				font-weight: 400;
+				color: $__light__black;
+				margin-bottom: 5px;
+			}
+			h5 {
+				margin-bottom: 20px;
+			}
+			.card-number {
+				border-top: 1px solid $__bright__gray;
+				padding-top: 20px;
+				h4 {
+					color: $__primarycolor;
+					margin-bottom: 0;
+				}
+			}
+		}
+	}
+}
+.court-table-head {
+	@include respond-below(custom991) {
+		margin-bottom: 20px;
+	}
+}
+.table-accept-btn {
+	@extend %display-flex;
+	.btn-secondary {
+		margin-right: 15px;
+	}
+}

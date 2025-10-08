@@ -1,0 +1,142 @@
+<!-- Page Content -->
+<div class="content" *ngIf="tenantData$ | async as tenantData">
+  <!-- About Us Info -->
+  <section class="aboutus-info">
+    <div class="container">
+     
+            <!-- Vision-Mission -->
+            <div class="vision-mission">
+              <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-8">
+                  <h2>Your Vision</h2>
+                  <p>
+                    We strive to revolutionize the sports industry by providing an all-in-one platform that connects players, coaches, and venues. Through innovative technology, we simplify match bookings, team management, and training sessions, creating a seamless and engaging experience for all sports enthusiasts.
+                  </p>
+                  <p>
+                    Our mission is to empower athletes and sports communities with the tools they need to grow, compete, and excel. Whether you're a casual player or a professional, our platform helps you train smarter, play better, and achieve your full potential.
+                  </p>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+                  <div class="mission-bg">
+                    <h2>Our Mission</h2>
+                    <p *ngIf="tenantData.siteInfo && tenantData.siteInfo.length > 0">
+                      {{ tenantData.siteInfo[0].aboutUs }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /Vision-Mission -->
+          </div>
+        </section>
+        <!-- /About Us Info -->
+
+        <!-- Group Coaching -->
+
+        <section class="section group-coaching">
+          <div class="container">
+            <div class="section-heading aos" data-aos="fade-up">
+              <h2>Our <span>Features</span></h2>
+              <p class="sub-title">Train with expert coaches, access state-of-the-art facilities, and take your game to the next level. Create your team, connect with other players, and book matches effortlessly.</p>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-lg-4 col-md-6 d-flex">
+                <div class="work-grid coaching-grid w-100 aos" data-aos="fade-up">
+                  <div class="work-icon">
+                    <div class="work-icon-inner">
+                      <img src="assets/img/icons/coache-icon-04.svg" alt="coache-icon">
+                    </div>
+                  </div>
+                  <div class="work-content">
+                    <h3>Innovative Lessons</h3>
+                    <p>Boost your football skills with cutting-edge training, combining modern techniques and advanced coaching methods.
+                    </p>
+                   
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6 d-flex">
+                <div class="work-grid coaching-grid w-100 aos" data-aos="fade-up">
+                  <div class="work-icon">
+                    <div class="work-icon-inner">
+                      <img src="assets/img/icons/coache-icon-05.svg" alt="coache-icon">
+                    </div>
+                  </div>
+                  <div class="work-content">
+                    <h3>Football Community</h3>
+                    <p>Elevate your game with engaging training sessions and a thriving football community. Connect, compete, and improve together!
+                    </p>
+                   
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6 d-flex">
+                <div class="work-grid coaching-grid w-100 aos" data-aos="fade-up">
+                  <div class="work-icon">
+                    <div class="work-icon-inner">
+                      <img src="assets/img/icons/coache-icon-06.svg" alt="coache-icon">
+                    </div>
+                  </div>
+                  <div class="work-content">
+                    <h3>Field Rental
+                    </h3>
+                    <p *ngIf="tenantData.siteInfo && tenantData.siteInfo.length > 0">Play anytime with premium football field rentals at {{ tenantData.siteInfo[0].name }}. Book your field now for an uninterrupted game!</p>
+                   
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- /Group Coaching -->
+                  
+  <!-- Latest News -->
+<section class="section featured-venues latest-news">
+  <div class="container">
+    <div class="section-heading aos" data-aos="fade-up">
+      <h2>The Latest <span>News</span></h2>
+      <p class="sub-title">Get the latest buzz from the badminton world- stay informed and inspired by the thrilling updates and remarkable achievements in the sport.</p>
+    </div>
+    <div class="row">
+      <owl-carousel-o *ngIf="tenantData?.annonces?.length > 0" [options]="topVenueOwlOptions" class="featured-venues-slider">
+        <ng-template carouselSlide *ngFor="let slide of tenantData.annonces">
+          <div class="featured-venues-item">
+            <div class="listing-item">
+              <div class="listing-img">
+                <!-- Image ici -->
+              </div>
+              <div class="listing-content news-content">
+                <div class="listing-venue-owner">
+                  <div class="navigation">
+                    <a *ngIf="tenantData.siteInfo && tenantData.siteInfo.length > 0">
+                      {{ tenantData.siteInfo[0].name }}
+                    </a>
+                    <span class="d-flex">
+                      <i class="feather icon-calendar"></i>{{ formatDate(slide.launchedAt) }}
+                    </span>
+                  </div>
+                </div>
+                <h3 class="listing-title">
+                  <a href="javascript:void(0);">{{ slide.description }}</a>
+                </h3>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </owl-carousel-o>
+      <ng-template #noNews>
+        <p>No news available.</p>
+      </ng-template>
+      
+    </div>
+    
+  </div>
+</section>
+
+<!-- /Latest News -->    
+
+
+
+<!-- /Page Content -->
+ </div>

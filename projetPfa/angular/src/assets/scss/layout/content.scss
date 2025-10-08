@@ -1,0 +1,6 @@
+.content {
+    @include margin-padding(null, 60px 0);
+    @include respond-below(custom767) {
+    	@include margin-padding(null, 40px 0);
+    }
+}

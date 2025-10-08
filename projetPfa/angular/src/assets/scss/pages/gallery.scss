@@ -1,0 +1,36 @@
+/*-----------------
+    25. Gallery
+-----------------------*/
+
+.gallery-page {
+	.grid-item {
+		margin-bottom: 2%;
+		overflow: hidden;
+		a {
+			img {
+				@include transition(all 0.5s ease-in-out 0s);
+				-webkit-transform: scale(1.0);
+				transform: scale(1.0);
+				border-radius: 5px;
+				&:hover {
+					-webkit-transform: scale(1.1);
+    				transform: scale(1.1);
+				}
+			}
+		}
+	}
+	.grid-item, .grid-sizer {
+	  	width: 32%;
+	  	@include respond-below(custom767) {
+	  		width: 48%;
+	  	}
+	}
+	.gutter-sizer { 
+		width: 2%; 
+	}
+}
+.content {
+	&.gallery-blk {
+		padding: 60px 0 50px;
+	}
+}

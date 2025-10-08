@@ -1,0 +1,26 @@
+/* Hide mobile links on desktop */
+@media (min-width: 992px) {
+    .mobile-only {
+      display: none !important;
+    }
+  }
+  
+  /* Show mobile links in sidebar */
+  @media (max-width: 991px) {
+    .mobile-only {
+      display: block;
+    }
+    
+    .mobile-profile, .mobile-logout {
+      padding: 10px 20px;
+      
+      a {
+        color: #333;
+        display: block;
+        
+        &:hover {
+          color: #09dca4;
+        }
+      }
+    }
+  }

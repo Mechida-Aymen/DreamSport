@@ -1,0 +1,125 @@
+<!-- FAQ Management Page -->
+<div class="content">
+  <div class="container">
+    <!-- Header Section -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>FAQ Management</h2>
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addFaqModal">
+            <i class="feather icon-plus me-2"></i>Add FAQ
+          </button>
+        </div>
+      </div>
+    </div>
+
+<!-- FAQ Table - Full Width with Clean Spacing -->
+<div class="table-responsive">
+  <table (matSortChange)="sortData($event)" matSort matSortActive="question" matSortDirection="asc"
+         matSortDisableClear class="table table-borderless datatable">
+    <thead class="thead-light">
+      <tr>
+        <th mat-sort-header="question">Question</th>
+        <th mat-sort-header="response">Response</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (faq of faqsList; track faq; let i = $index) {
+      <tr>
+        <td class="align-middle"><strong>{{faq.question}}</strong></td>
+        <td class="align-middle">{{faq.response}}</td>
+        <td class="text-end">
+          <button class="btn btn-sm btn-danger" 
+                  data-bs-toggle="modal" data-bs-target="#deleteFaqModal"
+                  (click)="setSelectedFaq(faq)">
+            <i class="feather icon-trash-2 me-1"></i>Delete
+          </button>
+        </td>
+      </tr>
+      }
+      @if (isLoading) {
+      <tr>
+        <td colspan="3" class="text-center">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </td>
+      </tr>
+      }
+      @if (!isLoading && faqsList.length === 0) {
+      <tr>
+        <td colspan="3" class="text-center text-muted">No FAQs found</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
+  </div>
+</div>
+
+<!-- Add FAQ Modal -->
+<div class="modal fade" id="addFaqModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add New FAQ</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="faqForm" (ngSubmit)="addFaq()">
+          <div class="mb-3">
+            <label for="question" class="form-label">Question</label>
+            <input type="text" class="form-control" id="question" 
+                   formControlName="question"
+                   [ngClass]="{ 'is-invalid': faqForm.get('question')?.touched && faqForm.get('question')?.invalid }">
+            <div *ngIf="faqForm.get('question')?.touched && faqForm.get('question')?.invalid" class="invalid-feedback">
+              Question is required
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="response" class="form-label">Response</label>
+            <textarea class="form-control" id="response" rows="4"
+                      formControlName="response"
+                      (ngmodel)="newFaq.question"
+                      [ngClass]="{ 'is-invalid': faqForm.get('response')?.touched && faqForm.get('response')?.invalid }"></textarea>
+            <div *ngIf="faqForm.get('response')?.touched && faqForm.get('response')?.invalid" class="invalid-feedback">
+              Response is required
+            </div>
+          </div>
+          <div class="modal-footer convenient-btns">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary d-inline-flex align-items-center" data-bs-dismiss="modal" [disabled]="faqForm.invalid">
+              Save FAQ
+              <span><i class="feather icon-check-circle ms-2"></i></span>
+            </button>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteFaqModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Deletion</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <img src="assets/img/icons/FAQim.png" alt="Warning" width="80" class="mb-3">
+        <h5>Are you sure you want to delete this FAQ?</h5>
+        <p class="text-muted">"{{ deletingFaq?.question }}" will be permanently removed.</p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteFaq(deletingFaq?.id)">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

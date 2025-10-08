@@ -1,0 +1,179 @@
+/*-----------------
+    14. Common
+-----------------------*/
+.btn-custom-outline {
+    border: 1px solid $__primarycolor;
+    color: $__primarycolor;
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    &:hover {
+        background-color: $__primarycolor;
+        color: white;
+        border-color: $__primarycolor;
+    }
+
+    &.active {
+        background-color: $__primarycolor;
+        color: white;
+    }
+}
+
+.tag-blue {
+    background-color: $__primarycolor; /* Couleur principale */
+}
+.add-emp{
+    background-color: $__primarylight;
+
+    color: $__white;
+
+&:hover{
+	background-color: $__primarycolor;
+
+    color: $__white;
+
+}
+}
+.pagination-group {
+    @extend %display-flex-center;
+    @extend %justify-content-center;
+    @include margin-padding(36px 0 0 , null);
+    .pagination {
+        margin-bottom: 0;
+        width: 100%;
+        text-align: center;                    
+        .previtem {
+            @include respond-below(custom575) {
+                display: none;
+            } 
+            a {
+                color: $__darkgray;
+                font-size: $__font__size__14;
+                width: 32px;
+                height: 32px;
+                padding: 8px;
+                border-radius: 32px;
+                span {
+                    line-height: 0;
+                    i {
+                        line-height: 0;
+                    }
+                }
+            }  
+        } 
+        .nextlink {
+            @include respond-below(custom575) {
+                display: none;
+            } 
+            a {
+                color: $__darkgray;
+                font-size: $__font__size__14;
+                width: 32px;
+                height: 32px;
+                padding: 8px;
+                border-radius: 32px;
+                span {
+                    line-height: 0;
+                    i {
+                        line-height: 0;
+                    }
+                }
+            }  
+        } 
+    }
+    .pagination-center {
+        display: $__flex;
+        justify-content: $__center;
+        align-items: $__center; 
+        .page-group {
+            .page-item {
+                a {
+                    color: $__darkgray;
+                    font-size: $__font__size__14;
+                    width: 32px;
+                    height: 32px;
+                    padding: 8px;
+                    border-radius: 32px;
+                    margin: 0 12px 0 0;
+                    color: $__darkgray;
+                    width: 32px;
+                    height: 32px;
+                    display: $__flex;
+                    justify-content: $__center;
+                    align-items: $__center;      
+                    &:focus {
+                        outline: 0;
+                        box-shadow: none;
+                    }                  
+                }
+                .active {
+                    background-color: $__primarycolor;
+                    color: $__white;
+                    border: 1px solid $__primarycolor;
+                }                    
+            }
+            ul {
+                display: $__flex;
+                align-items: $__center;
+                justify-content: $__center;
+                margin: 0 0 0 10px;
+            }
+        }            
+    } 
+    .previtem,.nextlink {
+        @include respond-below(custom575) {
+            display: none;
+        }
+        a {
+            height: 38px;
+            @extend %flex-align-center;
+            border-radius: 32px;
+            padding: 0 20px;
+            color: #000;
+        }
+    }
+}
+.fw-semibold{
+    font-weight: 500 !important;
+}
+.bootstrap-tagsinput {
+	.tag {
+		[data-role="remove"] {
+			margin-left: 8px;
+			cursor: pointer;
+			color: #F50303;;
+		}
+	}
+}
+.bootstrap-tagsinput {
+    border-color: transparent;
+    box-shadow: inherit;
+    width: 100%;
+    border-radius: 0;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    line-height: 0;
+	.tag {
+		display: inline-block;
+        margin-right: 2px;
+        padding: 11px 15px;
+        background: #FFFFFF;
+        border: 1px solid #EAEDF0;
+        border-radius: 10px;
+        font-weight: 500;
+        font-size: 14px;
+        color: #192335;
+        @include respond-below(custom767) {  
+            margin-bottom: 5px;
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+	}
+}
+.bootstrap-tagsinput.focus {
+	border-color: #20c0f3;
+}
+.fs-16{
+    font-size: 16px !important;
+}

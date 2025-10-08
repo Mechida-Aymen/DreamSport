@@ -1,0 +1,25 @@
+/*-----------------
+    23. Our Team
+-----------------------*/
+
+.ourteam-page {
+	.team-item { 
+		margin-bottom: 24px;
+	}
+}
+.ourteam-page, .services-page, .testimonials-page, .testimonials-carousel {
+	.content {
+		padding-bottom: 36px;
+		@include respond-below(custom767) {
+			padding-bottom: 16px;
+		}
+		&.carousel-content {
+			@include respond-below(custom991) {
+				padding-top: 110px;
+			}
+			@include respond-below(custom767) {
+				padding-top: 90px;
+			}
+		}	
+	}
+}

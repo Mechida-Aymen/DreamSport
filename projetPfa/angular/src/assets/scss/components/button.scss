@@ -1,0 +1,105 @@
+/*-----------------
+    4. Buttons
+-----------------------*/
+
+.btn {
+	font-size: $__body__font__size;
+	padding: 12px 20px;
+	font-weight: $__medium;
+	border-radius: $__value__10;
+	@include transition(all 0.5s ease-in-out 0s);
+	&:hover {
+		color: $__white;
+	}
+	a {
+		color: $__white;
+	}
+	@include respond-below(custom991) {
+		font-size: $__font__size__15;
+		padding: 10px 15px;
+	}
+}
+.btn-icon {
+	display: $__inline__flex;
+    align-items: $__center;
+    vertical-align: $__middle;
+}
+.btn-primary {
+	color: $__white;
+	background: $__primarycolor;
+	border-color: $__primarycolor;
+	&:hover {
+		background: $__secondarycolor;
+		border-color: $__secondarycolor;
+	}
+}
+.btn-secondary {
+	color: $__white;
+	background: $__secondarycolor;
+	border-color: $__secondarycolor;
+	&:hover {
+		background: $__primarycolor;
+		border-color: $__primarycolor;
+	}
+}
+.btn-secondary-block {
+	color: $__white;
+	background: $__secondarycolor;
+	border-color: $__secondarycolor;
+	padding: 20px;
+	&:hover {
+		background: $__white;
+		color: $__secondarycolor;
+		border-color: $__secondarycolor;
+	}
+}
+.btn-gradient {
+	color: $__white;
+	background: $__gradient__color;
+	&:hover {
+		background: $__reverse__gradient__color;
+	}
+}
+.btn-load-more {
+	background: $__white;
+	border: 3px solid $__darkash;
+	border-radius: $__value__5;
+	color: $__secondarycolor;
+	&:hover {
+		background: $__secondarycolor;
+		border-color: $__secondarycolor;
+		color: $__white;
+	}
+}
+.btn-white {
+	background: $__white;
+	color: $__primarycolor;
+	&:hover {
+		background: $__secondarycolor;
+		color: $__white;
+	}
+}
+
+.btn-load{
+	background: $__white;
+	color: $__secondarycolor;
+	border: 3px solid $__lightgray;
+	border-radius: $__value__5;
+	padding: 16px;
+    min-width: 202px;
+	display: inline-flex;
+	&:hover {
+		background: $__secondarycolor;
+		border-color: $__secondarycolor;
+		color: $__white;
+		img{
+			filter: brightness(0) invert(1);
+		}
+	}
+	&:focus {
+		img {
+			filter: brightness(0) invert(0);
+		}
+	}
+	
+}

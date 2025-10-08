@@ -1,0 +1,81 @@
+<!-- Page Content -->
+<div class="content blog-details contact-group" *ngIf="tenantData$ | async as tenantData">
+    <div class="container">
+        <h2 class="text-center mb-40">Contact Information</h2>
+        <div class="row mb-40">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                <div class="d-flex justify-content-start align-items-center details">
+                    <i class="feather icon-mail d-flex justify-content-center align-items-center"></i>
+                    <div class="info">
+                        <h4>Email Address</h4>
+                        <p><a href="mailto:info@example.com">
+                            {{ tenantData.siteInfo[0]?.email}}</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                <div class="d-flex justify-content-start align-items-center details">
+                    <i class="feather icon-phone-call d-flex justify-content-center align-items-center"></i>
+                    <div class="info">
+                        <h4>Phone Number</h4>
+                        <p>
+                            {{ tenantData.siteInfo[0]?.phoneNumber}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                <div class="d-flex justify-content-start align-items-center details">
+                    <i class="feather icon-map-pin d-flex justify-content-center align-items-center"></i>
+                    <div class="info">
+                        <h4>Location</h4>
+                        <p>
+                            {{ tenantData.siteInfo[0]?.addresse}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+    <section class="section dull-bg">
+        <div class="container">
+            <h2 class="text-center mb-40">Reach out to us and let's smash your inquiries</h2>
+            <div *ngIf="successMessage" class="alert alert-success">
+                {{ successMessage }}
+              </div>
+              <form class="contact-us" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  <div class="col-12 col-sm-12 col-md-6 mb-3">
+                    <label for="first-name" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="first-name" placeholder="Enter First Name" formControlName="firstName" required>
+                  </div>
+                  <div class="col-12 col-sm-12 col-md-6 mb-3">
+                    <label for="last-name" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="last-name" placeholder="Enter Last Name" formControlName="lastName" required>
+                  </div>
+                  <div class="col-12 col-sm-12 col-md-6 mb-3">
+                    <label for="e-mail" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="e-mail" placeholder="Enter Email Address" formControlName="email" required>
+                  </div>
+                  <div class="col-12 col-sm-12 col-md-6 mb-3">
+                    <label for="phone" class="form-label">Phone Number</label>
+                    <input type="text" class="form-control" id="phone" placeholder="Enter Phone Number" formControlName="phone" required>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col mb-3">
+                    <label for="subject" class="form-label">Subject</label>
+                    <input type="text" class="form-control" id="subject" placeholder="Enter Subject" formControlName="subject" required>
+                  </div>
+                </div>
+                <div>
+                  <label for="comments" class="form-label">Comments</label>
+                  <textarea class="form-control" id="comments" rows="3" placeholder="Enter Comments" formControlName="comments" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-secondary d-flex align-items-center">Submit<i class="feather icon-arrow-right-circle ms-2"></i></button>
+              </form>
+              
+              
+        </div>
+    </section>
+</div>
+<!-- /Page Content -->

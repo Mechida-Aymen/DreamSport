@@ -1,0 +1,113 @@
+/*-----------------
+	9. Forms
+-----------------------*/
+
+form {
+	label, input {
+		color: $__secondarycolor;
+	}
+	input {
+		height: $__value__60;
+	}
+	input, textarea { 
+		&.form-control {
+			padding: $__value__20;
+			border-radius: $__value__10;
+			background: $__light__whitesmoke;
+			border: $__none;
+			&:focus {
+				box-shadow: $__none;
+				background: $__light__whitesmoke;
+			}
+			&::placeholder {
+				color: $__darkgray;
+			}
+		}
+	}
+	textarea {
+		resize: none;
+	}
+	label {
+		&.form-label{
+			margin-bottom: 10px;
+		}
+		span {
+			color: $__red;
+		}
+	}
+	.form-icon {
+		position: $__relative;
+		span {
+			&.cus-icon {
+				@include position($__absolute,50%,15px,null,null);
+			    transform: translateY(-50%);
+			    height: auto;
+			    color: $__darkash;
+			}
+		}
+	}
+}
+.form-check { 
+	@include margin-padding(0, 0);
+	.form-check-input[type=radio] {
+		margin: 0;
+		width: 20px;
+		height: 20px;
+		position: $__relative;
+		flex-shrink: 0;
+		cursor: pointer;
+		&:after {
+			position: $__absolute;
+			left: 50%;
+			top: 50%;
+			@include transform(translate(-50%, -50%));
+			content: '';
+			width: 8px;
+			height: 8px;
+			border-radius: 8px;
+			background: $__primarycolor;
+			display: none;
+		}
+		&:focus {
+			box-shadow: none;
+		}
+		&:checked {
+			background: transparent;
+			border-color: $__primarycolor;
+			&:after {
+				display: block;
+			}
+		}
+	}
+	.form-check-input[type=checkbox] {
+		margin: 0 10px 0 0;
+		cursor: $__pointer;
+		&:focus {
+			box-shadow: none;
+		}
+		&:checked {
+			background-color: $__primarycolor;
+			border-color: $__primarycolor;
+		}
+	}
+	.default-check[type=checkbox] {
+		width: $__value__20;
+		height: $__value__20;
+		border-radius: 4px;
+		&:focus {
+			box-shadow: none;
+		}
+		&:checked {
+			background-color: $__primarycolor;
+			border-color: $__primarycolor;
+		}
+	}
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+  	margin: 0;
+}
+input[type=number] {
+  	-moz-appearance: textfield;
+}

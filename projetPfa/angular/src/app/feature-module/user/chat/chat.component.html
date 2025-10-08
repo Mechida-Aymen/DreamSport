@@ -1,0 +1,260 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="chat-window" [ngClass]="{'chat-slide': openChat === true}">
+
+            <!-- Chat Left -->
+            <div class="chat-cont-left">
+                <form class="chat-search">
+                    <div class="form-custom">
+                        <input type="text" 
+                               class="form-control" 
+                               placeholder="Search by name or last message"
+                               [(ngModel)]="searchTerm"
+                               name="searchTerm"
+                               (input)="cdRef.detectChanges()">
+                    </div>
+                </form>
+                <div class="chat-users-list">
+                    <h3>Contacts</h3>
+                    <div class="chat-scroll">
+                        <!-- No chats message -->
+                        <div *ngIf="filteredAmisChats().length === 0 && filteredTeamChats().length === 0" class="text-center p-3 text-muted">
+                            {{searchTerm ? 'No chats found' : 'No chats available'}}
+                        </div>
+
+                        <!-- Friend chats -->
+                        <a href="javascript:void(0);" class="media" 
+                           *ngFor="let chat of filteredAmisChats()"
+                           [ngClass]="{'read-chat active': isActiveAmisChat(chat)}"
+                           (click)="chatOpen(chat)">
+                            <div class="media-img-wrap">
+                                <div class="avatar avatar-online">
+                                    <img [src]="chat.avatar || 'https://pub-ae615910610b409dbb3d91c073aa47e6.r2.dev/avatar-02.jpg'" alt="User Image" class="avatar-img rounded-circle">
+                                </div>
+                            </div>
+                            <div class="media-body">
+                                <div>
+                                    <div class="user-name">{{chat.amiName}}</div>
+                                    <div class="user-last-chat">
+                                        <i class="fa-solid fa-check-double"></i> 
+                                        {{chat.lastMessage | truncate:20}}
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="last-chat-time block">{{chat.date | date:'shortTime':'UTC'}}</div>
+                                    <div class="badge badge-success badge-pill" *ngIf="chat.unreadCount && chat.unreadCount > 0">
+                                        {{chat.unreadCount}}
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Team chats -->
+                        <a href="javascript:void(0);" class="media" 
+                           *ngFor="let chat of filteredTeamChats()"
+                           [ngClass]="{'read-chat active': isActiveTeamChat(chat)}"
+                           (click)="chatOpen(chat)">
+                            <div class="media-img-wrap">
+                                <div class="avatar avatar-online">
+                                    <img [src]="chat.avatar || 'https://pub-ae615910610b409dbb3d91c073aa47e6.r2.dev/avatar-02.jpg'" alt="User Image" class="avatar-img rounded-circle">
+                                </div>
+                            </div>
+                            <div class="media-body">
+                                <div>
+                                    <div class="user-name">{{chat.equipeName}}</div>
+                                    <div class="user-last-chat">
+                                        <i class="fa-solid fa-check-double"></i> 
+                                        {{chat.lasteMessage | truncate:20}}
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="last-chat-time block">{{chat.date | date:'shortTime':'UTC'}}</div>
+                                    <div class="badge badge-success badge-pill" *ngIf="chat.nbrMessage && chat.nbrMessage > 0">
+                                        {{chat.nbrMessage}}
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Right -->
+            <div class="chat-cont-right" *ngIf="selectedChat; else noChatSelected">
+                <div class="chat-header">
+                    <a id="back_user_list" href="javascript:void(0)" class="back-user-list" (click)="chatOpen(null)">
+                        <i class="feather icon-chevrons-left"></i>
+                    </a>
+                    <div class="media">
+                        <div class="media-img-wrap">
+                            <div class="avatar avatar-online">
+                                <img [src]="getSelectedChatAvatar()" alt="User Image" class="avatar-img rounded-circle">
+                            </div>
+                        </div>
+                        <div class="media-body">
+                            <div class="user-name">
+                                {{getSelectedChatName()}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-options">
+                        <div class="dropdown dropdown-action table-drop-action">
+                            <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" 
+                                   *ngIf="!selectedChat?.isTeam && !blockStatus.iBlockedThem && !blockStatus.theyBlockedMe"
+                                   (click)="blockUser(getSelectedChatIdMember() || '')">
+                                    <i class="feather icon-user-x"></i>Block User
+                                </a>
+                                
+                                <a class="dropdown-item" 
+                                   *ngIf="!selectedChat?.isTeam && blockStatus.iBlockedThem"
+                                   (click)="unblockUser(getSelectedChatIdMember() || '')">
+                                    <i class="feather icon-user-check"></i>Unblock User
+                                </a>
+
+                                <div *ngIf="!selectedChat?.isTeam && blockStatus.theyBlockedMe" 
+                                     class="dropdown-item text-danger small">
+                                    <i class="feather icon-alert-triangle"></i> This user blocked you
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-body">
+                    <div class="chat-scroll">
+                        <!-- Loading more indicator -->
+                        <div *ngIf="pagination.loadingMore" class="text-center p-2">
+                            <div class="spinner-border spinner-border-sm text-primary" role="status">
+                                <span class="sr-only">Loading more messages...</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Initial loading indicator -->
+                        <div *ngIf="initialLoad" class="text-center p-3">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="sr-only">Loading messages...</span>
+                            </div>
+                            <p class="mt-2">Loading messages...</p>
+                        </div>
+                       
+                        <!-- No messages -->
+                        <div *ngIf="!initialLoad && !loading && messages.length === 0" class="text-center p-3 text-muted">
+                            Start the conversation!
+                        </div>
+
+                        <!-- Block warning -->
+                        <div *ngIf="selectedChat && !selectedChat.isTeam && isCommunicationBlocked()" 
+                             class="alert alert-warning mt-2">
+                            <i class="feather icon-alert-triangle"></i>
+                            <span *ngIf="blockStatus.iBlockedThem && !blockStatus.theyBlockedMe">
+                                You have blocked this user
+                            </span>
+                            <span *ngIf="!blockStatus.iBlockedThem && blockStatus.theyBlockedMe">
+                                This user has blocked you
+                            </span>
+                            <span *ngIf="blockStatus.iBlockedThem && blockStatus.theyBlockedMe">
+                                Messaging is disabled between you two
+                            </span>
+                        </div>
+
+                        <!-- Messages list -->
+                        <ul class="list-unstyled" *ngIf="!initialLoad && !loading && messages.length > 0">
+                            <li class="chat-date">Today</li>
+                            
+                            <li class="media" 
+                                *ngFor="let message of messages"
+                                [id]="'message-' + message.id"
+                                [ngClass]="{
+                                    'sent': getMessageSenderId(message) === currentUserId,
+                                    'received': getMessageSenderId(message) !== currentUserId
+                                }">
+                                
+                                <div class="avatar" *ngIf="getMessageSenderId(message) !== currentUserId">
+                                    <img [src]="getMessageSenderAvatar(message)" alt="User Image" class="avatar-img rounded-circle">
+                                </div>
+                                
+                                <div class="media-body">
+                                    <div class="msg-box">
+                                        <div>
+                                            <p>{{message.contenu}}</p>
+                                            <ul class="chat-msg-info">
+                                                <li>
+                                                    <div class="chat-time">
+                                                        <span>{{message.dateEnvoi | date:'shortTime':'UTC'}}</span>
+                                                        <span class="msg-status" *ngIf="getMessageSenderId(message) === currentUserId">
+                                                            <i class="fa-solid" 
+                                                               [ngClass]="{
+                                                                   'fa-check single-check': message.statut === 'Sent',
+                                                                   'fa-check-double double-check': message.statut === 'Seen'
+                                                               }"></i>
+                                                            <span class="seen-text" *ngIf="message.statut === 'Seen'">Seen</span>
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="avatar" *ngIf="getMessageSenderId(message) === currentUserId">
+                                    <img [src]="getMessageSenderAvatar(message)" alt="User Image" class="avatar-img rounded-circle">
+                                </div>
+                            </li>
+                            
+                            <!-- Typing indicator -->
+                            <li *ngIf="isTyping && typingUserId !== currentUserId" class="typing-indicator">
+                                <div class="dots">
+                                    <div class="dot"></div>
+                                    <div class="dot"></div>
+                                    <div class="dot"></div>
+                                </div>
+                                <span>{{typingUserName}} is typing</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="chat-footer">
+                    <div class="form-custom">
+                        <div class="input-group-prepend">
+                            <i class="feather icon-paperclip"></i>
+                        </div>
+                        <div class="send-blk">
+                            <input type="text" 
+                                   class="input-msg-send form-control" 
+                                   placeholder="Type something"
+                                   [(ngModel)]="newMessage"
+                                   (keyup.enter)="sendMessage()"
+                                   (input)="onInputChange()"
+                                   [disabled]="!selectedChat?.isTeam && isCommunicationBlocked()">
+                            <div class="input-group-append">
+                                <button type="button" 
+                                        class="btn msg-send-btn" 
+                                        (click)="sendMessage()"
+                                        [disabled]="!selectedChat?.isTeam && isCommunicationBlocked()">
+                                    <i class="feather icon-send"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- No chat selected -->
+            <ng-template #noChatSelected>
+                <div class="chat-cont-right">
+                    <div class="no-selection-message text-center">
+                        <div class="message-content">
+                            <i class="feather icon-message-square"></i>
+                            <h4>Select a chat to start messaging</h4>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

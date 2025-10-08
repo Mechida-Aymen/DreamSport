@@ -1,0 +1,696 @@
+@use "@angular/material" as mat;
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$dreamsports-angular-primary: mat.m2-define-palette(mat.$m2-indigo-palette);
+$dreamsports-angular-accent: mat.m2-define-palette(mat.$m2-pink-palette,
+    A200,
+    A100,
+    A400);
+
+// The warn palette is optional (defaults to red).
+$dreamsports-angular-warn: mat.m2-define-palette(mat.$m2-red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$dreamsports-angular-theme: mat.m2-define-light-theme((color: (primary: $dreamsports-angular-primary,
+        accent: $dreamsports-angular-accent,
+        warn: $dreamsports-angular-warn,
+      ),
+    ));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($dreamsports-angular-theme);
+/* You can add global styles to this file, and also import other style files */
+@import "/src/assets/scss/main.scss";
+@import "ngx-owl-carousel-o/lib/styles/scss/owl.carousel";
+@import "ngx-owl-carousel-o/lib/styles/scss/owl.theme.default";
+@import 'ngx-toastr/toastr';
+
+html,
+body {
+  height: 100%;
+}
+
+.table_header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0rem 1.5rem;
+
+  .dataTables_length {
+    label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-left: -24px;
+    }
+
+    select {
+      width: auto;
+      display: inline-block;
+      margin: 0px 3px;
+    }
+  }
+}
+
+.table_footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  .pagination_section {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+  }
+}
+
+html,
+body {
+  height: 100%;
+}
+
+.add-header-bg {
+  background: $__primarycolor;
+}
+
+.header .main-menu-wrapper .main-nav .has-submenu ul.show-sub-menu {
+  display: block;
+  animation: fadeIn 1s;
+}
+
+.header .main-menu-wrapper .main-nav .has-submenu ul.hide-sub-menu {
+  display: none;
+  animation: fadeOut 10s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+i-feather {
+  display: flex !important;
+  height: 18px !important;
+  width: 18px !important;
+}
+
+.owl-carousel .owl-nav .owl-prev,
+.owl-carousel .owl-nav .owl-next,
+.owl-carousel .owl-dot {
+  background: transparent;
+  color: #000;
+}
+
+.owl-carousel .owl-nav .owl-prev:hover,
+.owl-carousel .owl-nav .owl-next:hover {
+  background: transparent;
+}
+
+.coach-booking-mat .mat-mdc-select .mat-mdc-select-trigger {
+  background-image: url(./assets/img/icons/calendar-icon.svg);
+  background-repeat: no-repeat;
+  background-position: 10% 50%;
+}
+
+.coach-booking-mat .mat-mdc-select-placeholder,
+.coach-sidebar-mat .mat-mdc-select-placeholder {
+  margin-left: 20px;
+  color: #192335;
+}
+
+.coach-booking-mat .mat-mdc-select-placeholder,
+.coach-sidebar-mat .mat-mdc-select-placeholder {
+  margin-left: 20px;
+  color: #192335;
+}
+
+.coach-booking-mat .mat-mdc-select-value-text,
+.coach-sidebar-mat .mat-mdc-select-value-text {
+  margin-left: 20px;
+  color: #192335;
+}
+
+.profile-detail-group .mat-mdc-select .mat-mdc-select-trigger {
+  background-color: #fafafa;
+  border: none;
+  height: 60px;
+}
+
+.booking-form .mat-mdc-select {
+  border: none;
+  background-color: #FAFAFA;
+  font-size: 15px;
+  padding: 20px;
+}
+
+mat-select .mat-mdc-select-placeholder,
+mat-select .mat-mdc-select-arrow,
+mat-select .mat-mdc-select-value {
+  color: #192335;
+}
+
+.deactive-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+.coach-booking-mat .mat-mdc-select-placeholder {
+  margin-left: 20px;
+  color: #192335;
+}
+
+.coach-booking-mat .mat-mdc-select-value-text {
+  margin-left: 20px;
+  color: #192335;
+}
+
+
+
+
+form ngx-datepicker.form-control,
+form textarea.form-control {
+  padding: 20px;
+  border-radius: 10px;
+  background: #FAFAFA;
+  border: none;
+}
+
+.datepicker-container.datepicker-default input {
+  background: #FAFAFA;
+  border: none;
+  height: auto;
+}
+
+.datepicker-container.datepicker-default input:focus-visible {
+  outline: none !important;
+}
+
+.show-sub-menu {
+  display: block !important;
+  transition: all 0.5s;
+}
+
+.hide-sub-menu {
+  display: none !important;
+  transition: all 0.5s;
+}
+
+.custom-timepicker {
+  position: absolute;
+  width: fit-content;
+  left: 0;
+  z-index: 1;
+  margin-top: 5px;
+  padding: 20px;
+  background: #FFFFFF;
+  border: 1px solid #F2ECFF;
+  box-shadow: 0px 4px 44px rgb(231 234 252 / 75%);
+  border-radius: 6px;
+  display: none;
+}
+
+form .custom-timepicker input.form-control {
+  padding: 0;
+}
+
+.custom-timepicker .btn-default {
+  background: #097E52;
+  padding: 10px;
+  color: #fff !important;
+  color: #000;
+}
+
+.custom-timepicker .btn-default:hover {
+  color: #fff;
+
+}
+
+.custom-timepicker .btn-link:hover {
+  color: #0a58ca;
+
+}
+
+.day-unit.is-selected {
+  background: #097E52 !important;
+  background-color: #097E52;
+  color: #fff;
+}
+
+.day-unit:hover {
+  background-color: #097E52 !important;
+}
+
+.myPanelClass {
+  margin-left: -17px !important;
+}
+
+.mat-mdc-select:focus {
+  box-shadow: none;
+  border: none;
+}
+
+// slider
+.filter-range .ngx-slider .ngx-slider-pointer {
+  width: 15px;
+  height: 16px;
+  background-color: #da4453;
+  top: -6px;
+}
+
+.filter-range .ngx-slider .ngx-slider-pointer:hover {
+  background-color: #097e52;
+}
+
+.filter-range .ngx-slider .ngx-slider-bar {
+  height: 6px !important;
+}
+
+.filter-range .ngx-slider .ngx-slider-bubble {
+  color: white;
+  font-size: 12px;
+  line-height: 1.333;
+  text-shadow: none;
+  padding: 4px 10px;
+  background-color: #097e52;
+  border-radius: 2px;
+  top: -38px;
+  margin: 0px 0px !important;
+}
+
+.filter-range .ngx-slider .ngx-slider-bubble {
+  background: linear-gradient(93.86deg,
+      #006177 -2.6%,
+      #269089 67.39%,
+      #7abc82 110.84%);
+  text-align: center;
+  margin-left: 10px !important;
+  width: 50px;
+  border-radius: 130px;
+  text-align: center;
+  // top: 0px;
+}
+
+.filter-range .ngx-slider .ngx-slider-bubble.ngx-slider-limit {
+  display: none !important;
+}
+
+.filter-range .ngx-slider.animate .ngx-slider-bubble.ngx-slider-limit.ngx-slider-floor {
+  display: none !important;
+}
+
+.filter-range .ngx-slider.animate .ngx-slider-bubble.ngx-slider-limit.ngx-slider-ceil {
+  display: none !important;
+}
+
+.filter-range .ngx-slider .ngx-slider-pointer::after {
+  display: none !important;
+}
+
+.filter-range .ngx-slider .ngx-slider-selection {
+  background-color: #097e52 !important;
+}
+
+.filter-range .ngx-slider-selection-bar {
+  visibility: unset !important;
+}
+
+// slider **
+
+// mat sorter
+.mat-sort-header {
+  padding-right: 30px;
+}
+
+.mat-sort-header-container {
+  justify-content: space-between;
+
+  .mat-sort-header-arrow {
+    height: 19px;
+    width: 19px;
+    opacity: 0.54 !important;
+    transform: translateY(0px) !important;
+    position: relative;
+    right: -10px;
+    top: 2px;
+
+    .mat-sort-header-stem {
+      display: none;
+    }
+
+    .mat-sort-header-indicator {
+      opacity: 1;
+      color: black;
+      font-weight: bold;
+
+      // Hide default arrow as its composed of left, right and middle
+      .mat-sort-header-pointer-left,
+      .mat-sort-header-pointer-right,
+      .mat-sort-header-pointer-middle {
+        display: none;
+      }
+    }
+
+    &::after {
+      right: 0.5em;
+      content: "\2193";
+      color: #babfc7;
+      font-family: "Font Awesome 5 Free";
+      top: 0px;
+      font-size: 12px;
+      opacity: 1;
+      position: absolute;
+    }
+
+    &::before {
+      right: 0.5em;
+      content: "\2191";
+      color: #babfc7;
+      font-family: "Font Awesome 5 Free";
+      top: -2px;
+      left: -3px;
+      font-size: 12px;
+      opacity: 1;
+      position: absolute;
+    }
+  }
+}
+
+[aria-sort="ascending"] {
+  .mat-sort-header-arrow {
+    &::before {
+      color: #000;
+    }
+  }
+}
+
+[aria-sort="descending"] {
+  .mat-sort-header-arrow {
+    &::after {
+      color: #000;
+    }
+  }
+}
+
+// mat sorter **
+.stickybar {
+  position: sticky;
+  top: 0;
+}
+
+.footer-mat-select .mat-mdc-select {
+  background: transparent;
+  height: 25px;
+  line-height: 25px;
+  color: #6b7385;
+  padding-left: 15px;
+  text-align: right;
+  font-size: 16px;
+  border: none;
+}
+
+.footer-mat-select .mat-mdc-select-placeholder {
+  color: #6b7385;
+}
+
+.footer-mat-select .mat-mdc-select-arrow {
+  width: 35px;
+}
+
+.coach-detail-select .mat-mdc-select {
+  height: 60px;
+  line-height: 55px;
+  font-size: 16px;
+  border: none;
+  background: #fafafa;
+  border-radius: 10px;
+}
+
+.gallery-page .grid-item,
+.gallery-page .grid-sizer {
+  height: 235px;
+}
+
+.gallery-page .grid-item a img {
+  height: 100%;
+  width: 100%;
+}
+
+.gallery-page .grid {
+  display: flex;
+}
+
+.search-box .mat-mdc-select .mat-mdc-select-trigger {
+  height: 30px;
+  line-height: 30px;
+  padding-left: 0;
+  color: #6B7385;
+  border: none;
+  background: #FAFAFA;
+  border-radius: 10px;
+}
+
+.search-box .search-input {
+  padding-right: 12px;
+}
+
+mat-slider.mat-mdc-slider.mdc-slider {
+  width: 100%;
+}
+
+.brand-slider-group .owl-carousel .brand-logos img {
+  opacity: 0.5;
+}
+
+.brand-slider-group .owl-carousel .brand-logos img:hover {
+  opacity: 1;
+}
+
+
+div.owl-carousel .owl-item img {
+  display: block;
+  width: auto;
+}
+
+mat-option mat-pseudo-checkbox.mat-pseudo-checkbox {
+  display: none;
+}
+
+mat-option.mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled):not(.mat-mdc-option-multiple) {
+  background-color: #192335;
+}
+
+mat-option.mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+  color: #fff;
+}
+
+mat-option.mat-mdc-option.mdc-list-item {
+  min-height: 35px;
+}
+
+mat-option.mat-mdc-option:hover:not(.mdc-list-item--disabled) {
+  background-color: #192335 !important;
+  color: #fff;
+}
+
+mat-option.mat-mdc-option:focus.mdc-list-item,
+mat-option.mat-mdc-option.mat-mdc-option-active.mdc-list-item {
+  background-color: #ddd;
+}
+
+.footer .mat-mdc-select-arrow-wrapper .mat-mdc-select-arrow {
+  color: #6B7385;
+}
+
+mat-select .mat-mdc-select-trigger {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.mat-mdc-select .mat-mdc-select-trigger {
+  height: 50px;
+  line-height: 43px;
+  background: #ffffff;
+  border: 3px solid #eaedf0;
+  border-radius: 5px;
+  font-family: "Outfit", sans-serif;
+  font-size: 15px;
+}
+
+mat-select .mat-mdc-select-arrow svg {
+  left: 100%;
+}
+
+mat-option.mat-mdc-option {
+  font-family: "Outfit", sans-serif;
+  font-size: 14px;
+}
+
+.footer .mat-mdc-select .mat-mdc-select-trigger {
+  background-color: transparent;
+  border: none;
+}
+
+.footer .dropdown-blk ul li .lang-select .select-icon {
+  position: absolute;
+  top: 70%;
+  left: 5px;
+}
+
+.footer mat-select .mat-mdc-select-placeholder,
+.footer mat-select .mat-mdc-select-value {
+  color: #6B7385;
+}
+
+.venue-coach-details .accordion #short_bio.accordion-item .show-more {
+  padding-top: 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.venue-coach-details .accordion #short_bio.accordion-item .text.show-more-height {
+  -webkit-transition: all 0.7s ease-in-out 0s;
+  -ms-transition: all 0.7s ease-in-out 0s;
+  transition: all 0.7s ease-in-out 0s;
+  height: 75px;
+  overflow: hidden;
+}
+
+.mat-mdc-select.select.custom-select-list .mat-mdc-select-trigger {
+  background: #FAFAFA;
+  border: none;
+}
+
+/* Pagination Styles */
+.pagination-section {
+  margin: 2rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.pagination {
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+  border-radius: 0.375rem;
+  box-shadow:$__gradient__color;
+}
+
+.page-item {
+  margin: 0 0.25rem;
+}
+
+.page-item:first-child .page-link {
+  border-top-left-radius: 0.375rem;
+  border-bottom-left-radius: 0.375rem;
+}
+
+.page-item:last-child .page-link {
+  border-top-right-radius: 0.375rem;
+  border-bottom-right-radius: 0.375rem;
+}
+
+.page-link {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: $__primarycolor;
+  background-color: white;
+  border: 1px solid white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.page-link:hover {
+  z-index: 2;
+  color: $__primarycolor;
+  background-color: $__secondarycolor;
+  border-color: $__secondarycolor;
+}
+
+.page-link:focus {
+  z-index: 3;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem $__gradient__color;
+}
+
+.page-item.active .page-link {
+  z-index: 3;
+  color: #fff;
+  background-color: $__primarycolor;
+  border-color: $__primarycolor;
+}
+
+.page-item.disabled .page-link {
+  color: #a0aec0;
+  pointer-events: none;
+  background-color: #fff;
+  border-color: #e2e8f0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .page-item {
+    margin: 0 0.1rem;
+  }
+  
+  .page-link {
+    padding: 0.35rem 0.5rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* Animated Pagination */
+.page-link {
+  position: relative;
+  overflow: hidden;
+}
+
+.page-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: $__primarycolor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.page-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.page-item.active .page-link::after {
+  transform: scaleX(1);
+  background-color: white;
+}

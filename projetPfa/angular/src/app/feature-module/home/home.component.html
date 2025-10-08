@@ -1,0 +1,380 @@
+
+<div *ngIf="tenantData$ | async as tenantData">
+
+<!-- Hero Section -->
+
+<section class="hero-section" *ngIf="imageUrl" [style.background-image]="'url(' + imageUrl + ')'">
+  <div class="banner-cock-one">
+    <img src="assets/img/icons/football.svg" alt="banner-img">
+  </div>
+  <div class="banner-shapes">
+    <div class="banner-dot-one">
+      <span></span>
+    </div>
+    <div class="banner-cock-two">
+      <img src="assets/img/icons/football.svg" alt="banner-img">
+      <span></span>
+    </div>
+    <div class="banner-dot-two">
+      <span></span>
+    </div>
+  </div>
+  <div class="container">
+    <div class="home-banner">
+      <div class="row align-items-center w-100">
+        <div class="col-lg-7 col-md-10 mx-auto">
+          <div class="section-search aos" data-aos="fade-up">
+            <h4 *ngIf="tenantData.siteInfo && tenantData.siteInfo.length > 0">
+              {{ tenantData.siteInfo[0].name }}</h4>
+              <h1 >Book Your <span>Match Now</span> and Get Started!</h1>
+            <p class="sub-info">Reserve Your Match and Connect with Your Team or Friends for an Unforgettable Experience!</p>
+           
+          </div>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /Hero Section -->
+
+<!-- How It Works -->
+<section class="section work-section">
+  <div class="work-cock-img">
+    <img src="assets/img/icons/football.svg" alt="work-cock">
+  </div>
+  <div class="work-img">
+    <div class="work-img-right">
+      <img src="assets/img/bg/soccer.png" alt="work-cock">
+    </div>
+  </div>
+  <div class="container">
+    <div class="section-heading aos" data-aos="fade-up">
+      <h2>How It <span>Works</span></h2>
+      <p class="sub-title">Easily book matches, connect with your team, and enjoy the game!</p>
+    </div>
+    <div class="row justify-content-center ">
+      <div class="col-lg-4 col-md-6 d-flex">
+        <div class="work-grid w-100 aos" data-aos="fade-up">
+          <div class="work-icon">
+            <div class="work-icon-inner">
+              <img src="assets/img/icons/work-icon1.svg" alt="work-icon">
+            </div>
+          </div>
+          <div class="work-content">
+            <h5>
+              <a [routerLink]="routes.register">Join Us</a>
+            </h5>
+            <p>Quick and Easy Registration: Get started on our software platform with a simple account creation process.
+            </p>
+            <a class="btn" [routerLink]="routes.register">
+              Register Now <i class="feather icon-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+     
+      
+    </div>
+  </div>
+</section>
+<!-- /How It Works -->
+
+
+
+<!-- Convenient -->
+<section class="section convenient-section">
+  <div class="container">
+    <div class="convenient-content aos" data-aos="fade-up">
+      <h2>Easy & Flexible Booking Options</h2>
+      <p>Book Your Field Now – Day or Night, Play Anytime!</p>
+    </div>
+    <div class="convenient-btns aos" data-aos="fade-up">
+      <a [routerLink]="routes.register" class="btn btn-primary d-inline-flex align-items-center">
+        Book Now <span class="lh-1"><i class="feather icon-arrow-right-circle ms-2" ></i></span>
+      </a>
+  
+    </div>
+  </div>
+</section>
+<!-- /Convenient -->
+
+
+<!-- Journey -->
+<section class="section journey-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 d-flex align-items-center">
+        <div class="start-your-journey aos" data-aos="fade-up">
+          <h2>Start Your Journey With <span class="active-sport" *ngIf="tenantData.siteInfo && tenantData.siteInfo.length > 0">
+            {{ tenantData.siteInfo[0].name }}</span> today.</h2>
+          <p *ngIf="tenantData.siteInfo && tenantData.siteInfo.length > 0">At {{ tenantData.siteInfo[0].name }}, we prioritize your satisfaction and continuously improve our platform to enhance your football experience.</p>
+          <p>Our system allows you to create and manage your team, connect with other players, and book matches easily. Whether you're looking for a friendly game or a competitive challenge, our platform helps you find the perfect match.</p>
+          <span class="stay-approach">Build Your Team & Compete!          </span>
+          <div class="journey-list">
+            <ul>
+              <li><i class="fa-solid fa-circle-check"></i>Expert Coaches</li>
+              <li><i class="fa-solid fa-circle-check"></i>Cutting-Edge Training Methods</li>
+              <li><i class="fa-solid fa-circle-check"></i>Create & Manage Your Team</li>
+            </ul>
+            <ul>
+              <li><i class="fa-solid fa-circle-check"></i>Connect with Other Teams & Players</li>
+              <li><i class="fa-solid fa-circle-check"></i>Easy Match Booking</li>
+              <li><i class="fa-solid fa-circle-check"></i>Interactive & Engaging Training Sessions.</li>
+            </ul>
+          </div>
+     
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="journey-img aos" data-aos="fade-up">
+          <img src="assets/img/bg/football-stade.jpg" class="img-fluid" alt="use-img">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /Journey -->
+
+<!-- Group Coaching -->
+<section class="section group-coaching">
+  <div class="container">
+    <div class="section-heading aos" data-aos="fade-up">
+      <h2>Our <span>Features</span></h2>
+      <p class="sub-title">Train with expert coaches, access state-of-the-art facilities, and take your game to the next level. Create your team, connect with other players, and book matches effortlessly.</p>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-4 col-md-6 d-flex">
+        <div class="work-grid coaching-grid w-100 aos" data-aos="fade-up">
+          <div class="work-icon">
+            <div class="work-icon-inner">
+              <img src="assets/img/icons/coache-icon-04.svg" alt="coache-icon">
+            </div>
+          </div>
+          <div class="work-content">
+            <h3>Innovative Lessons</h3>
+            <p>Boost your football skills with cutting-edge training, combining modern techniques and advanced coaching methods.
+            </p>
+           
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 d-flex">
+        <div class="work-grid coaching-grid w-100 aos" data-aos="fade-up">
+          <div class="work-icon">
+            <div class="work-icon-inner">
+              <img src="assets/img/icons/coache-icon-05.svg" alt="coache-icon">
+            </div>
+          </div>
+          <div class="work-content">
+            <h3>Football Community</h3>
+            <p>Elevate your game with engaging training sessions and a thriving football community. Connect, compete, and improve together!
+            </p>
+           
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 d-flex">
+        <div class="work-grid coaching-grid w-100 aos" data-aos="fade-up">
+          <div class="work-icon">
+            <div class="work-icon-inner">
+              <img src="assets/img/icons/coache-icon-06.svg" alt="coache-icon">
+            </div>
+          </div>
+          <div class="work-content">
+            <h3>Field Rental
+            </h3>
+            <p *ngIf="tenantData.siteInfo && tenantData.siteInfo.length > 0">Play anytime with premium football field rentals at {{ tenantData.siteInfo[0].name }}. Book your field now for an uninterrupted game!</p>
+           
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Group Coaching -->
+
+<!-- Earn Money -->
+<section class="section earn-money">
+  <div class="cock-img cock-position">
+    <div class="cock-circle">
+      <img src="assets/img/bg/soccer.png" alt="soccer-img">
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="private-venue aos" data-aos="fade-up">
+         
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="nav-Recent" role="tabpanel" aria-labelledby="nav-Recent-tab"
+              tabindex="0">
+              <h2>Find the Perfect Place to Play!
+              </h2>
+              <p>Looking for a top-quality field for your next match or training session? Book premium sports facilities easily and enjoy a safe, professional environment for your game.</p>
+              <div class="earn-list">
+                <ul>
+                  <li><i class="fa-solid fa-circle-check "></i>High-Quality Fields & Venues </li>
+                  <li><i class="fa-solid fa-circle-check "></i>Secure & Well-Maintained Facilities</li>
+                  <li><i class="fa-solid fa-circle-check "></i>Easy & Instant Booking </li>
+                </ul>
+              </div>
+              <div class="convenient-btns">
+                <a [routerLink]="routes.register" class="btn btn-secondary d-inline-flex align-items-center">
+                  <span class="lh-1"><i class="feather icon-user-plus me-2"></i></span>Join Now & Reserve Your Field Today!
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="tab-content">
+            <div class="tab-pane fade show " id="nav-RecentCoaching" role="tabpanel" aria-labelledby="nav-Recent-tab"
+              tabindex="0">
+              <h2>Find the Perfect Place to Play!</h2>
+              <p>Looking for a top-quality field for your next match or training session? Book premium sports facilities easily and enjoy a safe, professional environment for your game.</p>
+              <div class="earn-list">
+                <ul>
+                  <li><i class="fa-solid fa-circle-check "></i>High-Quality Fields & Venues </li>
+                  <li><i class="fa-solid fa-circle-check "></i>Secure & Well-Maintained Facilities</li>
+                  <li><i class="fa-solid fa-circle-check "></i>Easy & Instant Booking  </li>
+                </ul>
+              </div>
+              <div class="convenient-btns">
+                <a [routerLink]="routes.register" class="btn btn-secondary d-inline-flex align-items-center">
+                  <span class="lh-1"><i class="feather icon-user-plus me-2"></i></span>Join Now & Reserve Your Field Today!
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /Earn Money -->
+
+<!-- Best Services -->
+<section class="section best-services">
+  <div class="container">
+    <div class="section-heading aos" data-aos="fade-up">
+      <h2>Extra Benefits, Unmatched <span>Service Excellence</span></h2>
+      <p class="sub-title">Take your football experience to the next level with DreamSports: Exclusive perks, top-tier facilities, and outstanding service.</p>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="best-service-img aos" data-aos="fade-up">
+          <img src="assets/img/best-service.jpg" class="img-fluid" alt="Service">
+          <div class="service-count-blk">
+            <div class="coach-count">
+              <h3>Coaches</h3>
+              <h2><span class="counter-up" [countUp]="88" [options]="{ enableScrollSpy: true }">88</span>+</h2>
+              <h4>Highly skilled football coaches who bring extensive expertise and professional experience to help you excel.</h4>
+            </div>
+            <div class="coach-count coart-count">
+              <h3>Courts</h3>
+              <h2><span class="counter-up" [countUp]="59" [options]="{ enableScrollSpy: true }">59</span>+</h2>
+              <h4>Well-maintained courts for optimal football experiences.</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="ask-questions aos" data-aos="fade-up">
+          <h3>Frequently Asked Questions</h3>
+          
+          <p *ngIf="tenantData.siteInfo && tenantData.siteInfo.length > 0">
+            Here are some frequently asked questions about football at {{ tenantData.siteInfo[0].name }}:
+          </p>
+          
+          <div class="faq-info">
+            <div class="accordion" id="accordionExample">
+      
+              <!-- Vérification des FAQ -->
+              <ng-container *ngIf="tenantData.faq && tenantData.faq.length > 0; else noFaqMessage">
+      
+                <!-- FAQ Item -->
+                <div class="accordion-item" *ngFor="let faq of tenantData.faq">
+                  <h2 class="accordion-header" [id]="'heading' + faq.id">
+                    <a href="javascript:void(0);" class="accordion-button" data-bs-toggle="collapse"
+                      [attr.data-bs-target]="'#collapse' + faq.id" 
+                      [attr.aria-expanded]="faq.isOpen ? 'true' : 'false'" 
+                      [attr.aria-controls]="'collapse' + faq.id">
+                      {{ faq.question }}
+                    </a>
+                  </h2>
+                  <div [id]="'collapse' + faq.id" class="accordion-collapse collapse" [ngClass]="{'show': faq.isOpen}" 
+                       [attr.aria-labelledby]="'heading' + faq.id" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      <p>{{ faq.response }}</p>
+                    </div>
+                  </div>
+                </div>
+                <!-- /FAQ Item -->
+      
+              </ng-container>
+      
+              <!-- Message si aucune FAQ n'existe -->
+              <ng-template #noFaqMessage>
+                <div class="alert alert-info" role="alert">
+                  No FAQs available at the moment. Please check back later.
+                </div>
+              </ng-template>
+      
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+    </div>
+  </div>
+</section>
+<!-- /Best Services -->
+
+<!-- Latest News -->
+<section class="section featured-venues latest-news">
+  <div class="container">
+    <div class="section-heading aos" data-aos="fade-up">
+      <h2>The Latest <span>News</span></h2>
+      <p class="sub-title">Get the latest buzz from the badminton world- stay informed and inspired by the thrilling updates and remarkable achievements in the sport.</p>
+    </div>
+    <div class="row">
+      <owl-carousel-o *ngIf="tenantData?.annonces?.length > 0" [options]="topVenueOwlOptions" class="featured-venues-slider">
+        <ng-template carouselSlide *ngFor="let slide of tenantData.annonces">
+          <div class="featured-venues-item">
+            <div class="listing-item">
+              <div class="listing-img">
+                <!-- Image ici -->
+              </div>
+              <div class="listing-content news-content">
+                <div class="listing-venue-owner">
+                  <div class="navigation">
+                    <a *ngIf="tenantData.siteInfo && tenantData.siteInfo.length > 0">
+                      {{ tenantData.siteInfo[0].name }}
+                    </a>
+                    <span class="d-flex">
+                      <i class="feather icon-calendar"></i>{{ formatDate(slide.launchedAt) }}
+                    </span>
+                  </div>
+                </div>
+                <h3 class="listing-title">
+                  <a href="javascript:void(0);">{{ slide.description }}</a>
+                </h3>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </owl-carousel-o>
+      <ng-template #noNews>
+        <p>No news available.</p>
+      </ng-template>
+      
+    </div>
+    
+  </div>
+</section>
+
+<!-- /Latest News -->
+
+
+</div>

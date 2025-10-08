@@ -1,0 +1,100 @@
+/* Custom Styles */
+.disabled-terrain {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Style for the tags */
+.tags-container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap; /* Permet aux tags de passer à la ligne si nécessaire */
+}
+
+
+
+.tag {
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: white;
+    text-align: center;
+    display: inline-block;
+}
+
+
+
+.tag-red {
+    background-color: #ff4444; /* Couleur pour les statuts désactivés */
+}
+
+/* Style for the filter dropdown */
+.form-select-lg {
+    font-size: 1.1rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ced4da;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the cards */
+.featured-venues-item {
+    border: 1px solid #e0e0e0;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+}
+
+.listing-img {
+    position: relative;
+
+    img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+}
+
+.listing-content {
+    padding: 1rem;
+
+    .listing-title {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .listing-button {
+        margin-top: 1rem;
+
+        .nav {
+            display: flex;
+            gap: 1rem;
+
+            li {
+                list-style: none;
+
+                a {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    color: inherit;
+                    text-decoration: none;
+
+                    &.disabled {
+                        color: #6c757d;
+                        pointer-events: none;
+                    }
+                }
+            }
+        }
+    }
+}

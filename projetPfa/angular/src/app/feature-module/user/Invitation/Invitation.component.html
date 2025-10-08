@@ -1,0 +1,120 @@
+<!-- Sort By -->
+<div class="row">
+  <div class="col-lg-12">
+    <div class="sortby-section court-sortby-section">
+      <div class="sorting-info">
+        <div class="row d-flex align-items-center">
+          <div class="col-xl-6 col-lg-6 col-sm-12 col-12">
+            <div class="coach-court-list">
+              <ul class="nav">
+                <li><a class="active" [routerLink]="routes.userInvitation">Users</a></li>
+                <li><a [routerLink]="routes.teamInvitation">Teams</a></li>
+                <li><a [routerLink]="routes.sendInvitation">Send Invitation</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="court-tab-content">
+      <div class="card card-tableset">
+        <div class="card-body">
+          <div class="coache-head-blk">
+            <div class="row align-items-center">
+              <div class="col-md-5">
+                <div class="court-table-head">
+                  <h4>Invitations</h4>
+                  <p>List of all your invitations</p>
+                </div>
+              </div>
+              <div class="col-md-7">
+                <div class="table-search-top Invitation-search-top">
+                  <div id="tablefilter">
+                    <div class="dataTables_filter">
+                      <label>
+                        <input [(ngModel)]="searchDataValue" 
+                               (ngModelChange)="searchData(searchDataValue)"
+                               class="form-control" 
+                               placeholder="Search..." />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="table-responsive table-datatble">
+            <div class="card dashboard-card upcoming-card">
+              <div class="notification-coach">
+                <ng-container *ngFor="let invitation of displayedData">
+                  <div class="notify-box">
+                    <div class="avatar flex-shrink-0">
+                      <img [src]="invitation.emetteur.imageUrl || 'https://pub-ae615910610b409dbb3d91c073aa47e6.r2.dev/avatar-02.jpg'" 
+                           [alt]="invitation.emetteur.firstName"
+                           class="avatar-img">
+                    </div>
+                    <div class="notify-detail flex-grow-1">
+                      <h5>
+                        <span class="sender-name">
+                          {{invitation.emetteur.firstName}} 
+                          {{invitation.emetteur.lastName}}
+                        </span>
+                        <span class="username" *ngIf="invitation.emetteur.username">
+                          {{invitation.emetteur.username}}
+                        </span>
+                      </h5>
+                      <p class="invitation-meta">
+                        <span class="invitation-date" *ngIf="invitation.emetteur.bio">
+                          {{invitation.emetteur.bio}}
+                        </span>
+                      </p>
+                      <div class="notify-btn-group">
+                        <button (click)="acceptInvitation(invitation.id)" class="btn btn-primary">
+                          Accept
+                        </button>
+                        <button (click)="refuseInvitation(invitation.id)" class="btn btn-secondary">
+                          Decline
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+                
+                <div *ngIf="tableData.length === 0" class="text-center py-4">
+                  <h5 class="no-record">No invitations available</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Pagination Controls -->
+      <div class="row" *ngIf="totalData > pageSize">
+        <div class="col-md-12">
+          <div class="pagination-section">
+            <nav>
+              <ul class="pagination">
+                <li class="page-item" [class.disabled]="currentPage === 1">
+                  <a class="page-link" (click)="prevPage()">Previous</a>
+                </li>
+                <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index" 
+                    [class.active]="currentPage === i+1">
+                  <a class="page-link" (click)="goToPage(i+1)">{{i+1}}</a>
+                </li>
+                <li class="page-item" [class.disabled]="currentPage === totalPages">
+                  <a class="page-link" (click)="nextPage()">Next</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

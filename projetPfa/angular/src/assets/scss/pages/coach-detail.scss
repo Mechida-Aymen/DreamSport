@@ -1,0 +1,217 @@
+/*-----------------
+    18. Coach Detail
+-----------------------*/
+
+.venue-coach-details { 
+	&.coach-detail {
+		.banner {
+			@include respond-below(custom991) {
+				display: none;
+			}
+		}
+		.content {
+			padding-top: 0;
+			.move-top {
+				position: $__relative;
+				top: -90px;
+				@include respond-below(custom991) {
+					top: 20px;
+				}
+				.coach-info {
+					color: $__dull__text;
+					padding: 24px;
+					margin-bottom: $__value__20;
+					@include respond-below(custom991) {
+						margin-top: 20px;
+					}
+					.profile-pic {
+						@include respond-below(custom767) {
+							text-align: center;
+							margin-bottom: 20px;
+						}
+					}
+					.info { 
+						margin-left: 15px;
+						@include respond-below(custom767) {
+							margin-left: 0;
+						}
+						h3 { 
+							span {
+								min-width: $__value__20;
+								height: $__value__20;
+								border-radius: $__value__20;
+								background: $__primarylight;
+								margin-left: $__value__10;
+								i {
+									font-size: $__font__size__12;
+									color: $__white;
+									min-width: 20px;
+									height: 20px;
+									@extend %flex-align-center;
+								}
+							}
+						}
+						p  {
+							margin: $__value__10 0;
+						}
+						ul {
+							li {
+								font-size: $__font__size__14;
+								margin-right: 25px;
+								display: inline-block;
+								margin-right: 15px;
+								@include respond-below(custom575) {
+									margin-right: 0;
+									margin-bottom: 10px;
+									&:last-child {
+										margin-bottom: 0;
+									}
+								}
+								.review {
+									padding: 5px;
+									border-radius: 5px;
+									.dark-yellow-bg {
+										margin-right: $__value__10;
+									}
+								}
+								img {
+									margin-right: 6px;
+								}
+								&:last-child {
+									margin-right: 0;
+								}
+							}
+						}
+						hr {
+							margin: 15px 0;
+						}
+					}
+				}
+			}
+			aside {
+				.book-coach {
+					.dull-bg {
+						padding: 20px;
+						font-size: $__font__size__14;
+						p {
+							color: $__secondarycolor;
+							margin-bottom: 0;
+						}
+					}
+					a {
+						i {
+							margin-right: 6px;
+						}
+					}
+				}
+				.next-availability{
+					i {
+						color: $__primarycolor;
+					}
+					ul {
+						margin-top: 20px;
+						li {
+							min-width: 167px;
+							font-size: $__font__size__14;
+							padding: $__value__10;
+							border: 1px solid $__lightgray;
+							border-radius: $__value__10;
+							padding-right: $__value__15;
+							margin: 0 15px 15px 0;
+							font-weight: $__semibold;
+							float: left;
+							@include respond-below(custom1399) {
+								margin: 0 5px 5px 0;
+							}
+							@include respond-below(custom991) {
+								margin: 0 15px 15px 0;
+							}
+							@include respond-below(custom479) {
+								width: 100%;
+								margin-right: 0;
+							}
+							&:last-child {
+								margin-bottom: 0;
+							}
+						}
+					}
+				}
+			}
+		}
+		.select2-container--default {
+			.select2-selection--single {
+				.select2-selection__rendered {
+					color: $__darkgray;
+				}
+				.select2-selection__arrow {
+					b {
+						border: 0;
+						background-image: url(../../img/icons/down-arrow.svg);
+						width: 11px;
+						height: 6px;
+						@include transition(all 0.5s ease);
+						line-height: 60px;
+					}
+				}
+			}
+			&.select2-container--open {
+				.select2-selection--single {
+					.select2-selection__arrow b {
+						transform: rotate(-180deg);
+						-webkit-transform: rotate(-180deg);
+						@include transition(all 0.5s ease);
+					}
+				}
+			}
+		}
+	}
+	.listing-item-grid {
+		margin-bottom: 0;
+	}
+}
+span {
+	&.favourite {
+		background: $__yellow__dark;
+		padding: 5px 10px;
+		border-radius: 5px;
+		color: $__white;
+		display: inline-block;
+		@include respond-below(custom575) {
+			margin-top: 10px;
+		}
+		i {
+			margin-right: 5px;
+		}
+		&.selected {
+			background: $__primarycolor;
+		}
+	}
+	&.icon-bg-40 {
+		margin-right: 10px;
+		width: $__value__40;
+		height: $__value__40;
+		border-radius: $__value__40;
+		background: $__dull__whitesmoke;
+		text-align: center;
+		img {
+			fill: $__primarycolor;
+		}
+	}
+}
+.section {
+	&.detail-smilar-coche {
+		padding: 80px 0px 56px;
+	}
+}
+.bootstrap-datetimepicker-widget.dropdown-menu {
+	@include respond-below(custom767) {
+		width: 16em;
+	}
+}
+.bootstrap-datetimepicker-widget .datepicker th, 
+.bootstrap-datetimepicker-widget .datepicker td {
+	@include respond-below(custom767) {
+		padding: 5px 9px;
+	}
+}
+

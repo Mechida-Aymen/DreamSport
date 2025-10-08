@@ -1,0 +1,35 @@
+{
+    "data" : [
+    
+    {
+        "courtName": "Feather Badminton",
+        "img1": "assets/img/booking/booking-02.jpg",
+        "img2": "assets/img/profiles/avatar-02.jpg",
+        "courtNumber" : "Court 1",
+        "bookingTime" : "Booked on : 26 May 2023",
+        "playerName": "Andy",
+		"date": "Mon, Jul 11",
+        "time" : "06:00 PM - 08:00 PM",
+		"additionalGuests": "2",
+		"payment": "$120",
+		"details": "View Details",
+		"chat": "Chat"
+    },
+    {
+        "courtName": "Wing Sports Academy",
+        "img1": "assets/img/booking/booking-03.jpg",
+        "img2": "assets/img/profiles/avatar-06.jpg",
+        "courtNumber" : "Court 1",
+        "bookingTime" : "Booked on : 26 May 2023",
+        "playerName": "Johnson",
+		"date": "Mon, Jul 11",
+        "time" : "06:00 PM - 08:00 PM",
+		"additionalGuests": "2",
+		"payment": "$120",
+		"details": "View Details",
+		"chat": "Chat"
+    }
+
+],
+"totalData":2
+}

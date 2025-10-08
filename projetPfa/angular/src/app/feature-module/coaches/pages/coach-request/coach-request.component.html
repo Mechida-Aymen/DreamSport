@@ -1,0 +1,205 @@
+<!-- Page Content -->
+<div class="content court-bg">
+  <div class="container">
+
+
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="court-tab-content">
+          <div class="card card-tableset">
+            <div class="card-body">
+              <div class="coache-head-blk">
+                <div class="row align-items-center">
+                  <div class="col-lg-6">
+                    <div class="court-table-head">
+                      <h4>Requests</h4>
+                      <p>Efficiently manage and respond to booking requests</p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="tab-content">
+                <div class="tab-pane fade show active" id="nav-Recent" role="tabpanel" aria-labelledby="nav-Recent-tab"
+                  tabindex="0">
+                  <div class="table-responsive">
+                    <!-- ... (previous code remains the same until the table) ... -->
+                    <table class="table table-borderless datatable" matSort (matSortChange)="sortData($event)">
+                      <thead class="thead-light">
+                        <tr>
+                          <th mat-sort-header="terrain.title">Court Name</th>
+                          <th mat-sort-header="user.nom">Player name</th>
+                          <th mat-sort-header="dateRes">Date & Time</th>
+                          <th mat-sort-header="status.libelle">Status</th>
+                          <th mat-sort-header="action"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @for (reservation of reservations; track reservation.id) {
+                        <tr>
+                          <td>
+                            <h2 class="table-avatar">
+                              <a href="javascript:void(0);" class="avatar avatar-sm flex-shrink-0">
+                                <img class="avatar-img" [src]="reservation.terrain.image" alt="Court Image">
+                              </a>
+                              <span class="table-head-name flex-grow-1">
+                                <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#request-court">
+                                  {{reservation.terrain.title}}
+                                </a>
+                                <span>Court ID: {{reservation.terrain.id}}</span>
+                              </span>
+                            </h2>
+                          </td>
+                          <td>
+                            <h2 class="table-avatar">
+                              <a class="avatar avatar-sm flex-shrink-0">
+                                <img class="avatar-img" [src]="reservation.user.image || 'assets/img/default-user.jpg'"
+                                  alt="User Image">
+                              </a>
+                              <span class="table-head-name table-name-user flex-grow-1">
+                                {{reservation.user.nom}} {{reservation.user.prenom}}
+                              </span>
+                            </h2>
+                          </td>
+                          <td class="table-date-time">
+                            <h4>{{reservation.dateRes | date:'shortDate'}}
+                              <span>{{reservation.dateRes | date:'shortTime'}}</span>
+                            </h4>
+                          </td>
+                          <td>
+                            <span>
+                              {{reservation.status.libelle}}
+                            </span>
+                          </td>
+                          <td class="table-accept-btn text-end"> <button class="btn accept-btn"
+                              (click)="onAccepteSubmit(reservation.id)"> <i class="feather icon-check-circle"></i>
+                              Accept </button> <a href="javascript:void(0);" class="btn cancel-table-btn"
+                              data-bs-toggle="modal" data-bs-target="#request-rejectt"
+                              (click)="openRejectModal(reservation)"> <i class="feather icon-x-circle"></i> Reject </a>
+                          </td>
+                        </tr>
+                        }
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- /Page Content -->
+
+<!-- Request Reject Modal -->
+<div class="modal custom-modal fade request-modal" id="request-rejectt" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="form-header modal-header-title">
+          <h4 class="mb-0">Reject Reservation</h4>
+        </div>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"><i class="feather icon-x"></i></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <!-- Court Information -->
+            <div class="card dashboard-card court-information">
+              <div class="card-header">
+                <h4>Court Information</h4>
+              </div>
+              <div class="appointment-info">
+                <ul>
+                  <li>
+                    <div class="appointment-item">
+                      <div class="appointment-img">
+                        <img [src]="rejectingRes?.terrain?.image || 'assets/img/default-court.jpg'" alt="Court Image">
+                      </div>
+                      <div class="appointment-content">
+                        <h6>{{ rejectingRes?.terrain?.title || 'N/A' }}</h6>
+                        <p class="color-green">Court ID: {{ rejectingRes?.terrain?.id }}</p>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <h6>Description</h6>
+                    <p>{{ rejectingRes?.terrain?.description || 'No description available' }}</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Player Information -->
+            <div class="card dashboard-card court-information">
+              <div class="card-header">
+                <h4>Player Information</h4>
+              </div>
+              <div class="appointment-info appoin-border">
+                <ul>
+                  <li>
+                    <div class="appointment-item">
+                      <div class="appointment-img">
+                        <img [src]="rejectingRes?.user?.image || 'assets/img/default-user.jpg'" alt="User Image">
+                      </div>
+                      <div class="appointment-content">
+                        <h6>{{ rejectingRes?.user?.nom }} {{ rejectingRes?.user?.prenom }}</h6>
+                        <p>User ID: {{ rejectingRes?.user?.id }}</p>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <h6>Current Status</h6>
+                    <p>
+                      <span>
+                        {{ rejectingRes?.status?.libelle || 'N/A' }}
+                      </span>
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Reservation Details -->
+            <div class="card dashboard-card court-information">
+              <div class="card-header">
+                <h4>Reservation Details</h4>
+              </div>
+              <div class="appointment-info appoin-border mb-0">
+                <ul>
+                  <li>
+                    <h6>Reservation Date</h6>
+                    <p>{{ rejectingRes?.dateRes | date:'fullDate' || 'N/A' }}</p>
+                  </li>
+                  <li>
+                    <h6>Reservation Time</h6>
+                    <p>{{ rejectingRes?.dateRes | date:'shortTime' || 'N/A' }}</p>
+                  </li>
+                  <li>
+                    <h6>Employee</h6>
+                    <p>ID: {{ rejectingRes?.idEmploye || 'Not assigned' }}</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="table-accept-btn">
+          <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancel</button>
+          <button href="javascript:void(0);" type="button" class="btn btn-danger"
+            (click)="onRejectSubmit(rejectingRes.id)">
+            Confirm Rejection
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

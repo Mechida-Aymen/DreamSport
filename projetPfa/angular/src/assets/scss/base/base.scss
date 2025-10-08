@@ -1,0 +1,118 @@
+/*-----------------
+	2. General
+-----------------------*/
+body {
+	font-family: $__body__font__family;
+	font-size: $__body__font__size;
+	color: $__darkgray;
+	font-weight: $__regular;
+	line-height: 1.5;
+}
+h1, h2, h3, h4, h5, h6 {
+	color: $__secondarycolor;
+}
+a {
+	color: $__darkgray;
+	cursor: pointer;
+	text-decoration: none;
+	@include transition(all 0.5s ease-in-out 0s);
+	&:hover{
+		color: $__secondarycolor;
+	}
+	&:focus {
+		outline: 0;
+	}
+}
+img {
+	max-width: 100%;
+	height: $__auto;
+}
+strong {
+	font-weight: $__bold;
+}
+ul {
+	padding-left: 0;
+	margin-bottom: 0;
+	li {
+		list-style-type: $__none;
+	}
+}
+.navigation {
+	font-weight: $__medium;
+}
+.tag-primary {
+	background: $__primarycolor;
+	color: $__white;
+}
+.tag-yellow {
+	background: $__yellow__dark;
+	color: $__white;
+}
+.tag-active {
+	background: $__active_color;
+	color: $__secondarycolor;
+}
+.tag-blue {
+	background: $__star__blue;
+	color: $__white;
+}
+.py-60 {
+	padding-top: $__value__60;
+	padding-bottom: $__value__60;
+	@include respond-below(custom767) {
+		padding-top: $__value__30;
+		padding-bottom: $__value__30;
+	}
+}
+.py-30 {
+	padding-top: $__value__30;
+	padding-bottom: $__value__30;
+	@include respond-below(custom767) {
+		padding-top: $__value__15;
+		padding-bottom: $__value__15;
+	}
+}
+.mb-60 {
+	margin-bottom: $__value__60;
+	@include respond-below(custom767) {
+		margin-bottom: $__value__30;
+	}
+}
+.mb-40 {
+	margin-bottom: $__value__40;
+	@include respond-below(custom767) {
+		margin-bottom: $__value__20;
+	}
+}
+.card {
+	border: 1px solid $__lightgray;
+	border-radius: $__value__10;
+	padding: 24px;
+	color: inherit;
+	@include respond-below(custom767) {
+		padding: 20px;
+	}
+}
+.primary-text {
+	color: $__primarycolor;
+}
+.btn-row {
+	margin-top: $__value__40;
+	padding: $__value__20;
+	box-shadow: $__row__box__shadow;
+}
+.white-bg {
+	background: $__white;
+}
+.corner-radius-10 {
+	border-radius: $__value__10;
+}
+.sub-title {
+	font-size: $__font__size__20;
+	@include respond-below(custom991) {
+        font-size: $__font__size__18;
+    }
+	@include respond-below(custom767) {
+        font-size: $__font__size__16;
+    }
+}

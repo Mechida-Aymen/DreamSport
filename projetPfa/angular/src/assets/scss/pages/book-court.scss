@@ -1,0 +1,421 @@
+/*-----------------
+    15. Book Court
+-----------------------*/
+
+.booking-steps {
+	border-bottom: 1px solid $__lightgray;
+	padding-bottom: 15px;
+	ul {
+		li {
+			display: $__inline__block;
+			padding-right: 2.5rem;
+			position: $__relative;
+			padding-bottom: 15px;
+			&:last-child {
+				@include respond-below(custom767) {
+					padding-bottom: 0;
+				}
+			} 
+			@include respond-below(custom767) {
+				display: $__block;
+			}
+			&:after {
+				@include position($__absolute,$__value__10,18px,null,null);
+			    content: "\f105";
+			    font: normal normal normal 14px/1 FontAwesome;
+			    color: $__darkash;
+			    @include respond-below(custom767) {
+					display: $__none;
+				}
+			}
+			&.active {
+				a { 
+					color: $__secondarycolor;
+					span {
+						background: $__primarycolor;
+					}
+				}
+			}
+			h5 {
+				margin-bottom: 0;
+				a { 
+					@extend %display-flex;
+					@extend %justify-content-center;
+					@extend %align-items-center;
+					@include respond-below(custom767) {
+						display: $__inline__flex;
+					}
+					span {
+						width: $__value__30;
+						height: $__value__30;
+						border-radius: $__value__30;
+						background: $__darkgray;
+						color: $__white;
+						margin-right: $__value__10;
+						font-size: $__font__size__18;
+						font-weight: $__semibold;
+						display: $__flex;
+						justify-content: $__center;
+						align-items: $__center;
+						@include transition(all 0.5s ease-in-out 0s);
+					}
+				}
+				&:hover {
+					span {
+						background: $__primarycolor;
+					}
+				}
+			}
+			&:last-child {
+				&:after {
+					display: $__none;
+				}
+			}
+		}
+	}
+}
+.master-academy {
+	&.dull-whitesmoke-bg {
+		background: $__dull__whitesmoke;
+		border: none;
+		.info {
+			margin-left: 15px;
+			@include respond-below(custom575) {
+				margin-left: 0;
+				margin-top: 20px;
+			}
+			p {
+				margin-bottom: 0;
+			}
+		}
+		ul {
+			padding: 24px;
+			background: $__white;
+			position: $__relative;
+			@include respond-below(custom991) {
+				margin-top: $__value__20;
+				text-align: center;
+			}
+			li {
+				@include respond-below(custom767) {
+					margin-top: $__value__20;
+				}
+				h3 {
+					color: $__primarycolor;
+					margin: 0 3px 3px 0;
+				}
+				span {
+					color: $__lightash;
+					font-size: $__font__size__14;
+				}
+				p {
+					color: $__secondarycolor;
+					font-size: $__font__size__14;
+					margin-bottom: 0;
+				}
+				span {
+					i { 
+						font-weight: $__bold;
+					    font-size: $__font__size__24;
+					    color: $__primarycolor;
+					}
+				}
+			}
+		}
+	}
+}
+.booking-form {
+	form {
+		.select-guest {
+		margin-top: $__value__40; 
+			h5 {
+				font-weight: $__semibold;
+				color: $__darkblue;
+				display: inline-block;
+			}
+			label {
+				color: $__darkgray;
+				font-size: $__font__size__14;
+			}
+			.qty-item {
+				margin-top: $__value__20;
+				position: $__relative;
+				max-width: 180px;
+				a {
+					@include transition(all 0.5s ease-in-out 0s);
+					i {
+						color: $__primarycolor;
+						@include transition(all 0.5s ease-in-out 0s);
+					}
+					&.dec {
+						@include position($__absolute,22px,null,null,$__value__20);
+					}
+					&.inc{
+						@include position($__absolute,22px,$__value__20,null,null);
+					}
+					&:hover {
+						i {
+							color: $__secondarycolor;
+						}
+					}
+				}
+				label {
+					margin-top: $__value__10;
+					span {
+						font-size: $__font__size__16;
+						display: block;
+						&.dark-text {
+							color: $__secondarycolor;
+							font-weight: $__medium;
+						}
+						&.dull-text {
+							font-weight: $__regular;
+							color: $__darkgray;
+						}
+					}
+				}
+			}
+		}
+	}
+	.select2-container--default {
+		&.select2-container--focus {
+			.select2-selection--single {
+				.select2-selection__rendered {
+					color: #192335;
+				}
+			}
+		}
+		.select2-selection--single {
+			.select2-selection__rendered {
+				color: $__darkgray;
+			}
+			.select2-selection__arrow {
+				b {
+					border: 0;
+					background-image: url(../../img/icons/down-arrow.svg);
+					width: 11px;
+					height: 6px;
+					@include transition(all 0.5s ease);
+					line-height: 60px;
+				}
+			}
+		}
+		&.select2-container--open {
+			.select2-selection--single {
+				.select2-selection__arrow b {
+					transform: rotate(-180deg);
+					-webkit-transform: rotate(-180deg);
+					@include transition(all 0.5s ease);
+				}
+			}
+		}
+	}
+}
+.booking-details {
+	ul {
+		li {
+			margin-bottom: $__value__20;
+			display: $__flex;
+			align-items: $__center;
+			i {
+				width: 52px;
+				height: 47px;
+				background: $__dull__whitesmoke;
+				border-radius: $__value__10;
+				display: $__inline__flex;
+				align-items: $__center;
+				justify-content: $__center;
+				color: $__primarycolor;
+			}
+			.timing-points {
+				p {
+					margin-bottom: 8px;
+					&:last-child {
+						margin-bottom: 0;
+					}
+				}
+			}
+		}
+	}
+	.btn-block {
+		margin-top: $__value__5;
+		button {
+			font-size: $__font__size__18;
+			font-weight: $__semibold;
+		}
+	}
+}
+.booking-order-confirmation {
+	ul {
+		border-bottom: 1px solid $__lightgray;
+		&:last-child {
+			border-bottom: none;
+			@include margin-padding(0, 0);
+		}
+		@include margin-padding(0 0 24px 0, 0 0 24px 0);
+		li {
+			h6 {
+				margin-bottom: 8px;
+			}
+			&:last-child {
+				@include respond-below(custom991) {
+					margin-bottom: 0;
+				}
+			}
+			@include respond-below(custom991) {
+				margin-bottom: $__value__20;
+			}
+			p {
+				margin-bottom: 0;
+			}
+		}
+		&.contact-info, &.payment-info {
+			li {
+				padding-right: 6.25rem;
+				&:last-child {
+					padding-right: 0;
+				}
+				p {
+					&.primary-text {
+						font-weight: $__medium;
+					}
+				}
+			}
+		}
+	}
+}
+.checkout {
+	.booking-details {
+		ul{
+			li {
+				&:last-child {
+					margin-bottom: 0;
+				}
+				.timing-points {
+					p {
+						margin-bottom: 8px;
+						&:last-child {
+							margin-bottom: 0;
+						}
+					}
+				}
+			}
+		}
+	}
+	aside {
+		@include respond-below(custom991) {
+			margin-top: 24px;
+		}
+		.radio { 
+			.form-check {
+				padding-left: $__value__10;
+				border: 1px solid $__lightgray;
+				border-radius: $__value__10;
+				cursor: pointer;
+				@extend %display-flex-center;
+				&.active {
+					background: $__dullgray;
+				}
+				label {
+					cursor: pointer;
+				}
+			}
+		}
+		label {
+			width: 100%;
+			padding: 15px 10px 15px 0;
+		}
+		ul{
+			li {
+				@extend %display-flex;
+				@extend %justify-content-between;
+				@extend %align-items-center;
+			}
+			&.order-sub-total {
+				li {
+					margin-bottom: 15px;
+					&:last-child {
+						margin-bottom: 14px;
+					}
+					p, h6 {
+						margin-bottom: 0;
+					}
+				}
+			}
+		}
+		.order-total {
+			background: $__dull__whitesmoke;
+			padding: $__value__15;
+			border-radius: $__value__10;
+			margin: 10px 0 9px  0;
+			h5 {
+				margin-bottom: 0;
+			}
+		}
+		.policy {
+			margin-bottom: 24px;
+			cursor: pointer;
+			input {
+				width: 20px;
+				height: 20px;
+				border-radius: 4px;
+			}
+			label {
+				font-size: $__font__size__14;
+				padding: 15px 0 0 0;
+				@include respond-below(custom991) {
+					padding: 0;
+				}
+				a {
+					color: $__primarycolor;
+					&:hover {
+						color: $__secondarycolor;
+					}
+				}
+			}
+		}
+		.btn-block {
+			.btn {
+				font-size: $__font__size__18;
+				font-weight: $__semibold;
+			}
+		}
+		@include respond-below(custom767) {
+			margin-top: $__value__20;
+		}
+	}
+}
+h3 {
+	&.border-bottom { 
+		@include margin-padding(0 0 20px 0, 0 0 20px 0);
+		@include respond-below(custom767) {
+			@include margin-padding(0 0 $__value__15 0, 0 0 $__value__15 0);
+		}
+	}
+}
+hr {
+	border-top: 1px solid $__lightgray;
+	@include margin-padding(24px 0, 0);
+	opacity: 1;
+}
+.text-center {
+	.sub-title {
+		margin-bottom: 0;
+		font-size: $__font__size__16;
+	}
+}
+.dark-yellow-bg {
+	width: $__value__30;
+	height: 28px;
+	background: $__yellow__dark;
+	border-radius: $__value__5;
+	padding: $__value__5;
+	color: $__white;
+}
+.card {
+	&.booking-form {
+		@include respond-below(custom991) {
+			margin-bottom: 20px;
+		}
+	}
+} 
