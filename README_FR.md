@@ -46,8 +46,8 @@ Ce projet est basé sur une architecture microservices avec 9 services backend .
 
 ```bash
 # Cloner le projet
-git clone https://github.com/AdnaneKejiou/DreamSport.git
-cd dreamsport
+git clone https://github.com/Mechida-Aymen/DreamSport.git
+cd dreamsport/projetPfa
 
 # Lancer tous les services
 docker-compose up --build
